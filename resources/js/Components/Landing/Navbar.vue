@@ -95,25 +95,26 @@ defineProps({
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
-                            href="#pablo">
+                        <Link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75 "
+                        :href="route('home')" >
                             <i class="fas fa-question-circle text-lg leading-lg main-text-color opacity-75" /><span
                                 class="ml-2">الاسئلة الشائعة</span>
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
-                        <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
-                            href="#pablo">
+                        <Link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
+                            :href="route('auctions')"
+                            >
                             <i class="fas fa-gavel text-lg leading-lg main-text-color opacity-75" /><span
                                 class="ml-2">المزادات</span>
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
-                        <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
-                            href="#pablo">
+                        <Link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
+                        :href="route('home')">
                             <i class="fas fa-home text-lg leading-lg main-text-color opacity-75" /><span
                                 class="ml-2">الرئيسية</span>
-                        </a>
+                        </Link>
                     </li>
                     <li v-if="canLogin" class="nav-item block my-5 lg:hidden">
                         <Link v-if="$page.props.auth.user" :href="route('admin.dashboard')"

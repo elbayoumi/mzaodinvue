@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WebSite\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,13 +16,24 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Home', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Web/Home', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+// Route::group([
+//     'namespace' => 'App\Http\Controllers\WebSite',
+// ], function () {
+// Route::resource('home', 'HomeController');
+
+//     });
+
+
+Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/auctions',[HomeController::class, 'index'])->name('auctions');
+
 
 require __DIR__.'/auth.php';
