@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('web_sites', function (Blueprint $table) {
             $table->id();
+            $table->tinyText('logo');
+            $table->json('for_frequently_asked_questions');
+            $table->json('about_us');
             $table->timestamps();
         });
     }
