@@ -16,6 +16,9 @@ return new class extends Migration
             $table->tinyText('logo');
             $table->json('for_frequently_asked_questions');
             $table->json('about_us');
+            $table->json('supports');
+            $table->string('footer');
+
             $table->timestamps();
         });
     }
