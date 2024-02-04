@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('image_products', function (Blueprint $table) {
             $table->id();
-            $table->tinyText('src');
             
+            $table->tinyText('src');
+
             $table->tinyText('alt');
 
             $table->foreignId('product_id')->unsigned()->nullable()->references('id')->on('products')->onDelete('cascade');

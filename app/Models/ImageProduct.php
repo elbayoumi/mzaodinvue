@@ -10,6 +10,6 @@ class ImageProduct extends Model
     use HasFactory;
     protected $guarded = [];
     function product(){
-        return  $this->belongsToMany(Product::class);
+        return  $this->belongsTo(Product::class);
     }
 }
