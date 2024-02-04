@@ -3,18 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Product $product)
     {
-        
-    }
 
+        return Inertia::render('Admin/Product/Index', [
+            'product' => $product->paginate(5),
+            'can' => [
+                'create' => Auth::user()->can('category create'),
+                'edit' => Auth::user()->can('category edit'),
+                'delete' => Auth::user()->can('category delete'),
+            ],
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
