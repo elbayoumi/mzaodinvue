@@ -10,4 +10,8 @@ class Paroduct extends Model
     use HasFactory;
     protected $guarded = [];
 
+    function image(){
+        return  $this->hasMany(ParoductImage::class);
+    }
+
 }
