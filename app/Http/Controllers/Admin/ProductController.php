@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\{
+    Product,
+    Permission
+};
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +18,33 @@ class ProductController extends Controller
      */
     public function index(Product $product)
     {
+        $permissions = (new Product)->newQuery();
+
+        if (request()->has('search')) {
+            $permissions->where('name', 'Like', '%'.request()->input('search').'%');
+        }
+
+        if (request()->query('sort')) {
+            $attribute = request()->query('sort');
+            $sort_order = 'ASC';
+            if (strncmp($attribute, '-', 1) === 0) {
+                $sort_order = 'DESC';
+                $attribute = substr($attribute, 1);
+            }
+            $permissions->orderBy($attribute, $sort_order);
+        } else {
+            $permissions->latest();
+        }
+
+        $permissions = $permissions->paginate(5)->onEachSide(2)->appends(request()->query());
 
         return Inertia::render('Admin/Product/Index', [
-            'product' => $product->paginate(5),
+            'permissions' => $permissions,
+            'filters' => request()->all('search'),
             'can' => [
-                'create' => Auth::user()->can('category create'),
-                'edit' => Auth::user()->can('category edit'),
-                'delete' => Auth::user()->can('category delete'),
+                'create' => Auth::user()->can('permission create'),
+                'edit' => Auth::user()->can('permission edit'),
+                'delete' => Auth::user()->can('permission delete'),
             ],
         ]);
     }
