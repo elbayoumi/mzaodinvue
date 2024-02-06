@@ -12,7 +12,6 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
-        {{-- @dd(asset('log-removebg-preview.png')) --}}
         @inertia
     </body>
 </html>
