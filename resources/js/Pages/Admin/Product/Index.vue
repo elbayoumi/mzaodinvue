@@ -104,16 +104,26 @@ function destroy(id) {
         <table>
           <thead>
             <tr>
+
+              <th >sku</th>
+
               <th>
-                <Sort label="Name" attribute="name" />
+                <Sort label="Name English" attribute="name" />
               </th>
+              <th>
+                <Sort label="Name Arabic" attribute="name" />
+              </th>
+              <th >cost price</th>
+              <th >required bidders</th>
+
               <th v-if="can.edit || can.delete">Actions</th>
             </tr>
           </thead>
 
           <tbody>
             <tr v-for="permission in permissions.data" :key="permission.id">
-              <td data-label="Name">
+                <td>{{ permission.sku }}</td>
+              <td data-label="Name English">
                 <Link
                   :href="route('admin.permission.show', permission.id)"
                   class="
@@ -126,6 +136,22 @@ function destroy(id) {
                   {{ permission.name_english }}
                 </Link>
               </td>
+              <td data-label="Name Arabic">
+                <Link
+                  :href="route('admin.permission.show', permission.id)"
+                  class="
+                    no-underline
+                    hover:underline
+                    text-cyan-600
+                    dark:text-cyan-400
+                  "
+                >
+                  {{ permission.name_arabic }}
+                </Link>
+              </td>
+              <td>{{ permission.cost_price }}</td>
+              <td>{{ permission.required_bidders }}</td>
+
               <td
                 v-if="can.edit || can.delete"
                 class="before:hidden lg:w-1 whitespace-nowrap"
@@ -147,6 +173,7 @@ function destroy(id) {
                   />
                 </BaseButtons>
               </td>
+
             </tr>
           </tbody>
         </table>
