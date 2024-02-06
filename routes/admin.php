@@ -1,4 +1,9 @@
 <?php
+
+use App\Http\Controllers\Admin\{
+    ProductController,
+    RoleController,
+};
 use Illuminate\Support\Facades\Route;
 
 use Inertia\Inertia;
@@ -15,8 +20,9 @@ Route::group([
         return Inertia::render('Dashboard');
     })->name('dashboard');
     Route::resource('user', 'UserController');
-    Route::resource('role', 'RoleController');
+    Route::resource('role', RoleController::class);
     Route::resource('permission', 'PermissionController');
+    Route::resource('product', ProductController::class);
     Route::resource('menu', 'MenuController')->except([
         'show',
     ]);

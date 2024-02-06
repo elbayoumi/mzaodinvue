@@ -6,7 +6,7 @@ import { useLayoutStore } from '@/Stores/layout.js'
 import AsideMenuLayer from '@/Components/AsideMenuLayer.vue'
 import OverlayLayer from '@/Components/OverlayLayer.vue'
 
-let menu = reactive({})
+let menu = reactive({});
 menu = computed(() => usePage().props.navigation.menu)
 
 const layoutStore = useLayoutStore()
