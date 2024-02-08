@@ -115,4 +115,21 @@ class ProductController extends Controller
             ->with('message', __('Product deleted successfully'));
 
     }
+    public function visible(Product $product)
+    {
+        $product->is_active=!$product->is_active;
+        $product->save();
+        return redirect()->route('admin.product.index')
+            ->with('message', __('Product Active Change successfully'));
+
+    }
+    public function active(Product $product)
+    {
+        $product->is_visible=!$product->is_visible;
+        $product->save();
+
+        return redirect()->route('admin.product.index')
+            ->with('message', __('Product Visible Change successfully'));
+
+    }
 }
