@@ -86,14 +86,14 @@ const form = useForm({
           </FormControl>
         </FormField>
         <FormField
-          label="Product Weight"
+          label="Weight"
           :class="{ 'text-red-400': form.errors.weight }"
         >
           <FormControl
             v-model="form.weight"
             type="number"
             step="0.01"
-            placeholder="Enter Product Weight"
+            placeholder="Enter Weight"
             :error="form.errors.weight"
 
           >
@@ -103,14 +103,14 @@ const form = useForm({
           </FormControl>
         </FormField>
         <FormField
-          label="Product payment deadline minutes"
+          label="payment deadline minutes"
           :class="{ 'text-red-400': form.errors.payment_deadline_minutes }"
         >
           <FormControl
             v-model="form.payment_deadline_minutes"
             type="number"
             step="0.01"
-            placeholder="Enter Product payment deadline minutes"
+            placeholder="Enter payment deadline minutes"
             :error="form.errors.payment_deadline_minutes"
 
           >
@@ -120,14 +120,14 @@ const form = useForm({
           </FormControl>
         </FormField>
         <FormField
-          label="Product cost price"
+          label="cost price"
           :class="{ 'text-red-400': form.errors.cost_price }"
         >
           <FormControl
             v-model="form.cost_price"
             type="number"
             step="0.01"
-            placeholder="Enter Product cost price"
+            placeholder="Enter cost price"
             :error="form.errors.cost_price"
 
           >
@@ -137,14 +137,14 @@ const form = useForm({
           </FormControl>
         </FormField>
         <FormField
-          label="Product estimated market price"
+          label="estimated market price"
           :class="{ 'text-red-400': form.errors.estimated_market_price }"
         >
           <FormControl
             v-model="form.estimated_market_price"
             type="number"
             step="0.01"
-            placeholder="Enter Product estimated market price"
+            placeholder="Enter estimated market price"
             :error="form.errors.estimated_market_price"
 
           >
@@ -155,14 +155,14 @@ const form = useForm({
         </FormField>
 
         <FormField
-          label="Product auction duration minutes"
+          label="auction duration minutes"
           :class="{ 'text-red-400': form.errors.auction_duration_minutes }"
         >
           <FormControl
             v-model="form.auction_duration_minutes"
             type="number"
-            step="0.01"
-            placeholder="Enter Product auction  duration minutes"
+            
+            placeholder="Enter auction  duration minutes"
             :error="form.errors.auction_duration_minutes"
 
           >
@@ -172,14 +172,14 @@ const form = useForm({
           </FormControl>
         </FormField>
         <FormField
-          label="Product registration amount"
+          label="registration amount"
           :class="{ 'text-red-400': form.errors.registration_amount }"
         >
           <FormControl
             v-model="form.registration_amount"
             type="number"
             step="0.01"
-            placeholder="Enter Product registration amount"
+            placeholder="Enter registration amount"
             :error="form.errors.registration_amount"
 
           >
@@ -189,14 +189,14 @@ const form = useForm({
           </FormControl>
         </FormField>
         <FormField
-          label="Product required bidders"
+          label="required bidders"
           :class="{ 'text-red-400': form.errors.required_bidders }"
         >
           <FormControl
             v-model="form.required_bidders"
             type="number"
             step="0.01"
-            placeholder="Enter Product required bidders"
+            placeholder="Enter required bidders"
             :error="form.errors.required_bidders"
 
           >
@@ -206,14 +206,14 @@ const form = useForm({
           </FormControl>
         </FormField>
         <FormField
-          label="Product opening bid amount"
+          label="opening bid amount"
           :class="{ 'text-red-400': form.errors.opening_bid_amount }"
         >
           <FormControl
             v-model="form.opening_bid_amount"
             type="number"
             step="0.01"
-            placeholder="Enter Product opening bid amount"
+            placeholder="Enter opening bid amount"
             :error="form.errors.opening_bid_amount"
 
           >
@@ -223,13 +223,13 @@ const form = useForm({
           </FormControl>
         </FormField>
         <FormField
-          label="Product Details"
+          label="Details"
           :class="{ 'text-red-400': form.errors.product_details }"
         >
           <FormControl
             v-model="form.product_details"
             type="textarea"
-            placeholder="Enter Product Details"
+            placeholder="Enter  Details"
             :error="form.errors.product_details"
           >
             <div class="text-red-400 text-sm" v-if="form.errors.product_details">
@@ -237,7 +237,40 @@ const form = useForm({
             </div>
           </FormControl>
         </FormField>
+        <FormField
+          label="auction start"
+          :class="{ 'text-red-400': form.errors.auction_start }"
+        >
+          <FormControl
+            v-model="form.auction_start"
+            type="date"
+            step="0.01"
+            placeholder="Enter auction start"
+            :error="form.errors.auction_start"
 
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.auction_start">
+              {{ form.errors.auction_start }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="auction end"
+          :class="{ 'text-red-400': form.errors.auction_end }"
+        >
+          <FormControl
+            v-model="form.auction_end"
+            type="date"
+            step="0.01"
+            placeholder="Enter auction end"
+            :error="form.errors.auction_end"
+
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.auction_end">
+              {{ form.errors.auction_end }}
+            </div>
+          </FormControl>
+        </FormField>
         <template #footer>
           <BaseButtons>
             <BaseButton
