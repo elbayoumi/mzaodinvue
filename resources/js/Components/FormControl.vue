@@ -12,6 +12,10 @@ const props = defineProps({
     type: String,
     default: null
   },
+  step: {
+    type: String,
+    default: null
+  },
   autocomplete: {
     type: String,
     default: null
@@ -163,6 +167,7 @@ if (props.ctrlKFocus) {
       :placeholder="placeholder"
       :type="computedType"
       :class="inputElClass"
+      :step="step"
     >
     <FormControlIcon
       v-if="icon"

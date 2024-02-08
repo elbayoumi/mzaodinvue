@@ -41,20 +41,203 @@ const form = useForm({
         @submit.prevent="form.post(route('admin.product.store'))"
       >
         <FormField
-          label="Name"
-          :class="{ 'text-red-400': form.errors.name }"
+          label="Name Arabic"
+          :class="{ 'text-red-400': form.errors.name_arabic }"
         >
           <FormControl
-            v-model="form.name"
+            v-model="form.name_arabic"
             type="text"
-            placeholder="Enter Name"
-            :error="form.errors.name"
+            placeholder="Enter Name Arabic"
+            :error="form.errors.name_arabic"
           >
-            <div class="text-red-400 text-sm" v-if="form.errors.name">
-              {{ form.errors.name }}
+            <div class="text-red-400 text-sm" v-if="form.errors.name_arabic">
+              {{ form.errors.name_arabic }}
             </div>
           </FormControl>
         </FormField>
+        <FormField
+          label="Name English"
+          :class="{ 'text-red-400': form.errors.name_english }"
+        >
+          <FormControl
+            v-model="form.name_english"
+            type="text"
+            placeholder="Enter Name English"
+            :error="form.errors.name"
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.name_english">
+              {{ form.errors.name_english }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="sku"
+          :class="{ 'text-red-400': form.errors.sku }"
+        >
+          <FormControl
+            v-model="form.sku"
+            type="text"
+            placeholder="Enter sku"
+            :error="form.errors.name"
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.sku">
+              {{ form.errors.sku }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="Product Weight"
+          :class="{ 'text-red-400': form.errors.weight }"
+        >
+          <FormControl
+            v-model="form.weight"
+            type="number"
+            step="0.01"
+            placeholder="Enter Product Weight"
+            :error="form.errors.weight"
+
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.weight">
+              {{ form.errors.weight }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="Product payment deadline minutes"
+          :class="{ 'text-red-400': form.errors.payment_deadline_minutes }"
+        >
+          <FormControl
+            v-model="form.payment_deadline_minutes"
+            type="number"
+            step="0.01"
+            placeholder="Enter Product payment deadline minutes"
+            :error="form.errors.payment_deadline_minutes"
+
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.payment_deadline_minutes">
+              {{ form.errors.payment_deadline_minutes }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="Product cost price"
+          :class="{ 'text-red-400': form.errors.cost_price }"
+        >
+          <FormControl
+            v-model="form.cost_price"
+            type="number"
+            step="0.01"
+            placeholder="Enter Product cost price"
+            :error="form.errors.cost_price"
+
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.cost_price">
+              {{ form.errors.cost_price }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="Product estimated market price"
+          :class="{ 'text-red-400': form.errors.estimated_market_price }"
+        >
+          <FormControl
+            v-model="form.estimated_market_price"
+            type="number"
+            step="0.01"
+            placeholder="Enter Product estimated market price"
+            :error="form.errors.estimated_market_price"
+
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.estimated_market_price">
+              {{ form.errors.estimated_market_price }}
+            </div>
+          </FormControl>
+        </FormField>
+
+        <FormField
+          label="Product auction duration minutes"
+          :class="{ 'text-red-400': form.errors.auction_duration_minutes }"
+        >
+          <FormControl
+            v-model="form.auction_duration_minutes"
+            type="number"
+            step="0.01"
+            placeholder="Enter Product auction  duration minutes"
+            :error="form.errors.auction_duration_minutes"
+
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.auction_duration_minutes">
+              {{ form.errors.weight }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="Product registration amount"
+          :class="{ 'text-red-400': form.errors.registration_amount }"
+        >
+          <FormControl
+            v-model="form.registration_amount"
+            type="number"
+            step="0.01"
+            placeholder="Enter Product registration amount"
+            :error="form.errors.registration_amount"
+
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.registration_amount">
+              {{ form.errors.registration_amount }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="Product required bidders"
+          :class="{ 'text-red-400': form.errors.required_bidders }"
+        >
+          <FormControl
+            v-model="form.required_bidders"
+            type="number"
+            step="0.01"
+            placeholder="Enter Product required bidders"
+            :error="form.errors.required_bidders"
+
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.required_bidders">
+              {{ form.errors.required_bidders }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="Product opening bid amount"
+          :class="{ 'text-red-400': form.errors.opening_bid_amount }"
+        >
+          <FormControl
+            v-model="form.opening_bid_amount"
+            type="number"
+            step="0.01"
+            placeholder="Enter Product opening bid amount"
+            :error="form.errors.opening_bid_amount"
+
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.opening_bid_amount">
+              {{ form.errors.opening_bid_amount }}
+            </div>
+          </FormControl>
+        </FormField>
+        <FormField
+          label="Product Details"
+          :class="{ 'text-red-400': form.errors.product_details }"
+        >
+          <FormControl
+            v-model="form.product_details"
+            type="textarea"
+            placeholder="Enter Product Details"
+            :error="form.errors.product_details"
+          >
+            <div class="text-red-400 text-sm" v-if="form.errors.product_details">
+              {{ form.errors.product_details }}
+            </div>
+          </FormControl>
+        </FormField>
+
         <template #footer>
           <BaseButtons>
             <BaseButton
