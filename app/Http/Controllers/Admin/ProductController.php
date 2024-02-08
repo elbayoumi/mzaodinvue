@@ -30,7 +30,15 @@ class ProductController extends Controller
         $products = (new Product)->newQuery();
 
         if (request()->has('search')) {
-            $products->where('name', 'Like', '%'.request()->input('search').'%');
+            $searchTerm = '%' . request()->input('search') . '%';
+
+            $products->where(function ($query) use ($searchTerm) {
+                $query->where('name_arabic', 'LIKE', $searchTerm)
+                      ->orWhere('name_english', 'LIKE', $searchTerm)
+                      ->orWhere('sku', 'LIKE', $searchTerm)
+                      // Add more conditions for other columns as needed
+                      ->orWhere('product_details', 'LIKE', $searchTerm);
+            });
         }
 
         if (request()->query('sort')) {
