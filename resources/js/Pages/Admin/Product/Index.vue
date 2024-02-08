@@ -48,7 +48,7 @@ function destroy(id) {
     }
 }
 function visible(id) {
-    if (confirm("Are you sure you want to delete?")) {
+    if (confirm("Are you sure you want to change visible?")) {
         formDelete.put(route("admin.product.visible", id))
     }
 }
@@ -135,15 +135,15 @@ function visible(id) {
                             <!-- <td>{{ product.is_visible }}</td> -->
                             <td>
                                 <BaseButton v-if="!product.is_visible" color="danger" :icon="mdiEyeOff" small
-                                    @click="destroy(product.id)" />
+                                    @click="visible(product.id)" />
                                 <BaseButton v-if="product.is_visible" color="success" :icon="mdiEyeSettings" small
-                                    @click="destroy(product.id)" />
+                                    @click="visible(product.id)" />
                             </td>
                             <td>
                                 <BaseButton v-if="!product.is_active" color="danger" :icon="mdiAccessPointOff" small
-                                    @click="destroy(product.id)" />
+                                    @click="visible(product.id)" />
                                 <BaseButton v-if="product.is_active" color="success" :icon="mdiAccessPoint" small
-                                    @click="destroy(product.id)" />
+                                    @click="visible(product.id)" />
                             </td>
                             <td v-if="can.edit || can.delete" class="before:hidden lg:w-1 whitespace-nowrap">
                                 <BaseButtons type="justify-start lg:justify-end" no-wrap>

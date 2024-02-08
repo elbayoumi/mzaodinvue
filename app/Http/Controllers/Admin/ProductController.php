@@ -117,6 +117,7 @@ class ProductController extends Controller
     }
     public function visible(Product $product)
     {
+        dd('sdfasf');
         $product->is_active=!$product->is_active;
         $product->save();
         return redirect()->route('admin.product.index')
