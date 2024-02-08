@@ -115,19 +115,21 @@ class ProductController extends Controller
             ->with('message', __('Product deleted successfully'));
 
     }
-    public function visible(Product $product)
+    public function active( $id)
     {
-        dd('sdfasf');
-        $product->is_active=!$product->is_active;
-        $product->save();
+        // dd($product);
+        $product=Product::findOrFail($id);
+        $product->update(['is_active' => !$product->is_active]);
+
         return redirect()->route('admin.product.index')
             ->with('message', __('Product Active Change successfully'));
 
     }
-    public function active(Product $product)
+    public function visible ($id)
     {
-        $product->is_visible=!$product->is_visible;
-        $product->save();
+
+        $product=Product::findOrFail($id);
+        $product->update(['is_visible' => !$product->is_visible]);
 
         return redirect()->route('admin.product.index')
             ->with('message', __('Product Visible Change successfully'));

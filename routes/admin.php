@@ -23,8 +23,8 @@ Route::group([
     Route::resource('role', RoleController::class);
     Route::resource('permission', 'PermissionController');
     Route::resource('product', ProductController::class);
-    Route::put('product/visible',[ProductController::class,'visible'])->name('product.visible');
-    Route::put('product/active',[ProductController::class,'active'])->name('product.active');
+    Route::put('product/visible/{id}',[ProductController::class,'visible'])->name('product.visible');
+    Route::put('product/active/{id}',[ProductController::class,'active'])->name('product.active');
     Route::resource('menu', 'MenuController')->except([
         'show',
     ]);
