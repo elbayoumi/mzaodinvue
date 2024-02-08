@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
 use App\Models\{
     Product,
     Permission
@@ -60,11 +61,13 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        //
-    }
+        Product::create($request->all());
 
+        return redirect()->route('admin.product.index')
+            ->with('message', __('Product created successfully.'));
+    }
     /**
      * Display the specified resource.
      */
