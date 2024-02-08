@@ -142,7 +142,7 @@ function destroy(id) {
                             </td>
                             <td v-if="can.edit || can.delete" class="before:hidden lg:w-1 whitespace-nowrap">
                                 <BaseButtons type="justify-start lg:justify-end" no-wrap>
-                                    <BaseButton v-if="can.edit" :route-name="route('admin.permission.edit', permission.id)"
+                                    <BaseButton v-if="can.edit" :route-name="route('admin.product.edit', permission.id)"
                                         color="info" :icon="mdiSquareEditOutline" small />
                                     <BaseButton v-if="can.delete" color="danger" :icon="mdiTrashCan" small
                                         @click="destroy(permission.id)" />
