@@ -95,7 +95,8 @@ function destroy(id) {
                             </th>
                             <th>cost price</th>
                             <th>required bidders</th>
-                            <th>is_active</th>
+                            <th>is visible</th>
+                            <th>is active</th>
 
                             <th v-if="can.edit || can.delete">Actions</th>
                         </tr>
@@ -126,11 +127,17 @@ function destroy(id) {
                             </td>
                             <td>{{ permission.cost_price }}</td>
                             <td>{{ permission.required_bidders }}</td>
-                            <!-- <td>{{ permission.is_active }}</td> -->
+                            <!-- <td>{{ permission.is_visible }}</td> -->
                             <td>
-                                <BaseButton v-if="!permission.is_active" color="danger" :icon="mdiEyeOff" small
+                                <BaseButton v-if="!permission.is_visible" color="danger" :icon="mdiEyeOff" small
                                     @click="destroy(permission.id)" />
-                                <BaseButton v-if="permission.is_active" color="success" :icon="mdiEyeSettings" small
+                                <BaseButton v-if="permission.is_visible" color="success" :icon="mdiEyeSettings" small
+                                    @click="destroy(permission.id)" />
+                            </td>
+                            <td>
+                                <BaseButton v-if="!permission.is_active" color="danger" :icon="mdiAccessPointOff" small
+                                    @click="destroy(permission.id)" />
+                                <BaseButton v-if="permission.is_active" color="success" :icon="mdiAccessPoint" small
                                     @click="destroy(permission.id)" />
                             </td>
                             <td v-if="can.edit || can.delete" class="before:hidden lg:w-1 whitespace-nowrap">

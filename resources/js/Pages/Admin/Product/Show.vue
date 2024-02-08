@@ -4,7 +4,9 @@ import {
     mdiAccountKey,
     mdiArrowLeftBoldOutline,
     mdiAccessPointOff,
-    mdiAccessPoint
+    mdiAccessPoint,
+    mdiEyeOff,
+    mdiEyeSettings
 } from "@mdi/js"
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue"
 import SectionMain from "@/Components/SectionMain.vue"
@@ -248,10 +250,10 @@ function destroy(id) {
                   hidden
                   lg:block
                 ">
-                                is visible
+                                is active
                             </td>
 
-                            <td data-label="is visible">
+                            <td data-label="is active">
                                 <BaseButton v-if="!permission.is_active" color="danger" :icon="mdiAccessPointOff" small
                                     @click="destroy(permission.id)" />
                                 <BaseButton v-if="permission.is_active" color="success" :icon="mdiAccessPoint" small
@@ -266,11 +268,14 @@ function destroy(id) {
                   hidden
                   lg:block
                 ">
-                                weight
+                                is visible
                             </td>
 
-                            <td data-label="weight">
-                                {{ permission.weight }}
+                            <td data-label="is visible">
+                                <BaseButton v-if="!permission.is_visible" color="danger" :icon="mdiEyeOff" small
+                                    @click="destroy(permission.id)" />
+                                <BaseButton v-if="permission.is_visible" color="success" :icon="mdiEyeSettings" small
+                                    @click="destroy(permission.id)" />
                             </td>
                             <!-- // -->
                             <td class="
