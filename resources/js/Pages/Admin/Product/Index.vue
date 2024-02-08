@@ -44,7 +44,7 @@ const formDelete = useForm({})
 
 function destroy(id) {
     if (confirm("Are you sure you want to delete?")) {
-        formDelete.delete(route("admin.permission.destroy", id))
+        formDelete.delete(route("admin.product.destroy", id))
     }
 }
 </script>
