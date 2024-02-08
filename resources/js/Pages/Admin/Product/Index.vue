@@ -47,6 +47,11 @@ function destroy(id) {
         formDelete.delete(route("admin.product.destroy", id))
     }
 }
+function visible(id) {
+    if (confirm("Are you sure you want to delete?")) {
+        formDelete.put(route("admin.product.visible", id))
+    }
+}
 </script>
 
 <template>
