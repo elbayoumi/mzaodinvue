@@ -14,7 +14,20 @@ import BaseButton from '@/Components/BaseButton.vue'
 import BaseButtons from '@/Components/BaseButtons.vue'
 
 const form = useForm({
-  name: '',
+  name_arabic: '',
+  name_english: '',
+  sku: '',
+  weight: '',
+  payment_deadline_minutes: '',
+  cost_price: '',
+  estimated_market_price: '',
+  auction_duration_minutes: '',
+  registration_amount: '',
+  required_bidders: '',
+  opening_bid_amount: '',
+  product_details: '',
+  auction_start: '',
+  auction_end: ''
 })
 </script>
 
@@ -78,7 +91,7 @@ const form = useForm({
             v-model="form.sku"
             type="text"
             placeholder="Enter sku"
-            :error="form.errors.name"
+            :error="form.errors.sku"
           >
             <div class="text-red-400 text-sm" v-if="form.errors.sku">
               {{ form.errors.sku }}
@@ -161,7 +174,7 @@ const form = useForm({
           <FormControl
             v-model="form.auction_duration_minutes"
             type="number"
-            
+
             placeholder="Enter auction  duration minutes"
             :error="form.errors.auction_duration_minutes"
 

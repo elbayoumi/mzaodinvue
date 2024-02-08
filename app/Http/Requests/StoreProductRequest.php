@@ -34,9 +34,6 @@ class StoreProductRequest extends FormRequest
             'auction_duration_minutes' => 'nullable|integer|min:1',
             'opening_bid_amount' => 'nullable|numeric|min:0',
             'payment_deadline_minutes' => 'nullable|integer|min:1',
-            'is_visible' => 'required|boolean',
-            'user_id' => 'required|exists:users,id',
-            'is_active' => 'required|boolean',
             'auction_start' => 'nullable|date',
             'auction_end' => 'nullable|date|after_or_equal:auction_start',
         ];

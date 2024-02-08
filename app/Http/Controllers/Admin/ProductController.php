@@ -63,7 +63,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        Product::create($request->all());
+        Product::create(['user_id'=>Auth::id()]+$request->all());
 
         return redirect()->route('admin.product.index')
             ->with('message', __('Product created successfully.'));
