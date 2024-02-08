@@ -51,9 +51,9 @@ class ProductController extends Controller
             'products' => $products,
             'filters' => request()->all('search'),
             'can' => [
-                'create' => Auth::user()->can('permission create'),
-                'edit' => Auth::user()->can('permission edit'),
-                'delete' => Auth::user()->can('permission delete'),
+                'create' => Auth::user()->can('product create'),
+                'edit' => Auth::user()->can('product edit'),
+                'delete' => Auth::user()->can('product delete'),
             ],
         ]);
     }
