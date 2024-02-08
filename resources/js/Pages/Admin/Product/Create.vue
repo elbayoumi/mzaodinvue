@@ -20,11 +20,11 @@ const form = useForm({
 
 <template>
   <LayoutAuthenticated>
-    <Head title="Create permission" />
+    <Head title="Create product" />
     <SectionMain>
       <SectionTitleLineWithButton
         :icon="mdiAccountKey"
-        title="Add permission"
+        title="Add product"
         main
       >
         <BaseButton

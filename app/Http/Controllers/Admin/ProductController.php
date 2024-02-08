@@ -53,7 +53,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Product/Create');
+
     }
 
     /**
