@@ -14,7 +14,7 @@ import BaseButton from '@/Components/BaseButton.vue'
 import BaseButtons from '@/Components/BaseButtons.vue'
 
 const props = defineProps({
-  permission: {
+  product: {
     type: Object,
     default: () => ({}),
   },
@@ -22,7 +22,7 @@ const props = defineProps({
 
 const form = useForm({
   _method: 'put',
-  name: props.permission.name,
+  name: props.product.name,
 })
 </script>
 
@@ -46,7 +46,7 @@ const form = useForm({
       </SectionTitleLineWithButton>
       <CardBox
         form
-        @submit.prevent="form.post(route('admin.product.update', props.permission.id))"
+        @submit.prevent="form.post(route('admin.product.update', props.product.id))"
       >
         <FormField
           label="Name"

@@ -19,10 +19,10 @@ class ProductController extends Controller
      */
     public function index(Product $product)
     {
-        $permissions = (new Product)->newQuery();
+        $products = (new Product)->newQuery();
 
         if (request()->has('search')) {
-            $permissions->where('name', 'Like', '%'.request()->input('search').'%');
+            $products->where('name', 'Like', '%'.request()->input('search').'%');
         }
 
         if (request()->query('sort')) {
@@ -32,15 +32,15 @@ class ProductController extends Controller
                 $sort_order = 'DESC';
                 $attribute = substr($attribute, 1);
             }
-            $permissions->orderBy($attribute, $sort_order);
+            $products->orderBy($attribute, $sort_order);
         } else {
-            $permissions->latest();
+            $products->latest();
         }
 
-        $permissions = $permissions->paginate(5)->onEachSide(2)->appends(request()->query());
+        $products = $products->paginate(5)->onEachSide(2)->appends(request()->query());
 
         return Inertia::render('Admin/Product/Index', [
-            'permissions' => $permissions,
+            'products' => $products,
             'filters' => request()->all('search'),
             'can' => [
                 'create' => Auth::user()->can('permission create'),
@@ -84,7 +84,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return Inertia::render('Admin/Product/Edit', [
-            'permission' => $product,
+            'product' => $product,
         ]);
     }
 

@@ -22,7 +22,7 @@ import Pagination from "@/Components/Admin/Pagination.vue"
 import Sort from "@/Components/Admin/Sort.vue"
 
 const props = defineProps({
-    permissions: {
+    products: {
         type: Object,
         default: () => ({}),
     },
@@ -103,49 +103,49 @@ function destroy(id) {
                     </thead>
 
                     <tbody>
-                        <tr v-for="permission in permissions.data" :key="permission.id">
-                            <td>{{ permission.sku }}</td>
+                        <tr v-for="product in products.data" :key="product.id">
+                            <td>{{ product.sku }}</td>
                             <td data-label="Name English">
-                                <Link :href="route('admin.product.show', permission.id)" class="
+                                <Link :href="route('admin.product.show', product.id)" class="
                     no-underline
                     hover:underline
                     text-cyan-600
                     dark:text-cyan-400
                   ">
-                                {{ permission.name_english }}
+                                {{ product.name_english }}
                                 </Link>
                             </td>
                             <td data-label="Name Arabic">
-                                <Link :href="route('admin.product.show', permission.id)" class="
+                                <Link :href="route('admin.product.show', product.id)" class="
                     no-underline
                     hover:underline
                     text-cyan-600
                     dark:text-cyan-400
                   ">
-                                {{ permission.name_arabic }}
+                                {{ product.name_arabic }}
                                 </Link>
                             </td>
-                            <td>{{ permission.cost_price }}</td>
-                            <td>{{ permission.required_bidders }}</td>
-                            <!-- <td>{{ permission.is_visible }}</td> -->
+                            <td>{{ product.cost_price }}</td>
+                            <td>{{ product.required_bidders }}</td>
+                            <!-- <td>{{ product.is_visible }}</td> -->
                             <td>
-                                <BaseButton v-if="!permission.is_visible" color="danger" :icon="mdiEyeOff" small
-                                    @click="destroy(permission.id)" />
-                                <BaseButton v-if="permission.is_visible" color="success" :icon="mdiEyeSettings" small
-                                    @click="destroy(permission.id)" />
+                                <BaseButton v-if="!product.is_visible" color="danger" :icon="mdiEyeOff" small
+                                    @click="destroy(product.id)" />
+                                <BaseButton v-if="product.is_visible" color="success" :icon="mdiEyeSettings" small
+                                    @click="destroy(product.id)" />
                             </td>
                             <td>
-                                <BaseButton v-if="!permission.is_active" color="danger" :icon="mdiAccessPointOff" small
-                                    @click="destroy(permission.id)" />
-                                <BaseButton v-if="permission.is_active" color="success" :icon="mdiAccessPoint" small
-                                    @click="destroy(permission.id)" />
+                                <BaseButton v-if="!product.is_active" color="danger" :icon="mdiAccessPointOff" small
+                                    @click="destroy(product.id)" />
+                                <BaseButton v-if="product.is_active" color="success" :icon="mdiAccessPoint" small
+                                    @click="destroy(product.id)" />
                             </td>
                             <td v-if="can.edit || can.delete" class="before:hidden lg:w-1 whitespace-nowrap">
                                 <BaseButtons type="justify-start lg:justify-end" no-wrap>
-                                    <BaseButton v-if="can.edit" :route-name="route('admin.product.edit', permission.id)"
+                                    <BaseButton v-if="can.edit" :route-name="route('admin.product.edit', product.id)"
                                         color="info" :icon="mdiSquareEditOutline" small />
                                     <BaseButton v-if="can.delete" color="danger" :icon="mdiTrashCan" small
-                                        @click="destroy(permission.id)" />
+                                        @click="destroy(product.id)" />
                                 </BaseButtons>
                             </td>
 
@@ -153,7 +153,7 @@ function destroy(id) {
                     </tbody>
                 </table>
                 <div class="py-4">
-                    <Pagination :data="permissions" />
+                    <Pagination :data="products" />
                 </div>
             </CardBox>
         </SectionMain>
