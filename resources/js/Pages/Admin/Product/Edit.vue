@@ -10,44 +10,33 @@ import SectionTitleLineWithButton from "@/Components/SectionTitleLineWithButton.
 import CardBox from "@/Components/CardBox.vue"
 import FormField from '@/Components/FormField.vue'
 import FormControl from '@/Components/FormControl.vue'
-import FormCheckRadioGroup from '@/Components/FormCheckRadioGroup.vue'
-import BaseDivider from '@/Components/BaseDivider.vue'
 import BaseButton from '@/Components/BaseButton.vue'
 import BaseButtons from '@/Components/BaseButtons.vue'
 
 const props = defineProps({
-  role: {
+  permission: {
     type: Object,
     default: () => ({}),
   },
-  permissions: {
-    type: Object,
-    default: () => ({}),
-  },
-  roleHasPermissions: {
-    type: Object,
-    default: () => ({}),
-  }
 })
 
 const form = useForm({
   _method: 'put',
-  name: props.role.name,
-  permissions: props.roleHasPermissions
+  name: props.permission.name,
 })
 </script>
 
 <template>
   <LayoutAuthenticated>
-    <Head title="Update role" />
+    <Head title="Update permission" />
     <SectionMain>
       <SectionTitleLineWithButton
         :icon="mdiAccountKey"
-        title="Update role"
+        title="Update permission"
         main
       >
         <BaseButton
-          :route-name="route('admin.role.index')"
+          :route-name="route('admin.permission.index')"
           :icon="mdiArrowLeftBoldOutline"
           label="Back"
           color="white"
@@ -57,7 +46,7 @@ const form = useForm({
       </SectionTitleLineWithButton>
       <CardBox
         form
-        @submit.prevent="form.post(route('admin.role.update', props.role.id))"
+        @submit.prevent="form.post(route('admin.permission.update', props.permission.id))"
       >
         <FormField
           label="Name"
@@ -74,21 +63,6 @@ const form = useForm({
             </div>
           </FormControl>
         </FormField>
-
-        <BaseDivider />
-
-        <FormField
-          label="Permissions"
-          wrap-body
-        >
-          <FormCheckRadioGroup
-            v-model="form.permissions"
-            name="permissions"
-            is-column
-            :options="props.permissions"
-          />
-        </FormField>
-
         <template #footer>
           <BaseButtons>
             <BaseButton

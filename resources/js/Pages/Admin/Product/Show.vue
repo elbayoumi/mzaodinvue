@@ -11,32 +11,24 @@ import CardBox from "@/Components/CardBox.vue"
 import BaseButton from "@/Components/BaseButton.vue"
 
 const props = defineProps({
-  role: {
+  permission: {
     type: Object,
     default: () => ({}),
   },
-  permissions: {
-    type: Object,
-    default: () => ({}),
-  },
-  roleHasPermissions: {
-    type: Object,
-    default: () => ({}),
-  }
 })
 </script>
 
 <template>
   <LayoutAuthenticated>
-    <Head title="View role" />
+    <Head title="View product" />
     <SectionMain>
       <SectionTitleLineWithButton
         :icon="mdiAccountKey"
-        title="View role"
+        title="View product"
         main
       >
         <BaseButton
-          :route-name="route('admin.role.index')"
+          :route-name="route('admin.permission.index')"
           :icon="mdiArrowLeftBoldOutline"
           label="Back"
           color="white"
@@ -61,7 +53,7 @@ const props = defineProps({
                 Name
               </td>
               <td data-label="Name">
-                {{ role.name }}
+                {{ permission.name }}
               </td>
             </tr>
             <tr>
@@ -78,7 +70,7 @@ const props = defineProps({
                 Created
               </td>
               <td data-label="Created">
-                {{ new Date(role.created_at).toLocaleString() }}
+                {{ new Date(permission.created_at).toLocaleString() }}
               </td>
             </tr>
           </tbody>
