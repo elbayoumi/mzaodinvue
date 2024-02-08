@@ -15,7 +15,7 @@ import CardBox from "@/Components/CardBox.vue"
 import BaseButton from "@/Components/BaseButton.vue"
 
 const props = defineProps({
-    permission: {
+    product: {
         type: Object,
         default: () => ({}),
     },
@@ -53,7 +53,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="Name Arabic">
-                                {{ permission.name_arabic }}
+                                {{ product.name_arabic }}
                             </td>
                             <!-- // -->
                             <td class="
@@ -68,7 +68,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="Name English">
-                                {{ permission.name_english }}
+                                {{ product.name_english }}
                             </td>
 
                             <!-- // -->
@@ -84,7 +84,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="Product Details">
-                                {{ permission.product_details }}
+                                {{ product.product_details }}
                             </td>
                             <!-- // -->
 
@@ -104,7 +104,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="sku">
-                                {{ permission.sku }}
+                                {{ product.sku }}
                             </td>
                             <!-- // -->
                             <td class="
@@ -119,7 +119,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="weight">
-                                {{ permission.weight }}
+                                {{ product.weight }}
                             </td>
                             <!-- // -->
                             <td class="
@@ -134,7 +134,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="estimated market price">
-                                {{ permission.estimated_market_price }}
+                                {{ product.estimated_market_price }}
                             </td>
                             <!-- // -->
 
@@ -154,7 +154,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="cost price">
-                                {{ permission.cost_price }}
+                                {{ product.cost_price }}
                             </td>
                             <!-- // -->
                             <td class="
@@ -169,7 +169,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="required bidders">
-                                {{ permission.required_bidders }}
+                                {{ product.required_bidders }}
                             </td>
                             <!-- // -->
                             <td class="
@@ -184,7 +184,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="registration amount">
-                                {{ permission.registration_amount }}
+                                {{ product.registration_amount }}
                             </td>
                             <!-- // -->
 
@@ -204,7 +204,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="auction duration minutes">
-                                {{ permission.auction_duration_minutes }}
+                                {{ product.auction_duration_minutes }}
                             </td>
                             <!-- // -->
                             <td class="
@@ -219,7 +219,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="opening bid amount">
-                                {{ permission.opening_bid_amount }}
+                                {{ product.opening_bid_amount }}
                             </td>
                             <!-- // -->
                             <td class="
@@ -234,7 +234,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="payment deadline minutes">
-                                {{ permission.payment_deadline_minutes }}
+                                {{ product.payment_deadline_minutes }}
                             </td>
                             <!-- // -->
 
@@ -254,10 +254,10 @@ function destroy(id) {
                             </td>
 
                             <td data-label="is active">
-                                <BaseButton v-if="!permission.is_active" color="danger" :icon="mdiAccessPointOff" small
-                                    @click="destroy(permission.id)" />
-                                <BaseButton v-if="permission.is_active" color="success" :icon="mdiAccessPoint" small
-                                    @click="destroy(permission.id)" />
+                                <BaseButton v-if="!product.is_active" color="danger" :icon="mdiAccessPointOff" small
+                                    @click="destroy(product.id)" />
+                                <BaseButton v-if="product.is_active" color="success" :icon="mdiAccessPoint" small
+                                    @click="destroy(product.id)" />
                             </td>
                             <!-- // -->
                             <td class="
@@ -272,10 +272,10 @@ function destroy(id) {
                             </td>
 
                             <td data-label="is visible">
-                                <BaseButton v-if="!permission.is_visible" color="danger" :icon="mdiEyeOff" small
-                                    @click="destroy(permission.id)" />
-                                <BaseButton v-if="permission.is_visible" color="success" :icon="mdiEyeSettings" small
-                                    @click="destroy(permission.id)" />
+                                <BaseButton v-if="!product.is_visible" color="danger" :icon="mdiEyeOff" small
+                                    @click="destroy(product.id)" />
+                                <BaseButton v-if="product.is_visible" color="success" :icon="mdiEyeSettings" small
+                                    @click="destroy(product.id)" />
                             </td>
                             <!-- // -->
                             <td class="
@@ -289,7 +289,7 @@ function destroy(id) {
                                 Created
                             </td>
                             <td data-label="Created">
-                                {{ new Date(permission.created_at).toLocaleString() }}
+                                {{ new Date(product.created_at).toLocaleString() }}
                             </td>
                             <!-- // -->
 
@@ -308,7 +308,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="auction start">
-                                {{ permission.auction_start }}
+                                {{ product.auction_start }}
                             </td>
                             <!-- // -->
                             <td class="
@@ -323,7 +323,7 @@ function destroy(id) {
                             </td>
 
                             <td data-label="auction end">
-                                {{ permission.auction_end }}
+                                {{ product.auction_end }}
                             </td>
                         </tr>
                         <tr>
