@@ -7,7 +7,9 @@ import {
     mdiTrashCan,
     mdiAlertBoxOutline,
     mdiAccessPointOff,
-    mdiAccessPoint
+    mdiAccessPoint,
+    mdiEyeSettings,
+    mdiEyeOff
 } from "@mdi/js"
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue"
 import SectionMain from "@/Components/SectionMain.vue"
@@ -126,9 +128,9 @@ function destroy(id) {
                             <td>{{ permission.required_bidders }}</td>
                             <!-- <td>{{ permission.is_active }}</td> -->
                             <td>
-                                <BaseButton v-if="!permission.is_active" color="danger" :icon="mdiAccessPointOff" small
+                                <BaseButton v-if="!permission.is_active" color="danger" :icon="mdiEyeOff" small
                                     @click="destroy(permission.id)" />
-                                <BaseButton v-if="permission.is_active" color="success" :icon="mdiAccessPoint" small
+                                <BaseButton v-if="permission.is_active" color="success" :icon="mdiEyeSettings" small
                                     @click="destroy(permission.id)" />
                             </td>
                             <td v-if="can.edit || can.delete" class="before:hidden lg:w-1 whitespace-nowrap">
