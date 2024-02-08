@@ -286,16 +286,16 @@ function destroy(id) {
                   hidden
                   lg:block
                 ">
-                                estimated market price
+                                Created
                             </td>
-
-                            <td data-label="estimated market price">
-                                {{ permission.estimated_market_price }}
+                            <td data-label="Created">
+                                {{ new Date(permission.created_at).toLocaleString() }}
                             </td>
                             <!-- // -->
 
                         </tr>
                         <tr>
+                            <!-- // -->
                             <td class="
                   p-4
                   pl-8
@@ -304,12 +304,30 @@ function destroy(id) {
                   hidden
                   lg:block
                 ">
-                                Created
+                                auction start
                             </td>
-                            <td data-label="Created">
-                                {{ new Date(permission.created_at).toLocaleString() }}
+
+                            <td data-label="auction start">
+                                {{ permission.auction_start }}
                             </td>
                             <!-- // -->
+                            <td class="
+                  p-4
+                  pl-8
+                  text-slate-500
+                  dark:text-slate-400
+                  hidden
+                  lg:block
+                ">
+                                auction end
+                            </td>
+
+                            <td data-label="auction end">
+                                {{ permission.auction_end }}
+                            </td>
+                        </tr>
+                        <tr>
+
 
                         </tr>
                     </tbody>
