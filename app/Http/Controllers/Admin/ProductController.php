@@ -130,7 +130,7 @@ class ProductController extends Controller
         $product->update(['is_active' => !$product->is_active]);
 
         return redirect()->route('admin.product.index')
-            ->with('message', __('Product Active Change successfully'));
+            ->with('message', __('Product Active Change '.$product->sku.' successfully'));
 
     }
     public function visible ($id)
@@ -140,7 +140,7 @@ class ProductController extends Controller
         $product->update(['is_visible' => !$product->is_visible]);
 
         return redirect()->route('admin.product.index')
-            ->with('message', __('Product Visible Change successfully'));
+            ->with('message', __('Product Visible Change '.$product->sku.' successfully'));
 
     }
 }
