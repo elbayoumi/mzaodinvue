@@ -20,9 +20,21 @@ const props = defineProps({
         default: () => ({}),
     },
 })
+const form = useForm({})
+
 function destroy(id) {
     if (confirm("Are you sure you want to delete?")) {
-        formDelete.delete(route("admin.permission.destroy", id))
+        form.delete(route("admin.permission.destroy", id))
+    }
+}
+function visible(id) {
+    if (confirm("Are you sure you want to change visible?")) {
+        form.put(route("admin.product.visible", id))
+    }
+}
+function active(id) {
+    if (confirm("Are you sure you want to change active?")) {
+        form.put(route("admin.product.active", id))
     }
 }
 </script>
@@ -255,9 +267,9 @@ function destroy(id) {
 
                             <td data-label="is active">
                                 <BaseButton v-if="!product.is_active" color="danger" :icon="mdiAccessPointOff" small
-                                    @click="destroy(product.id)" />
+                                    @click="active(product.id)" />
                                 <BaseButton v-if="product.is_active" color="success" :icon="mdiAccessPoint" small
-                                    @click="destroy(product.id)" />
+                                    @click="active(product.id)" />
                             </td>
                             <!-- // -->
                             <td class="
@@ -273,9 +285,9 @@ function destroy(id) {
 
                             <td data-label="is visible">
                                 <BaseButton v-if="!product.is_visible" color="danger" :icon="mdiEyeOff" small
-                                    @click="destroy(product.id)" />
+                                    @click="visible(product.id)" />
                                 <BaseButton v-if="product.is_visible" color="success" :icon="mdiEyeSettings" small
-                                    @click="destroy(product.id)" />
+                                    @click="visible(product.id)" />
                             </td>
                             <!-- // -->
                             <td class="
