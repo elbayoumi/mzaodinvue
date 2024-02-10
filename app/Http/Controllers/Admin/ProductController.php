@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\{
+    StoreProductRequest,
+    UpdateProductRequest,
+};
 use App\Models\{
     Product,
     Permission
@@ -18,7 +21,7 @@ class ProductController extends Controller
     {
         $this->middleware('can:product list', ['only' => ['index', 'show']]);
         $this->middleware('can:product create', ['only' => ['create', 'store']]);
-        $this->middleware('can:product edit', ['only' => ['edit', 'update']]);
+        $this->middleware('can:product edit', ['only' => ['edit', 'update','active' ,'visible' ]]);
         $this->middleware('can:product delete', ['only' => ['destroy']]);
     }
 
@@ -79,7 +82,10 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        Product::create(['user_id'=>Auth::id()]+$request->all());
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+
+        Product::create($data);
 
         return redirect()->route('admin.product.index')
             ->with('message', __('Product created successfully.'));
@@ -107,11 +113,13 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+public function update(UpdateProductRequest $request, Product $product)
+{
+    $product->update($request->validated());
 
+    return redirect()->route('admin.product.index')
+        ->with('message', __('Product Updated successfully.'));
+}
     /**
      * Remove the specified resource from storage.
      */
@@ -133,7 +141,7 @@ class ProductController extends Controller
             ->with('message', __('Product Active Change '.$product->sku.' successfully'));
 
     }
-    public function visible ($id)
+    public function  visible ($id)
     {
 
         $product=Product::findOrFail($id);
