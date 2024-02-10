@@ -85,11 +85,12 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = Auth::id();
-        $image=$data['image'];
-        unset($data['image']);
+        $image=$request->image;
+        // dd($image);
+        // unset($data['image']);
 
         Product::create($data);
-        ImageProduct::create(['img'=>imageProcess($image)]);
+        ImageProduct::create(['img'=>imageProcess($request)]);
         return redirect()->route('admin.product.index')
             ->with('message', __('Product created successfully.'));
     }
