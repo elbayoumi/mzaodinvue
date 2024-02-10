@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use BalajiDharma\LaravelCategory\Models\CategoryType;
 use BalajiDharma\LaravelMenu\Models\Menu;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
@@ -80,7 +81,8 @@ class AdminCoreSeeder extends Seeder
         // create demo users
         $user = \App\Models\User::factory()->create([
             'name' => 'Super Admin',
-            'email' => 'superadmin@example.com',
+            'email' => 'mohamedashrafelbayoumi@gmail.com',
+            'password' => Hash::make('mohamedashrafelbayoumi@gmail.com') ,
         ]);
         $user->assignRole($role3);
 
@@ -119,6 +121,12 @@ class AdminCoreSeeder extends Seeder
             [
                 'name' => 'Roles',
                 'uri' => '/<admin>/role',
+                'enabled' => 1,
+                'weight' => 2,
+            ],
+            [
+                'name' => 'Product',
+                'uri' => '/<admin>/product',
                 'enabled' => 1,
                 'weight' => 2,
             ],
