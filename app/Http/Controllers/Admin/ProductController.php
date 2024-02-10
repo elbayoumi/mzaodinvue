@@ -8,6 +8,7 @@ use App\Http\Requests\{
     UpdateProductRequest,
 };
 use App\Models\{
+    ImageProduct,
     Product,
     Permission
 };
@@ -84,9 +85,11 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = Auth::id();
+        $image=$data['image'];
+        unset($data['image']);
 
         Product::create($data);
-
+        ImageProduct::create(['img'=>imageProcess($image)]);
         return redirect()->route('admin.product.index')
             ->with('message', __('Product created successfully.'));
     }
