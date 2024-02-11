@@ -65,6 +65,7 @@ const submit = e => {
     :class="componentClass"
     class="bg-white flex flex-col"
     @submit="submit"
+    
   >
     <header
       v-if="title"

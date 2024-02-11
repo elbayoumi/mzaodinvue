@@ -52,7 +52,7 @@ const form = useForm({
                 <BaseButton :route-name="route('admin.product.index')" :icon="mdiArrowLeftBoldOutline" label="Back"
                     color="white" rounded-full small />
             </SectionTitleLineWithButton>
-            <CardBox form @submit.prevent="form.post(route('admin.product.store'))">
+            <CardBox form enctype="multipart/form-data" @submit.prevent="form.post(route('admin.product.store'))">
                 <FormField label="Name Arabic" :class="{ 'text-red-400': form.errors.name_arabic }">
                     <FormControl v-model="form.name_arabic" type="text" placeholder="Enter Name Arabic"
                         :error="form.errors.name_arabic">
