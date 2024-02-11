@@ -83,6 +83,9 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+
+    dd($request->hasFile('image'));
+
         $data = $request->validated();
         $data['user_id'] = Auth::id();
         $image=$request->image;

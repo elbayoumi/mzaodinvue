@@ -16,12 +16,8 @@ import { ref } from 'vue'
 
 const image = ref(null)
 
-function onFileChange(event) {
-  const file = event.target.files[0]
-  // Validate file type, size, etc. if needed
-  // Set the selected file to the `image` ref
-  image.value = file
-  // You can also preview the image if necessary
+function handleFileUpload(event){
+     image=this.$refs.file.files;
 }
 
 const form = useForm({
@@ -169,7 +165,10 @@ const form = useForm({
                 </FormField>
 
                 <FormField label="Image" :class="{ 'text-red-400': form.errors.image }">
-                    <FormControl type="file" v-model="form.image" @change="onFileChange" :error="form.errors.image" />
+                    <!-- <FormControl type="file" multible ref="fileInput" accept="image/*" v-model="form.image"
+                        @change="onFileChange" :error="form.errors.image" /> -->
+                        <input type="file" v-on:change="handleFileUpload" id="image" ref="inputEl" name="image"
+                        :class="{ 'text-red-400': form.errors.image }" >
                     <div class="text-red-400 text-sm" v-if="form.errors.image">
                         {{ form.errors.image }}
                     </div>

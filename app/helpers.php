@@ -17,7 +17,6 @@ use Intervention\Image\Facades\Image;
 //     }//end of if
 // }
 function imageProcess($imageRequest ){
-    // dd($imageRequest->image);
     Image::make($imageRequest->image)->save(public_path('uploads/' . $imageRequest->image->hashName()));
 
     return $imageRequest->image->hashName();
