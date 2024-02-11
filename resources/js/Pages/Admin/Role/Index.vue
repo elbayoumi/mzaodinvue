@@ -87,6 +87,8 @@ function destroy(id) {
                   focus:ring
                   focus:ring-indigo-200
                   focus:ring-opacity-50
+                  text-black
+
                 "
                 placeholder="Search"
               />

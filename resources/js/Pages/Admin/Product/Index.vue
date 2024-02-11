@@ -83,7 +83,7 @@ function active(id) {
                   focus:ring
                   focus:ring-indigo-200
                   focus:ring-opacity-50
-                  text-blackn s
+                  text-black
                 " placeholder="Search" />
                             <BaseButton label="Search" type="submit" color="info"
                                 class="ml-4 inline-flex items-center px-4 py-2" />
