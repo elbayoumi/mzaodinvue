@@ -109,7 +109,41 @@ const passwordForm = useForm({
             </BaseButtons>
           </template>
         </CardBox>
+        <CardBox
+          title="Edit Image"
+          :icon="mdiAccountCircle"
+          form
 
+          @submit.prevent="profileForm.post(route('admin.account.info.store'))"
+        >
+
+          <FormField
+            label="Email"
+            help="Required. Your e-mail"
+            :class="{ 'text-red-400': profileForm.errors.email }"
+          >
+            <FormControl
+              :icon="mdiMail"
+              type="file"
+              name="Image"
+              ref="file"
+              multiple
+              required
+              :error="profileForm.errors.email"
+            >
+
+              <div class="text-red-400 text-sm" v-if="profileForm.errors.email">
+                {{ profileForm.errors.email }}
+              </div>
+            </FormControl>
+          </FormField>
+
+          <template #footer>
+            <BaseButtons>
+              <BaseButton color="info" type="submit" label="Submit" />
+            </BaseButtons>
+          </template>
+        </CardBox>
         <CardBox
           title="Change Password"
           :icon="mdiLock"
