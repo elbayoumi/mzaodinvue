@@ -22,8 +22,8 @@ class StoreImage extends FormRequest
     public function rules(): array
     {
         return [
-            'images' => 'required|array', // تحديد الصور باستخدام array
-            'images.*' => 'image|mimes:jpeg,jpg,png,gif,svg|max:2048' // قواعد الصور الفردية
+            'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
+
         ];
     }
 }
