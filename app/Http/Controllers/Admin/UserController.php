@@ -33,6 +33,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        // dd(Auth::user()->img);
         $users = (new User)->newQuery();
 
         if (request()->has('search')) {
@@ -233,6 +234,7 @@ class UserController extends Controller
         if ($request->hasFile('image')) {
             $image_path = $request->file('image')->store('image', 'public');
         }
+        // dd($image_path );
         $user = \Auth::user()->update(['img'=>$image_path]);
 
         if ($user) {
