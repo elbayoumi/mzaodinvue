@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\{
     ProductController,
     RoleController,
 };
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use Inertia\Inertia;
@@ -41,4 +42,11 @@ Route::group([
     Route::get('edit-account-info', 'UserController@accountInfo')->name('account.info');
     Route::post('edit-account-info', 'UserController@accountInfoStore')->name('account.info.store');
     Route::post('change-password', 'UserController@changePasswordStore')->name('account.password.store');
+    Route::post('change-image', 'UserController@changeImageStore')->name('account.image.store');
+
+    Route::get('/file', function(Request $request) {
+            return Inertia::render('Admin/Product/Fileupload');
+    })->name('product.up');
+    Route::post('image', [ProductController::class,'upload'])->name('image.store');
+
 });

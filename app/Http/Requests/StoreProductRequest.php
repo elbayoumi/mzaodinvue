@@ -36,6 +36,7 @@ class StoreProductRequest extends FormRequest
             'payment_deadline_minutes' => 'nullable|integer|min:1',
             'auction_start' => 'nullable|date',
             'auction_end' => 'nullable|date|after_or_equal:auction_start',
+            'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ];
     }
 }

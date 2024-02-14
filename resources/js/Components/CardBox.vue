@@ -65,7 +65,8 @@ const submit = e => {
     :class="componentClass"
     class="bg-white flex flex-col"
     @submit="submit"
-    
+    enctype="multipart/form-data"
+
   >
     <header
       v-if="title"

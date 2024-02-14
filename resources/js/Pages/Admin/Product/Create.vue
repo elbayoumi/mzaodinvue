@@ -14,13 +14,17 @@ import BaseButton from '@/Components/BaseButton.vue'
 import BaseButtons from '@/Components/BaseButtons.vue'
 import { ref } from 'vue'
 
-const image = ref(null)
+// let image = ref(null)
+let url = ref(null)
 
-function handleFileUpload(event){
-     image=this.$refs.file.files;
+
+function handleFileUpload(event) {
+    image.value = event.target.files;
 }
 
-const form = useForm({
+let imageUrl = ref(null)
+
+let form = useForm({
     name_arabic: '',
     name_english: '',
     sku: '',
@@ -37,6 +41,16 @@ const form = useForm({
     auction_end: '',
     image: null
 })
+
+function submit() {
+    form.post(route('admin.product.store'))
+}
+
+function previewImage(event) {
+    const file = event.target.files[0]
+    form.image = file
+    imageUrl.value = URL.createObjectURL(file)
+}
 </script>
 
 <template>
@@ -48,7 +62,7 @@ const form = useForm({
                 <BaseButton :route-name="route('admin.product.index')" :icon="mdiArrowLeftBoldOutline" label="Back"
                     color="white" rounded-full small />
             </SectionTitleLineWithButton>
-            <CardBox form enctype="multipart/form-data" @submit.prevent="form.post(route('admin.product.store'))">
+            <CardBox form @submit.prevent="submit">
                 <FormField label="Name Arabic" :class="{ 'text-red-400': form.errors.name_arabic }">
                     <FormControl v-model="form.name_arabic" type="text" placeholder="Enter Name Arabic"
                         :error="form.errors.name_arabic">
@@ -165,14 +179,23 @@ const form = useForm({
                 </FormField>
 
                 <FormField label="Image" :class="{ 'text-red-400': form.errors.image }">
-                    <!-- <FormControl type="file" multible ref="fileInput" accept="image/*" v-model="form.image"
-                        @change="onFileChange" :error="form.errors.image" /> -->
-                        <input type="file" v-on:change="handleFileUpload" id="image" ref="inputEl" name="image"
-                        :class="{ 'text-red-400': form.errors.image }" >
+                    <input type="file" @change="previewImage" class="
+                        w-full
+                        px-4
+                        py-2
+                        mt-2
+                        border
+                        rounded-md
+                        focus:outline-none
+                        focus:ring-1
+                        focus:ring-blue-600
+                    " />
+                    <img v-if="imageUrl" :src="imageUrl" class="w-full mt-4 h-80" />
                     <div class="text-red-400 text-sm" v-if="form.errors.image">
                         {{ form.errors.image }}
                     </div>
                 </FormField>
+
                 <template #footer>
                     <BaseButtons>
                         <BaseButton type="submit" color="info" label="Submit" :class="{ 'opacity-25': form.processing }"

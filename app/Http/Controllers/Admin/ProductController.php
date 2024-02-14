@@ -7,6 +7,7 @@ use App\Http\Requests\{
     StoreProductRequest,
     UpdateProductRequest,
 };
+use App\Http\Requests\StoreImage;
 use App\Models\{
     ImageProduct,
     Product,
@@ -15,6 +16,7 @@ use App\Models\{
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -84,7 +86,12 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
 
-    dd($request->hasFile('image'));
+    // dd($request->hasFile('image'));
+    $image_path = '';
+
+    if ($request->hasFile('image')) {
+        $image_path = $request->file('image')->store('image', 'public');
+    }
 
         $data = $request->validated();
         $data['user_id'] = Auth::id();
@@ -93,7 +100,8 @@ class ProductController extends Controller
         // unset($data['image']);
 
         Product::create($data);
-        ImageProduct::create(['img'=>imageProcess($request)]);
+
+        ImageProduct::create(['img'=>$image_path,"alt"=>"dfgsdfds"]);
         return redirect()->route('admin.product.index')
             ->with('message', __('Product created successfully.'));
     }
@@ -158,4 +166,24 @@ public function update(UpdateProductRequest $request, Product $product)
             ->with('message', __('Product Visible Change '.$product->sku.' successfully'));
 
     }
+    public function  upload (StoreImage $request){
+
+
+    $image_path = '';
+
+    if ($request->hasFile('image')) {
+        $image_path = $request->file('image')->store('image', 'public');
+    }
+
+    $data = ImageProduct::create([
+        'img' => $image_path,
+        "alt"=>"dfgsdfds"
+    ]);
+
+
+        return redirect()->route('admin.product.index')
+        ->with('message', __('Product created successfully.'));
+    }
+
+
 }

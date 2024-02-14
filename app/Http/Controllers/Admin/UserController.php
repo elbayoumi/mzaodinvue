@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreImage;
 use App\Models\Role;
 use App\Models\User;
 use BalajiDharma\LaravelAdminCore\Actions\User\CreateUser;
@@ -225,4 +226,22 @@ class UserController extends Controller
 
         return redirect()->route('admin.account.info')->with('message', __($message));
     }
+    public function changeImageStore(StoreImage $request)
+    {
+        $image_path = '';
+
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('image', 'public');
+        }
+        $user = \Auth::user()->update(['img'=>$image_path]);
+
+        if ($user) {
+            $message = 'Account updated successfully.';
+        } else {
+            $message = 'Error while saving. Please try again.';
+        }
+
+        return redirect()->route('admin.account.info')->with('message', __($message));
+    }
+
 }
