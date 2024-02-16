@@ -39,7 +39,9 @@ let form = useForm({
     product_details: '',
     auction_start: '',
     auction_end: '',
-    image: null
+    image: null,
+    alt: '',
+
 })
 
 function submit() {
@@ -195,7 +197,14 @@ function previewImage(event) {
                         {{ form.errors.image }}
                     </div>
                 </FormField>
-
+                <FormField label="text for image" :class="{ 'text-red-400': form.errors.alt }">
+                    <FormControl v-model="form.alt" type="text" step="0.01"
+                        placeholder="Enter opening bid amount" :error="form.errors.alt">
+                        <div class="text-red-400 text-sm" v-if="form.errors.alt">
+                            {{ form.errors.alt }}
+                        </div>
+                    </FormControl>
+                </FormField>
                 <template #footer>
                     <BaseButtons>
                         <BaseButton type="submit" color="info" label="Submit" :class="{ 'opacity-25': form.processing }"
