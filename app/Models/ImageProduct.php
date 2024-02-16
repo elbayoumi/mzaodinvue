@@ -12,4 +12,8 @@ class ImageProduct extends Model
     function product(){
         return  $this->belongsTo(Product::class);
     }
+    public function getImgAttribute($value)
+    {
+        return asset('storage/'.$value);
+    }
 }

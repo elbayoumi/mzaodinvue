@@ -15,12 +15,7 @@ import BaseButtons from '@/Components/BaseButtons.vue'
 import { ref } from 'vue'
 
 // let image = ref(null)
-let url = ref(null)
 
-
-function handleFileUpload(event) {
-    image.value = event.target.files;
-}
 
 let imageUrl = ref(null)
 

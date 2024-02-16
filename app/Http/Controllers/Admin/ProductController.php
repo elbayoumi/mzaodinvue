@@ -121,8 +121,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(Request $request , $productId)
     {
+        $product=Product::with('imageProduct')->first();
+        // dd($product->imageProduct);
         return Inertia::render('Admin/Product/Edit', [
             'product' => $product,
         ]);

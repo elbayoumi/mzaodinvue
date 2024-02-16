@@ -36,7 +36,7 @@ const form = useForm({
   opening_bid_amount: props.product.opening_bid_amount,
   product_details: props.product.product_details,
   auction_start: convertToDate(props.product.auction_start),
-  auction_end: convertToDate(props.product.auction_end)
+  auction_end: convertToDate(props.product.auction_end),
 })
 function convertToDate(dateString){
   if (!dateString) return null;
@@ -50,6 +50,10 @@ if (day < 10) day = '0' + day;
 
 return `${year}-${month}-${day}`;
 }
+function image_product(){
+    return props.product.image_product
+}
+// console.log('immmm',props.product.image_product);
 </script>
 
 <template>
@@ -74,7 +78,7 @@ return `${year}-${month}-${day}`;
         form
         @submit.prevent="form.post(route('admin.product.update', props.product.id))"
       >
-
+<img :src="props.product.image_product[0].img" alt="">
         <FormField
           label="Name Arabic"
           :class="{ 'text-red-400': form.errors.name_arabic }"
@@ -90,6 +94,7 @@ return `${year}-${month}-${day}`;
             </div>
           </FormControl>
         </FormField>
+
         <FormField
           label="Name English"
           :class="{ 'text-red-400': form.errors.name_english }"
