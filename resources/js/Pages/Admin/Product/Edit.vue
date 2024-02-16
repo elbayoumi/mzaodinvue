@@ -53,7 +53,7 @@ function convertToDate(dateString) {
 }
 
 
-console.log('immmm',props.product.image_product);
+// console.log('immmm',props.product.image_product);
 </script>
 
 <template>
@@ -68,9 +68,12 @@ console.log('immmm',props.product.image_product);
             <CardBox form @submit.prevent="form.post(route('admin.product.update', props.product.id))">
                 <FormField class="image-container">
                     <div v-for="image in images" :key="image.id" class="px-3 py-2 max-w-full focus:ring focus:outline-none rounded w-full',
-    'dark:placeholder-gray-400 w-44">
-                        <span>{{ image.rank }}</span>
-                        <img class="image" :src="image.img" :alt="image.alt">
+    'dark:placeholder-gray-400 ">
+                        <div class=" w-44 relative">
+                            <span class="absolute inset-x-1/2">{{ image.rank }}</span>
+                            <img class="image block w-full" :src="image.img" :alt="image.alt">
+                        </div>
+
                     </div>
                 </FormField>
 
