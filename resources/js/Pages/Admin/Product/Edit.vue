@@ -19,6 +19,7 @@ const props = defineProps({
         default: () => ({}),
     },
 })
+let images = props.product.image_product;
 
 const form = useForm({
     _method: 'put',
@@ -51,9 +52,8 @@ function convertToDate(dateString) {
     return `${year}-${month}-${day}`;
 }
 
-const images = props.product.image_product;
 
-// console.log('immmm',props.product.image_product);
+console.log('immmm',props.product.image_product);
 </script>
 
 <template>
@@ -66,11 +66,13 @@ const images = props.product.image_product;
                     color="white" rounded-full small />
             </SectionTitleLineWithButton>
             <CardBox form @submit.prevent="form.post(route('admin.product.update', props.product.id))">
-                <div class="image-container">
-                    <div v-for="image in images" :key="image.id" class="image-wrapper">
-                        <img class="image" :src="image.img" alt="Product Image">
+                <FormField class="image-container">
+                    <div v-for="image in images" :key="image.id" class="px-3 py-2 max-w-full focus:ring focus:outline-none rounded w-full',
+    'dark:placeholder-gray-400 w-44">
+                        <span>{{ image.rank }}</span>
+                        <img class="image" :src="image.img" :alt="image.alt">
                     </div>
-                </div>
+                </FormField>
 
                 <FormField label="Name Arabic" :class="{ 'text-red-400': form.errors.name_arabic }">
                     <FormControl v-model="form.name_arabic" type="text" placeholder="Enter Name Arabic"

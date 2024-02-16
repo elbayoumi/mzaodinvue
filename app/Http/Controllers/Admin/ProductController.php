@@ -123,8 +123,8 @@ class ProductController extends Controller
      */
     public function edit(Request $request , $productId)
     {
-        $product=Product::with('imageProduct')->first();
-        // dd($product->imageProduct);
+        $product=Product::with('imageProduct')->find($productId);
+        // dd($product);
         return Inertia::render('Admin/Product/Edit', [
             'product' => $product,
         ]);
