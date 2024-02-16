@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->tinyText('img');
 
-            $table->tinyText('alt');
+            $table->tinyText('alt')->nullable();
 
             $table->foreignId('product_id')->unsigned()->nullable()->references('id')->on('products')->onDelete('cascade');
 

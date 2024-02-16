@@ -86,22 +86,24 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
 
-    dd($request->hasFile('image'));
+    // dd($request->hasFile('image'));
     $image_path = '';
 
     if ($request->hasFile('image')) {
         $image_path = $request->file('image')->store('image', 'public');
-    }
 
+    }
         $data = $request->validated();
         $data['user_id'] = Auth::id();
         $image=$request->image;
-        dd($image);
+        // dd($image);
         unset($data['image']);
 
-        Product::create($data);
+        $product=Product::create($data);
+        $imageProduct=ImageProduct::create(['img'=>$image_path,"alt"=>$request->alt??null]);
 
-        ImageProduct::create(['img'=>$image_path,"alt"=>"dfgsdfds"]);
+        $product->imageProduct()->save($imageProduct);
+
         return redirect()->route('admin.product.index')
             ->with('message', __('Product created successfully.'));
     }
