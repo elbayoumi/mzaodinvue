@@ -2,7 +2,8 @@
 import { Head, Link, useForm } from "@inertiajs/vue3"
 import {
     mdiAccountKey,
-    mdiArrowLeftBoldOutline
+    mdiArrowLeftBoldOutline,
+    mdiArrowBottomRightThick
 } from "@mdi/js"
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue"
 import SectionMain from "@/Components/SectionMain.vue"
@@ -66,7 +67,11 @@ function convertToDate(dateString) {
                     color="white" rounded-full small />
             </SectionTitleLineWithButton>
             <CardBox form @submit.prevent="form.post(route('admin.product.update', props.product.id))">
+
                 <FormField class="image-container">
+                    <BaseButton label="Image Edit" class="w-28 h-10" :route-name="route('admin.dashboard')"
+                        :icon="mdiArrowBottomRightThick" />
+
                     <div v-for="image in images" :key="image.id" class="px-3 py-2 max-w-full focus:ring focus:outline-none rounded w-full',
     'dark:placeholder-gray-400 ">
                         <div class=" w-44 relative">
