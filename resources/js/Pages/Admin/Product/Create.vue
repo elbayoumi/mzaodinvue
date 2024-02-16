@@ -40,7 +40,7 @@ let form = useForm({
     auction_start: '',
     auction_end: '',
     image: null,
-    alt: '',
+    alt: null,
 
 })
 
