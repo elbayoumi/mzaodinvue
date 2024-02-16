@@ -98,6 +98,7 @@ class ProductController extends Controller
         $image=$request->image;
         // dd($image);
         unset($data['image']);
+        unset($data['alt']);
 
         $product=Product::create($data);
         $imageProduct=ImageProduct::create(['img'=>$image_path,"alt"=>$request->alt??null]);
