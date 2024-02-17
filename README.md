@@ -75,7 +75,7 @@ To change the Admin Prefix, change `prefix` on `config/admin.php` or add the `AD
 	<br/><br/>
 	<img src="https://user-images.githubusercontent.com/6037466/184570672-6413384d-a5c4-461b-9c8e-d97ede29a21f.png">
 </p>
-
+<p>https://icon-sets.iconify.design/mdi/</p>
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
