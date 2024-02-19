@@ -15,7 +15,11 @@
                         <form @submit.prevent="submit">
                             <div>
                                 <label for="File">File Upload</label>
-                                <input type="file" @change="previewImage" ref="photo" class="
+                                <input
+    type="file"
+    @change="previewImages"
+    ref="photos"
+    class="
         w-full
         px-4
         py-2
@@ -25,9 +29,13 @@
         focus:outline-none
         focus:ring-1
         focus:ring-blue-600
-    " multiple />
+    "
+    multiple
+/>
 
-                                <img v-if="url" :src="url" class="w-full mt-4 h-80" />
+                                <div v-for="(image, index) in images" :key="index">
+                                    <img :src="image.url" class="w-full mt-4 h-80" />
+                                </div>
                                 <div v-if="errors.image" class="font-bold text-red-600">
                                     {{ errors.image }}
                                 </div>
@@ -55,7 +63,8 @@
 <script>
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue"
 import { Head, Link, useForm } from "@inertiajs/vue3"
-// import { useForm } from "@inertiajs/inertia-vue3";
+import { ref } from 'vue'; // Import ref from vue
+
 export default {
     components: {
         LayoutAuthenticated,
@@ -64,36 +73,37 @@ export default {
     props: {
         errors: Object,
     },
-    data() {
-        return {
-            url: null,
-        }
-    },
-    setup() {
+    setup(props) {
         const form = useForm({
-            image: null,
+            image: [],
         });
+        const images = ref([]);
 
-        return { form };
-    },
-    methods: {
-        submit() {
-            // Get an array of File objects from the file input element
-            const files = Array.from(this.$refs.photo.files);
+        const previewImages = (e) => {
+            images.value = [];
 
-            // Add each file to the form data
+            Array.from(e.target.files).forEach(file => {
+                images.value.push({ url: URL.createObjectURL(file) });
+                form.image.push(file);
+            });
+        };
+
+        const submit = () => {
+            const files = Array.from(this.$refs.photos.files);
+
             files.forEach(file => {
-                this.form.image.push(file);
+                form.image.push(file);
             });
 
-            // Submit the form with the updated image array
-            this.form.post(route("admin.image.store"));
-        }
-        ,
-        previewImage(e) {
+            form.post(route("admin.image.store"));
+        };
+
+        const previewImage = (e) => {
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file);
-        },
-    },
+        };
+
+        return { form, images, previewImages, submit, previewImage };
+    }
 };
 </script>
