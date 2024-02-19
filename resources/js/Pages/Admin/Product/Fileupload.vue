@@ -15,45 +15,32 @@
                         <form @submit.prevent="submit">
                             <div>
                                 <label for="File">File Upload</label>
-                                <input
-                                    type="file"
-                                    @change="previewImage"
-                                    ref="photo"
-                                    class="
-                                        w-full
-                                        px-4
-                                        py-2
-                                        mt-2
-                                        border
-                                        rounded-md
-                                        focus:outline-none
-                                        focus:ring-1
-                                        focus:ring-blue-600
-                                    "
-                                />
-                                <img
-                                    v-if="url"
-                                    :src="url"
-                                    class="w-full mt-4 h-80"
-                                />
-                                <div
-                                    v-if="errors.image"
-                                    class="font-bold text-red-600"
-                                >
+                                <input type="file" @change="previewImage" ref="photo" class="
+        w-full
+        px-4
+        py-2
+        mt-2
+        border
+        rounded-md
+        focus:outline-none
+        focus:ring-1
+        focus:ring-blue-600
+    " multiple />
+
+                                <img v-if="url" :src="url" class="w-full mt-4 h-80" />
+                                <div v-if="errors.image" class="font-bold text-red-600">
                                     {{ errors.image }}
                                 </div>
                             </div>
 
                             <div class="flex items-center mt-4">
-                                <button
-                                    class="
+                                <button class="
                                         px-6
                                         py-2
                                         text-white
                                         bg-gray-900
                                         rounded
-                                    "
-                                >
+                                    ">
                                     Save
                                 </button>
                             </div>
@@ -77,11 +64,11 @@ export default {
     props: {
         errors: Object,
     },
- data() {
-    return {
-      url: null,
-    }
-  },
+    data() {
+        return {
+            url: null,
+        }
+    },
     setup() {
         const form = useForm({
             image: null,
@@ -91,11 +78,18 @@ export default {
     },
     methods: {
         submit() {
-            if (this.$refs.photo) {
-                this.form.image = this.$refs.photo.files[0];
-            }
+            // Get an array of File objects from the file input element
+            const files = Array.from(this.$refs.photo.files);
+
+            // Add each file to the form data
+            files.forEach(file => {
+                this.form.image.push(file);
+            });
+
+            // Submit the form with the updated image array
             this.form.post(route("admin.image.store"));
-        },
+        }
+        ,
         previewImage(e) {
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file);
