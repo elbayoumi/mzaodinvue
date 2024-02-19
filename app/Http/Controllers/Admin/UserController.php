@@ -13,6 +13,7 @@ use BalajiDharma\LaravelAdminCore\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 
@@ -159,7 +160,7 @@ class UserController extends Controller
      */
     public function accountInfo()
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         return Inertia::render('Admin/User/AccountInfo', [
             'user' => $user,
@@ -175,10 +176,10 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.\Auth::user()->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.Auth::user()->id],
         ]);
 
-        $user = \Auth::user()->update($request->except(['_token']));
+        $user = Auth::user()->update($request->except(['_token']));
 
         if ($user) {
             $message = 'Account updated successfully.';
@@ -206,7 +207,7 @@ class UserController extends Controller
             if ($validator->failed()) {
                 return;
             }
-            if (! Hash::check($request->input('old_password'), \Auth::user()->password)) {
+            if (! Hash::check($request->input('old_password'), Auth::user()->password)) {
                 $validator->errors()->add(
                     'old_password', __('Old password is incorrect.')
                 );
@@ -215,7 +216,7 @@ class UserController extends Controller
 
         $validator->validate();
 
-        $user = \Auth::user()->update([
+        $user = Auth::user()->update([
             'password' => Hash::make($request->input('new_password')),
         ]);
 
@@ -229,21 +230,31 @@ class UserController extends Controller
     }
     public function changeImageStore(StoreImage $request)
     {
-        $image_path = '';
 
+        $image_path = '';
+        $user = Auth::user();
+dd($user->image_path);
         if ($request->hasFile('image')) {
+            // Store the new image file
             $image_path = $request->file('image')->store('image', 'public');
+
+            // Delete the existing image file if it exists
+            if ($user->img) {
+                Storage::disk('public')->delete($user->img);
+            }
         }
-        // dd($image_path );
-        $user = \Auth::user()->update(['img'=>$image_path]);
+
+        $user->img = $image_path;
+        $user->save();
 
         if ($user) {
-            $message = 'Account updated successfully.';
+            $message = 'Account Image updated successfully.';
         } else {
             $message = 'Error while saving. Please try again.';
         }
 
-        return redirect()->route('admin.account.info')->with('message', __($message));
+        return redirect()->route('admin.account.info')->with('message', $message);
+
     }
 
 }

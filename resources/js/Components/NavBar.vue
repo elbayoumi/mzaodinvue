@@ -32,7 +32,7 @@ import NavBarSearch from '@/Components/NavBarSearch.vue'
 const mainStore = useMainStore()
 
 const userName = computed(() => usePage().props.auth.user.name)
-const img = computed(() => usePage().props.auth.user.img)
+const img = computed(() => usePage().props.auth.user.image_path)
 
 const styleStore = useStyleStore()
 

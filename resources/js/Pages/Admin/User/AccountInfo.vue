@@ -107,7 +107,7 @@ function submitProfileImage() {
                         focus:outline-none
                         focus:ring-1
                         focus:ring-blue-600
-                    " />
+                    " accept="image/jpeg, image/jpg, image/png, image/gif, image/svg+xml" required/>
                         <img v-if="imageUrl" :src="imageUrl" class="w-full mt-4 h-80" />
                         <div class="text-red-400 text-sm" v-if="profileImage.errors.image">
                             {{ profileImage.errors.image }}

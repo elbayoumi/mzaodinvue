@@ -4,12 +4,12 @@ import { usePage } from '@inertiajs/vue3'
 import UserAvatar from '@/Components/UserAvatar.vue'
 
 const userName = computed(() => usePage().props.auth.user.name)
-const img = computed(() => usePage().props.auth.user.img)
+const image_path = computed(() => usePage().props.auth.user.image_path)
 </script>
 
 <template>
   <UserAvatar
-    :img="img"
+    :image_path="image_path"
     :username="userName"
     api="initials"
   />

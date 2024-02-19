@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $appends = ['image_path'];
+
     protected $fillable = [
         'name',
         'email',
@@ -44,10 +46,14 @@ class User extends Authenticatable
         'img' => 'string',
     ];
 
-    public function getImgAttribute($value)
+    // public function getImgAttribute($value)
+    // {
+    //     return asset('storage/'.$value);
+    // }
+    public function getImagePathAttribute()
     {
-        return asset('storage/'.$value);
-    }
 
+        return asset('storage/' . $this->img);
+    }
 
 }

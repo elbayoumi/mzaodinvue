@@ -10,7 +10,7 @@ const props = defineProps({
     type: String,
     default: null
   },
-  img: {
+  image_path: {
     type: String,
     default: null
   },
@@ -25,14 +25,14 @@ const avatar = computed(
 )
 
 const username = computed(() => props.username)
-const img = computed(() => props.img)
-console.log('imggg',props.img)
+const image_path = computed(() => props.image_path)
+// console.log('imggg',props.image_path)
 </script>
 
 <template>
   <div>
     <img
-      :src="img"
+      :src="image_path"
       :alt="username"
       class="rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800"
     >
