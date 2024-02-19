@@ -233,7 +233,6 @@ class UserController extends Controller
 
         $image_path = '';
         $user = Auth::user();
-dd($user->image_path);
         if ($request->hasFile('image')) {
             // Store the new image file
             $image_path = $request->file('image')->store('image', 'public');
