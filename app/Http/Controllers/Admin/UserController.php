@@ -238,9 +238,7 @@ class UserController extends Controller
             $image_path = $request->file('image')->store('image', 'public');
 
             // Delete the existing image file if it exists
-            if ($user->img) {
-                Storage::disk('public')->delete($user->img);
-            }
+
         }
 
         $user->img = $image_path;

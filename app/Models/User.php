@@ -57,22 +57,13 @@ class User extends Authenticatable
 
         return asset('storage/' . $this->img);
     }
-    // public function setImgAttribute($value)
-    // {
-    //     $image_path = '';
-    //     if ($value instanceof UploadedFile) {
-    //         // Store the new image file
-    //         $image_path = $value->store('images', 'public');
+    public function setImgAttribute($value)
+    {
+        if (!empty($this->img)) {
+            Storage::disk('public')->delete($this->img);
+        }
 
-    //         // Delete the existing image file if it exists
-    //         if ($this->img) {
-    //             Storage::disk('public')->delete($this->img);
-    //         }
-    //         $this->attributes['img'] = $image_path;
-
-    //     }
-
-    //     $this->attributes['img'] = $value;
-    // }
+        $this->attributes['img'] = $value;
+    }
 
 }
