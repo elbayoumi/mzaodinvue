@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -55,9 +57,22 @@ class User extends Authenticatable
 
         return asset('storage/' . $this->img);
     }
-    public function setImgAttribute($value)
-    {
-        $this->attributes['img'] = $value;
-    }
+    // public function setImgAttribute($value)
+    // {
+    //     $image_path = '';
+    //     if ($value instanceof UploadedFile) {
+    //         // Store the new image file
+    //         $image_path = $value->store('images', 'public');
+
+    //         // Delete the existing image file if it exists
+    //         if ($this->img) {
+    //             Storage::disk('public')->delete($this->img);
+    //         }
+    //         $this->attributes['img'] = $image_path;
+
+    //     }
+
+    //     $this->attributes['img'] = $value;
+    // }
 
 }
