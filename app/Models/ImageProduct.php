@@ -27,4 +27,9 @@ class ImageProduct extends Model
 
         $this->attributes['img'] = $value;
     }
+    public function getImagePathAttribute()
+    {
+
+        return asset('storage/' . $this->img);
+    }
 }
