@@ -55,5 +55,9 @@ class User extends Authenticatable
 
         return asset('storage/' . $this->img);
     }
+    public function setImgAttribute($value)
+    {
+        $this->attributes['img'] = $value;
+    }
 
 }
