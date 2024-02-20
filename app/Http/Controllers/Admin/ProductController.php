@@ -174,7 +174,8 @@ public function update(UpdateProductRequest $request, Product $product)
     public function  upload (StoreImage $request ,$productId){
 
     $image_path = '';
-
+$count=ImageProduct::where('product_id',$productId)->count();
+// dd($count);
     if ($request->hasFile('image')) {
         foreach($request->file('image') as $i => $img){
             $image_path = $img->store('image', 'public');
