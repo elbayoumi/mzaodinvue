@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
         $this->middleware('can:product list', ['only' => ['index', 'show']]);
         $this->middleware('can:product create', ['only' => ['create', 'store']]);
-        $this->middleware('can:product edit', ['only' => ['edit', 'update','active' ,'visible' ]]);
+        $this->middleware('can:product edit', ['only' => ['edit', 'update', 'active', 'visible']]);
         $this->middleware('can:product delete', ['only' => ['destroy']]);
     }
 
@@ -40,10 +40,10 @@ class ProductController extends Controller
 
             $products->where(function ($query) use ($searchTerm) {
                 $query->where('name_arabic', 'LIKE', $searchTerm)
-                      ->orWhere('name_english', 'LIKE', $searchTerm)
-                      ->orWhere('sku', 'LIKE', $searchTerm)
-                      // Add more conditions for other columns as needed
-                      ->orWhere('product_details', 'LIKE', $searchTerm);
+                    ->orWhere('name_english', 'LIKE', $searchTerm)
+                    ->orWhere('sku', 'LIKE', $searchTerm)
+                    // Add more conditions for other columns as needed
+                    ->orWhere('product_details', 'LIKE', $searchTerm);
             });
         }
 
@@ -77,7 +77,6 @@ class ProductController extends Controller
     public function create()
     {
         return Inertia::render('Admin/Product/Create');
-
     }
 
     /**
@@ -86,22 +85,21 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
 
-    // dd($request->hasFile('image'));
-    $image_path = '';
+        // dd($request->hasFile('image'));
+        $image_path = '';
 
-    if ($request->hasFile('image')) {
-        $image_path = $request->file('image')->store('image', 'public');
-
-    }
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('image', 'public');
+        }
         $data = $request->validated();
         $data['user_id'] = Auth::id();
-        $image=$request->image;
+        $image = $request->image;
         // dd($image);
         unset($data['image']);
         unset($data['alt']);
 
-        $product=Product::create($data);
-        $imageProduct=ImageProduct::create(['img'=>$image_path,"alt"=>$request->alt]);
+        $product = Product::create($data);
+        $imageProduct = ImageProduct::create(['img' => $image_path, "alt" => $request->alt]);
 
         $product->imageProduct()->save($imageProduct);
 
@@ -121,9 +119,9 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request , $productId)
+    public function edit(Request $request, $productId)
     {
-        $product=Product::with('imageProduct')->find($productId);
+        $product = Product::with('imageProduct')->find($productId);
         // dd($product);
         return Inertia::render('Admin/Product/Edit', [
             'product' => $product,
@@ -133,13 +131,13 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-public function update(UpdateProductRequest $request, Product $product)
-{
-    $product->update($request->validated());
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        $product->update($request->validated());
 
-    return redirect()->route('admin.product.index')
-        ->with('message', __('Product Updated successfully.'));
-}
+        return redirect()->route('admin.product.index')
+            ->with('message', __('Product Updated successfully.'));
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -149,54 +147,56 @@ public function update(UpdateProductRequest $request, Product $product)
 
         return redirect()->route('admin.product.index')
             ->with('message', __('Product deleted successfully'));
-
     }
-    public function active( $id)
+    public function active($id)
     {
         // dd($product);
-        $product=Product::findOrFail($id);
+        $product = Product::findOrFail($id);
         $product->update(['is_active' => !$product->is_active]);
 
         return redirect()->route('admin.product.index')
-            ->with('message', __('Product Active Change '.$product->sku.' successfully'));
-
+            ->with('message', __('Product Active Change ' . $product->sku . ' successfully'));
     }
-    public function  visible ($id)
+    public function  visible($id)
     {
 
-        $product=Product::findOrFail($id);
+        $product = Product::findOrFail($id);
         $product->update(['is_visible' => !$product->is_visible]);
 
         return redirect()->route('admin.product.index')
-            ->with('message', __('Product Visible Change '.$product->sku.' successfully'));
-
+            ->with('message', __('Product Visible Change ' . $product->sku . ' successfully'));
     }
-    public function  upload (StoreImage $request ,$productId){
+    public function  upload(StoreImage $request, $productId)
+    {
 
-    $image_path = '';
-$count=ImageProduct::where('product_id',$productId)->count();
-// dd($count);
-    if ($request->hasFile('image')) {
-        foreach($request->file('image') as $i => $img){
-            $image_path = $img->store('image', 'public');
-            ImageProduct::create([
-                'product_id'=>$productId,
-                'img' => $image_path,
-                "alt"=>"dfgsdfds",
-                "rank"=>$i,
-            ]);
+        $image_path = '';
+        $count = ImageProduct::where('product_id', $productId)->count();
+        $count = $count < 1 ? 1 : $count;
+        // dd($count);
+        foreach ($request->file('image') as $img) {
+            // Check if file is valid
+            if ($img->isValid()) {
+                // Generate a unique filename
+                $imageName = uniqid() . '_' . $img->getClientOriginalName();
+                // Store the image
+                $image_path = $img->storeAs('images', $imageName, 'public');
+
+                // Create ImageProduct instance
+                ImageProduct::create([
+                    'product_id' => $productId,
+                    'img' => $image_path,
+                    'alt' => "dfgsdfds",
+                    'rank' => $count, // Use $count as rank
+                ]);
+
+                // Increment counter
+                $count++;
+            }
         }
-    }
 
-    $data = ImageProduct::create([
-        'img' => $image_path,
-        "alt"=>"dfgsdfds"
-    ]);
 
 
         return redirect()->route('admin.product.index')
-        ->with('message', __('Product created successfully.'));
+            ->with('message', __('Product created successfully.'));
     }
-
-
 }
