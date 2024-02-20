@@ -89,7 +89,7 @@ export default {
         };
 
         const submit = () => {
-            const files = Array.from(this.$refs.photos.files);
+            const files = Array.from(images);
 
             files.forEach(file => {
                 form.image.push(file);
