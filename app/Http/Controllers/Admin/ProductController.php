@@ -168,32 +168,51 @@ class ProductController extends Controller
     }
     public function  upload(StoreImage $request, $productId)
     {
+        $product = Product::findOrFail($productId);
 
         $image_path = '';
         $count = ImageProduct::where('product_id', $productId)->count();
         $count = $count < 1 ? 1 : $count;
         // dd($count);
+        // foreach ($request->file('image') as $img) {
+        //     // Check if file is valid
+        //     if ($img->isValid()) {
+        //         // Generate a unique filename
+        //         $imageName = uniqid() . '_' . $img->getClientOriginalName();
+        //         // Store the image
+        //         $image_path = $img->storeAs('images', $imageName, 'public');
+
+        //         // Create ImageProduct instance
+        //         ImageProduct::create([
+        //             'product_id' => $productId,
+        //             'img' => $image_path,
+        //             'alt' => "dfgsdfds",
+        //             'rank' => $count, // Use $count as rank
+        //         ]);
+
+        //         // Increment counter
+        //         $count++;
+        //     }
+        // }
+
+        $images = [];
+
         foreach ($request->file('image') as $img) {
-            // Check if file is valid
             if ($img->isValid()) {
-                // Generate a unique filename
                 $imageName = uniqid() . '_' . $img->getClientOriginalName();
-                // Store the image
-                $image_path = $img->storeAs('images', $imageName, 'public');
+                $imagePath = $img->storeAs('images', $imageName, 'public');
 
-                // Create ImageProduct instance
-                ImageProduct::create([
-                    'product_id' => $productId,
-                    'img' => $image_path,
+                $images[] = [
+                    'img' => $imagePath,
                     'alt' => "dfgsdfds",
-                    'rank' => $count, // Use $count as rank
-                ]);
+                    'rank' => $count,
+                ];
 
-                // Increment counter
                 $count++;
+
             }
         }
-
+        $product->imageProduct()->createMany($images);
 
 
         return redirect()->route('admin.product.index')
