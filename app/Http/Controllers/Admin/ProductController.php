@@ -171,7 +171,7 @@ public function update(UpdateProductRequest $request, Product $product)
             ->with('message', __('Product Visible Change '.$product->sku.' successfully'));
 
     }
-    public function  upload (StoreImage $request){
+    public function  upload (StoreImage $request ,$productId){
 
 
     $image_path = '';

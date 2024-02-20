@@ -106,4 +106,5 @@ export default {
         return { form, images, previewImages, submit, previewImage };
     }
 };
+// console.log(productId);
 </script>

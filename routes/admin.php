@@ -44,9 +44,9 @@ Route::group([
     Route::post('change-password', 'UserController@changePasswordStore')->name('account.password.store');
     Route::post('change-image', 'UserController@changeImageStore')->name('account.image.store');
 
-    Route::get('/file/{id}', function(Request $request,$id=null) {
-            return Inertia::render('Admin/Product/Fileupload');
+    Route::get('/file/{productId}', function(Request $request,$productId) {
+            return Inertia::render('Admin/Product/Fileupload',['productId'=>$productId]);
     })->name('product.image');
-    Route::post('image', [ProductController::class,'upload'])->name('image.store');
+    Route::post('image/{productId}', [ProductController::class,'upload'])->name('image.store');
 
 });
