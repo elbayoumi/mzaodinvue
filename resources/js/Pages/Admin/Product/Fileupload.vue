@@ -72,13 +72,18 @@ export default {
     },
     props: {
         errors: Object,
-    },
+        productId: {
+            type: String // تحديد نوع الـ prop ليكون String
+        }
+        },
+
     setup(props) {
         const form = useForm({
             image: [],
         });
         const images = ref([]);
-
+        const productId = props.productId;
+// console.log(productId)
         const previewImages = (e) => {
             images.value = [];
 
@@ -95,7 +100,7 @@ export default {
                 form.image.push(file);
             });
 
-            form.post(route("admin.image.store"));
+            form.post(route("admin.image.store",props.productId));
         };
 
         const previewImage = (e) => {

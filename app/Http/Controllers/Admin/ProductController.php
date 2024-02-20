@@ -173,13 +173,13 @@ public function update(UpdateProductRequest $request, Product $product)
     }
     public function  upload (StoreImage $request ,$productId){
 
-
     $image_path = '';
 
     if ($request->hasFile('image')) {
         foreach($request->file('image') as $i => $img){
             $image_path = $img->store('image', 'public');
             ImageProduct::create([
+                'product_id'=>$productId,
                 'img' => $image_path,
                 "alt"=>"dfgsdfds",
                 "rank"=>$i,
