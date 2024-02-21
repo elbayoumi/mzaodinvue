@@ -209,7 +209,6 @@ class ProductController extends Controller
                 ];
 
                 $count++;
-
             }
         }
         $product->imageProduct()->createMany($images);
