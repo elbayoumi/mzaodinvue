@@ -9,7 +9,7 @@
     props: ['imagePath'], // تحديد الخاصية كمسار للصورة
     data() {
       return {
-        imageUrl: 'http://127.0.0.1:8000/website/cart-btn.png', // استخدام المسار الممرر أو الافتراضي
+        imageUrl: 'https://mzaodin.com/website/cart-btn.png', // استخدام المسار الممرر أو الافتراضي
       };
     },
   };

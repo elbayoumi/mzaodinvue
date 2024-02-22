@@ -9,7 +9,7 @@
     props: ['imagePath'], // تحديد الخاصية كمسار للصورة
     data() {
       return {
-        imageUrl: 'http://127.0.0.1:8000/website/log-removebg-preview.png', // استخدام المسار الممرر أو الافتراضي
+        imageUrl: 'https://mzaodin.com/website/log-removebg-preview.png', // استخدام المسار الممرر أو الافتراضي
       };
     },
   };
