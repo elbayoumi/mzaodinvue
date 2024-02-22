@@ -123,7 +123,7 @@ const submit = () => {
 
                             <!-- <i class="fa-solid fa-star"></i> -->
                         </div>
-                        <img src="http://127.0.0.1:8000/website/download.jpeg" class="w-full h-48 object-cover"
+                        <img src="https://mzaodin.com/website/download.jpeg" class="w-full h-48 object-cover"
                             alt="Card Image">
                         <div class="rounded card-pop p-2">
                             <div> انتهى المزاد </div>
@@ -155,7 +155,7 @@ const submit = () => {
 
                             <!-- <i class="fa-solid fa-star"></i> -->
                         </div>
-                        <img src="http://127.0.0.1:8000/website/download.jpeg" class="w-full h-48 object-cover"
+                        <img src="https://mzaodin.com/website/download.jpeg" class="w-full h-48 object-cover"
                             alt="Card Image">
                         <div class="rounded card-pop p-2">
                             <div> انتهى المزاد </div>
@@ -187,7 +187,7 @@ const submit = () => {
 
                             <!-- <i class="fa-solid fa-star"></i> -->
                         </div>
-                        <img src="http://127.0.0.1:8000/website/download.jpeg" class="w-full h-48 object-cover"
+                        <img src="https://mzaodin.com/website/download.jpeg" class="w-full h-48 object-cover"
                             alt="Card Image">
                         <div class="rounded card-pop p-2">
                             <div> انتهى المزاد </div>
@@ -235,7 +235,7 @@ const submit = () => {
                     </li>
 
                 </ul>
-                <!-- <img :src="'http://127.0.0.1:8000/website/log-removebg-preview.png'"
+                <!-- <img :src="'https://mzaodin.com/website/log-removebg-preview.png'"
                             class="w-100 d-inline-block m-0 p-0 logo" alt=""> -->
                 <!-- <ul class="list-unstyled flex flex-wrap justify-around w-100 py-5 ">
                     <li class="text-center">
@@ -261,7 +261,7 @@ const submit = () => {
                         <a class="nav-link text-secondary" href="#"> التواصل </a>
                     </li>
                     <li class="text-center">
-                        <img :src="'http://127.0.0.1:8000/website/log-removebg-preview.png'"
+                        <img :src="'https://mzaodin.com/website/log-removebg-preview.png'"
                             class=" d-inline-block m-0 p-0 logo" alt="">
                     </li>
                 </ul>
