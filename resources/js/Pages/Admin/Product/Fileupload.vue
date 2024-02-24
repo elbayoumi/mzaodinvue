@@ -35,6 +35,8 @@
 
                                 <div v-for="(image, index) in images" :key="index">
                                     <img :src="image.url" class="w-full mt-4 h-80" />
+                                    <input value="Remove" type="button" @click="removeImage(index, $event)" class="text-red-600 mt-2">
+
                                 </div>
                                 <div v-if="errors.image" class="font-bold text-red-600">
                                     {{ errors.image }}
@@ -83,6 +85,7 @@ export default {
         });
         const images = ref([]);
         const productId = props.productId;
+
 // console.log(productId)
         const previewImages = (e) => {
             images.value = [];
@@ -107,9 +110,14 @@ export default {
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file);
         };
-
-        return { form, images, previewImages, submit, previewImage };
+        const removeImage = (index,event) => {
+            event.preventDefault();
+            images.value.splice(index, 1);
+    form.image.splice(index, 1)
+        };
+        return { form, images, previewImages, submit, previewImage,removeImage };
     }
+
 };
 // console.log(productId);
 </script>
