@@ -39,8 +39,8 @@ Route::get('/',function (){
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
-     })->name('home');
-Route::get('/test/home',[HomeController::class, 'index'])->name('home.test');
+     })->name('home.test');
+Route::get('/test/home',[HomeController::class, 'index'])->name('home');
 Route::get('/auctions',[HomeController::class, 'index'])->name('auctions');
 
 
