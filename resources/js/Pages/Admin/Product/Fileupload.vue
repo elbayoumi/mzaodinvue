@@ -14,7 +14,7 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent="submit">
                             <div>
-                                <label for="File">File Upload</label>
+                                <label for="File" class="text-black">Imges Upload</label>
                                 <input type="file" @change="previewImages" ref="photos" class="
         w-full
         px-4
