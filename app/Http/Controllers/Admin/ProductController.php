@@ -217,4 +217,8 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index')
             ->with('message', __('Product created successfully.'));
     }
+    public function destroyImage(Request $Request){
+
+    }
 }
+
