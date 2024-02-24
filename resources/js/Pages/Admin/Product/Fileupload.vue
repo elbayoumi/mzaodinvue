@@ -35,7 +35,7 @@
 
                                 <div v-for="(image, index) in images" :key="index">
                                     <img :src="image.url" class="w-full mt-4 h-80" />
-                                    <input value="Remove" type="button" @click="removeImage(index, $event)" class="text-red-600 mt-2">
+                                    <input value="Remove" type="button" @click="removeImage(index, $event)" class=" mt-2 px-4 py-2 bg-red-500 text-white font-semibold rounded cursor-pointer hover:bg-red-600">
 
                                 </div>
                                 <div v-if="errors.image" class="font-bold text-red-600">
