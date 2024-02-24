@@ -228,8 +228,11 @@ class ProductController extends Controller
         if ($imageProduct) {
             // $imageProduct=$imageProduct->first();
             $product_id = $imageProduct->product_id;
-
             Storage::disk('public')->delete($imageProduct->img);
+
+            // if (Storage::disk('public')->exists($imageProduct->img)) {
+            //     // Delete the file
+            // }
             $imageProduct->delete();
             // dd($product_id);
 
