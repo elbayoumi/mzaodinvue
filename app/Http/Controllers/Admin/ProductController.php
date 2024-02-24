@@ -224,7 +224,8 @@ class ProductController extends Controller
     }
     public function destroyImage(Request $request, $id)
     {
-        $imageProduct = ImageProduct::find($id);
+        $imageProductQuery = ImageProduct::query();
+        $imageProduct = $imageProductQuery->find($id);
 
         if ($imageProduct) {
             try {
@@ -237,8 +238,17 @@ class ProductController extends Controller
 
                 // Delete the ImageProduct record
                 $imageProduct->delete();
+                $images = ImageProduct::where('product_id', $imageProduct->product_id)
+                ->orderBy('rank') // Order by rank
+                ->get();
 
-                // Redirect back with success message
+            // Reorder images
+            $count = 1;
+            foreach ($images as $image) {
+                $image->rank = $count;
+                $image->save();
+                $count++;
+            }                // Redirect back with success message
                 return redirect()->route('admin.product.edit', $imageProduct->product_id)
                     ->with('message', __('Image Product deleted successfully'));
             } catch (\Exception $e) {
