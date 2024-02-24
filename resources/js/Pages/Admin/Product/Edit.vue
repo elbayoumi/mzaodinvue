@@ -55,7 +55,11 @@ function convertToDate(dateString) {
 
     return `${year}-${month}-${day}`;
 }
-
+function destroyImage(id,rank) {
+    if (confirm(`Are you sure you want to delete image ${rank} ? `)) {
+        formDelete.delete(route("admin.product.destroy", id))
+    }
+}
 
 // console.log('immmm',props.product.image_product);
 </script>
@@ -83,13 +87,18 @@ function convertToDate(dateString) {
 
                 </FormField>
                 <div class="grid grid-cols-3 gap-4">
-        <div v-for="image in images" :key="image.id" class="max-w-full focus:ring focus:outline-none rounded">
-            <div class="relative">
-                <span class="absolute inset-x-1/2">{{ image.rank }}</span>
-                <img class="image block w-full" :src="image.img" :alt="image.alt">
-            </div>
-        </div>
-    </div>
+                    <div v-for="(image, index) in images" :key="image.id" class="max-w-full focus:ring focus:outline-none rounded">
+                        <div class="relative">
+                            <span class="absolute inset-x-1/2">{{ image.rank }}</span>
+                            <img class="image block w-full" :src="image.img" :alt="image.alt">
+                            <div class="absolute top-2 right-2">
+                        <div @click="destroyImage(image.id,image.rank)" class="px-2 py-1 cursor-pointer bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 focus:outline-none">
+                          <i class="fas fa-trash"></i>
+                        </div>
+                      </div>
+                        </div>
+                    </div>
+                </div>
                 <FormField label="Name Arabic" :class="{ 'text-red-400': form.errors.name_arabic }">
                     <FormControl v-model="form.name_arabic" type="text" placeholder="Enter Name Arabic"
                         :error="form.errors.name_arabic">
