@@ -16,6 +16,7 @@ import FormField from '@/Components/FormField.vue'
 import FormControl from '@/Components/FormControl.vue'
 import BaseButton from '@/Components/BaseButton.vue'
 import BaseButtons from '@/Components/BaseButtons.vue'
+import NotificationBar from "@/Components/NotificationBar.vue"
 
 const props = defineProps({
     product: {
@@ -55,9 +56,11 @@ function convertToDate(dateString) {
 
     return `${year}-${month}-${day}`;
 }
+const formDelete = useForm({})
+
 function destroyImage(id,rank) {
     if (confirm(`Are you sure you want to delete image ${rank} ? `)) {
-        formDelete.delete(route("admin.product.destroy", id))
+        formDelete.delete(route("admin.product.destroyImage", id))
     }
 }
 
@@ -73,6 +76,9 @@ function destroyImage(id,rank) {
                 <BaseButton :route-name="route('admin.product.index')" :icon="mdiArrowLeftBoldOutline" label="Back"
                     color="white" rounded-full small />
             </SectionTitleLineWithButton>
+            <NotificationBar :key="Date.now()" v-if="$page.props.flash.message" color="success" :icon="mdiAlertBoxOutline">
+                {{ $page.props.flash.message }}
+            </NotificationBar>
             <CardBox form @submit.prevent="form.post(route('admin.product.update', props.product.id))">
 
                 <FormField class="image-container">

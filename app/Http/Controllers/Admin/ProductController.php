@@ -13,6 +13,8 @@ use App\Models\{
     Product,
     Permission
 };
+use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -196,7 +198,7 @@ class ProductController extends Controller
         // }
 
         $images = [];
-// if(!empty())
+        // if(!empty())
         foreach ($request->file('image') as $img) {
             if ($img->isValid()) {
                 $imageName = uniqid() . '_' . $img->getClientOriginalName();
@@ -217,8 +219,21 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index')
             ->with('message', __('Product created successfully.'));
     }
-    public function destroyImage(Request $Request){
+    public function destroyImage(Request $request, $id)
+    {
+        $imageProduct = ImageProduct::whereId($id)->first();
+        if ($imageProduct) {
+            // $imageProduct=$imageProduct->first();
+            $product_id = $imageProduct->product_id;
 
+            Storage::disk('public')->delete($imageProduct->img);
+            $imageProduct->delete();
+            // dd($product_id);
+
+            return redirect()->route('admin.product.edit', $product_id)
+                ->with('message', __('Image Product deleted successfully'));
+        }
+
+        return redirect()->back()->withErrors(['error' => 'Product deletion failed.']);
     }
 }
-
