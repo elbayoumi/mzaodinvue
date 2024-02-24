@@ -224,22 +224,33 @@ class ProductController extends Controller
     }
     public function destroyImage(Request $request, $id)
     {
-        $imageProduct = ImageProduct::whereId($id)->first();
+        $imageProduct = ImageProduct::find($id);
+
         if ($imageProduct) {
-            // $imageProduct=$imageProduct->first();
-            $product_id = $imageProduct->product_id;
-            Storage::disk('public')->delete($imageProduct->img);
+            try {
+                // Delete the image from storage
+                // dd(Storage::disk('public')->exists($imageProduct->img));
 
-            // if (Storage::disk('public')->exists($imageProduct->img)) {
-            //     // Delete the file
-            // }
-            $imageProduct->delete();
-            // dd($product_id);
+                if (Storage::disk('public')->exists($imageProduct->img)) {
+                    Storage::disk('public')->delete($imageProduct->img);
+                }
 
-            return redirect()->route('admin.product.edit', $product_id)
-                ->with('message', __('Image Product deleted successfully'));
+                // Delete the ImageProduct record
+                $imageProduct->delete();
+
+                // Redirect back with success message
+                return redirect()->route('admin.product.edit', $imageProduct->product_id)
+                    ->with('message', __('Image Product deleted successfully'));
+            } catch (\Exception $e) {
+                // Log the error
+                \Log::error('Error deleting image: ' . $e->getMessage());
+
+                // Redirect back with error message
+                return redirect()->back()->withErrors(['error' => 'Failed to delete image.']);
+            }
         }
 
-        return redirect()->back()->withErrors(['error' => 'Product deletion failed.']);
+        // Redirect back with error message if ImageProduct not found
+        return redirect()->back()->withErrors(['error' => 'Image Product not found.']);
     }
 }
