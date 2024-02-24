@@ -86,10 +86,10 @@ function destroyImage(id,rank) {
 
 
                 </FormField>
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-3 gap-4 my-4">
                     <div v-for="(image, index) in images" :key="image.id" class="max-w-full focus:ring focus:outline-none rounded">
                         <div class="relative">
-                            <span class="absolute inset-x-1/2">{{ image.rank }}</span>
+<span class="absolute inset-x-1/2 text-gray-800 font-semibold bg-white bg-opacity-75 px-4 text-center py-1 rounded">{{ image.rank }}</span>
                             <img class="image block w-full" :src="image.img" :alt="image.alt">
                             <div class="absolute top-2 right-2">
                         <div @click="destroyImage(image.id,image.rank)" class="px-2 py-1 cursor-pointer bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 focus:outline-none">
