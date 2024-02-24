@@ -4,7 +4,7 @@
     <LayoutAuthenticated>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Image Create
+                Image Upload
             </h2>
         </template>
 
@@ -13,39 +13,46 @@
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent="submit">
-                            <div>
-                                <label for="File" class="text-black">Imges Upload</label>
-                                <input type="file" @change="previewImages" ref="photos" class="
-        w-full
-        px-4
-        py-2
-        mt-2
-        border
-        rounded-md
-        focus:outline-none
-        focus:ring-1
-        focus:ring-blue-600
-    " multiple />
+                            <div class="mb-6">
+                                <label for="File" class="text-black">Images Upload</label>
+                                <input required type="file" @change="previewImages" ref="photos" class="
+                                    w-full
+                                    px-4
+                                    py-2
+                                    mt-2
+                                    border
+                                    rounded-md
+                                    focus:outline-none
+                                    focus:ring-1
+                                    focus:ring-blue-600
+                                " multiple />
+                            </div>
 
-                                <div v-for="(image, index) in images" :key="index">
-                                    <img :src="image.url" class="w-full mt-4 h-80" />
-                                    <input value="Remove" type="button" @click="removeImage(index, $event)"
-                                        class=" mt-2 px-4 py-2 bg-red-500 text-white font-semibold rounded cursor-pointer hover:bg-red-600">
-
-                                </div>
-                                <div v-if="errors.image" class="font-bold text-red-600">
-                                    {{ errors.image }}
+                            <div class="grid grid-cols-3 gap-4">
+                                <div v-for="(image, index) in images" :key="index" class="relative">
+                                    <img :src="image.url" class="w-full h-auto rounded-lg cursor-pointer" @click="openImageModal(index)">
+                                    <div class="absolute top-2 right-2">
+                                        <div @click="removeImage(index)" class="px-2 py-1 cursor-pointer bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 focus:outline-none">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="flex items-center mt-4">
-                                <button class="
-                                        px-6
-                                        py-2
-                                        text-white
-                                        bg-gray-900
-                                        rounded
-                                    ">
+                            <div v-if="errors.image" class="mt-4 font-bold text-red-600">
+                                {{ errors.image }}
+                            </div>
+
+                            <div class="flex justify-center mt-6">
+                                <button type="submit" class="
+                                    px-6
+                                    py-2
+                                    text-white
+                                    bg-gray-900
+                                    rounded
+                                    hover:bg-gray-800
+                                    focus:outline-none
+                                ">
                                     Save
                                 </button>
                             </div>
@@ -59,7 +66,7 @@
 
 <script>
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue"
-import { Head, Link, useForm } from "@inertiajs/vue3"
+import { Head, useForm } from "@inertiajs/vue3"
 import { ref } from 'vue'; // Import ref from vue
 
 export default {
@@ -79,9 +86,7 @@ export default {
             image: [],
         });
         const images = ref([]);
-        const productId = props.productId;
 
-        // console.log(productId)
         const previewImages = (e) => {
             images.value = [];
 
@@ -101,18 +106,21 @@ export default {
             form.post(route("admin.image.store", props.productId));
         };
 
-        const previewImage = (e) => {
-            const file = e.target.files[0];
-            this.url = URL.createObjectURL(file);
-        };
-        const removeImage = (index, event) => {
-            event.preventDefault();
+        const removeImage = (index) => {
             images.value.splice(index, 1);
-            form.image.splice(index, 1)
+            form.image.splice(index, 1);
         };
-        return { form, images, previewImages, submit, previewImage, removeImage };
+
+        const openImageModal = (index) => {
+            // افتح نافذة مودال لعرض الصورة بحجم أكبر أو إجراء أي عمليات أخرى
+        };
+
+        return { form, images, previewImages, submit, removeImage, openImageModal };
     }
 
 };
-// console.log(productId);
 </script>
+
+<style>
+/* أضف أي استايلات تكميلية هنا */
+</style>
