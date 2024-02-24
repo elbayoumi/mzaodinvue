@@ -3,7 +3,10 @@ import { Head, Link, useForm } from "@inertiajs/vue3"
 import {
     mdiAccountKey,
     mdiArrowLeftBoldOutline,
-    mdiArrowBottomRightThick
+    mdiArrowBottomRightThick,
+    mdiAccountBoxPlusOutline,
+    mdiAppleKeyboardCaps,
+    mdiCogTransferOutline
 } from "@mdi/js"
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue"
 import SectionMain from "@/Components/SectionMain.vue"
@@ -69,8 +72,13 @@ function convertToDate(dateString) {
             <CardBox form @submit.prevent="form.post(route('admin.product.update', props.product.id))">
 
                 <FormField class="image-container">
-                    <BaseButton label="Image Edit" class="w-28 h-10" :route-name="route('admin.product.image',props.product.id)"
-                        :icon="mdiArrowBottomRightThick" />
+                    <div class="flex">
+                        <BaseButton label="Image Upload" class="w-32 h-10 inline-block " :route-name="route('admin.product.image',props.product.id)"
+                        :icon="mdiAppleKeyboardCaps" />
+                    <BaseButton label="Image Edit" class="w-32 h-10 inline-block ml-4" :route-name="route('admin.product.image',props.product.id)"
+                        :icon="mdiCogTransferOutline" />
+                    </div>
+
 
                     <div v-for="image in images" :key="image.id" class="px-3 py-2 max-w-full focus:ring focus:outline-none rounded w-full',
     'dark:placeholder-gray-400 ">
