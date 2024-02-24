@@ -32,7 +32,15 @@ use Inertia\Inertia;
 //     });
 
 
-Route::get('/',[HomeController::class, 'index'])->name('home');
+// Route::get('/',function (){
+// })->name('home');
+Route::get('/',function (){
+    return Inertia::render('Web/Soon', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+     })->name('home');
+Route::get('/test/home',[HomeController::class, 'index'])->name('home.test');
 Route::get('/auctions',[HomeController::class, 'index'])->name('auctions');
 
 

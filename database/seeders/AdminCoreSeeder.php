@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\WebSite;
 use BalajiDharma\LaravelCategory\Models\CategoryType;
 use BalajiDharma\LaravelMenu\Models\Menu;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,15 @@ class AdminCoreSeeder extends Seeder
      */
     public function run()
     {
+        // WebSite::create([
+        //     'home_route'=>'',
+        //     'logo' => 'Tag',
+        //     'for_frequently_asked_questions' => json_encode(['tag']),
+        //     'about_us' => json_encode(['tag']),
+        //     'supports' => json_encode(['tag']),
+        //     'footer' => json_encode(['tag']),
+
+        // ]);
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
