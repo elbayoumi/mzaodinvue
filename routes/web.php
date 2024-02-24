@@ -40,7 +40,7 @@ Route::get('/',function (){
         'canRegister' => Route::has('register'),
     ]);
      })->name('home.test');
-Route::get('/test/home',[HomeController::class, 'index'])->name('home');
+Route::get('/home',[HomeController::class, 'index'])->name('home');
 Route::get('/auctions',[HomeController::class, 'index'])->name('auctions');
 
 
