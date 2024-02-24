@@ -78,7 +78,7 @@
       </LayoutAuthenticated>
 
       <!-- Image Modal Component -->
-      <ModalImage v-if="modalOpen" :imageUrl="modalImageUrl" @close="modalOpen = false" />
+      <ModalImage v-if="modalOpen.value" :imageUrl="modalImageUrl.value" @close="modalOpen.value = false" />
     </div>
   </template>
 
@@ -135,11 +135,11 @@
       const openImageModal = (index) => {
         modalImageUrl.value = images.value[index].url;
     modalOpen.value = true;
-    console.log(modalOpen.value);
+    console.log(modalImageUrl.value);
 
       };
 
-      return { form, images, previewImages, submit, removeImage, openImageModal };
+      return { form, images, modalImageUrl,modalOpen,previewImages, submit, removeImage, openImageModal };
     },
   };
   </script>
