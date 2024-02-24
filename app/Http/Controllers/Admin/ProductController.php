@@ -7,7 +7,10 @@ use App\Http\Requests\{
     StoreProductRequest,
     UpdateProductRequest,
 };
-use App\Http\Requests\StoreImage;
+use App\Http\Requests\{
+    StoreImage,
+    StoreMultiImage
+};
 use App\Models\{
     ImageProduct,
     Product,
@@ -168,7 +171,7 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index')
             ->with('message', __('Product Visible Change ' . $product->sku . ' successfully'));
     }
-    public function  upload(StoreImage $request, $productId)
+    public function  upload(StoreMultiImage $request, $productId)
     {
         $product = Product::findOrFail($productId);
 
