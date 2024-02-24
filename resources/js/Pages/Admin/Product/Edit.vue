@@ -73,23 +73,23 @@ function convertToDate(dateString) {
 
                 <FormField class="image-container">
                     <div class="flex">
-                        <BaseButton label="Image Upload" class="w-32 h-10 inline-block " :route-name="route('admin.product.image',props.product.id)"
-                        :icon="mdiAppleKeyboardCaps" />
-                    <BaseButton label="Image Edit" class="w-32 h-10 inline-block ml-4" :route-name="route('admin.product.image',props.product.id)"
-                        :icon="mdiCogTransferOutline" />
+                        <BaseButton label="Image Upload" class="w-32 h-10 inline-block "
+                            :route-name="route('admin.product.image', props.product.id)" :icon="mdiAppleKeyboardCaps" />
+                        <BaseButton label="Image Edit" class="w-32 h-10 inline-block ml-4"
+                            :route-name="route('admin.product.image', props.product.id)" :icon="mdiCogTransferOutline" />
                     </div>
 
 
-                    <div v-for="image in images" :key="image.id" class="px-3 py-2 max-w-full focus:ring focus:outline-none rounded w-full',
-    'dark:placeholder-gray-400 ">
-                        <div class=" w-44 relative">
-                            <span class="absolute inset-x-1/2">{{ image.rank }}</span>
-                            <img class="image block w-full" :src="image.img" :alt="image.alt">
-                        </div>
 
-                    </div>
                 </FormField>
-
+                <div class="grid grid-cols-3 gap-4">
+        <div v-for="image in images" :key="image.id" class="max-w-full focus:ring focus:outline-none rounded">
+            <div class="relative">
+                <span class="absolute inset-x-1/2">{{ image.rank }}</span>
+                <img class="image block w-full" :src="image.img" :alt="image.alt">
+            </div>
+        </div>
+    </div>
                 <FormField label="Name Arabic" :class="{ 'text-red-400': form.errors.name_arabic }">
                     <FormControl v-model="form.name_arabic" type="text" placeholder="Enter Name Arabic"
                         :error="form.errors.name_arabic">
