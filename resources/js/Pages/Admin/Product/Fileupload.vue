@@ -15,11 +15,7 @@
                         <form @submit.prevent="submit">
                             <div>
                                 <label for="File">File Upload</label>
-                                <input
-    type="file"
-    @change="previewImages"
-    ref="photos"
-    class="
+                                <input type="file" @change="previewImages" ref="photos" class="
         w-full
         px-4
         py-2
@@ -29,13 +25,12 @@
         focus:outline-none
         focus:ring-1
         focus:ring-blue-600
-    "
-    multiple
-/>
+    " multiple />
 
                                 <div v-for="(image, index) in images" :key="index">
                                     <img :src="image.url" class="w-full mt-4 h-80" />
-                                    <input value="Remove" type="button" @click="removeImage(index, $event)" class=" mt-2 px-4 py-2 bg-red-500 text-white font-semibold rounded cursor-pointer hover:bg-red-600">
+                                    <input value="Remove" type="button" @click="removeImage(index, $event)"
+                                        class=" mt-2 px-4 py-2 bg-red-500 text-white font-semibold rounded cursor-pointer hover:bg-red-600">
 
                                 </div>
                                 <div v-if="errors.image" class="font-bold text-red-600">
@@ -77,7 +72,7 @@ export default {
         productId: {
             type: String // تحديد نوع الـ prop ليكون String
         }
-        },
+    },
 
     setup(props) {
         const form = useForm({
@@ -86,7 +81,7 @@ export default {
         const images = ref([]);
         const productId = props.productId;
 
-// console.log(productId)
+        // console.log(productId)
         const previewImages = (e) => {
             images.value = [];
 
@@ -103,19 +98,19 @@ export default {
                 form.image.push(file);
             });
 
-            form.post(route("admin.image.store",props.productId));
+            form.post(route("admin.image.store", props.productId));
         };
 
         const previewImage = (e) => {
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file);
         };
-        const removeImage = (index,event) => {
+        const removeImage = (index, event) => {
             event.preventDefault();
             images.value.splice(index, 1);
-    form.image.splice(index, 1)
+            form.image.splice(index, 1)
         };
-        return { form, images, previewImages, submit, previewImage,removeImage };
+        return { form, images, previewImages, submit, previewImage, removeImage };
     }
 
 };
