@@ -219,7 +219,7 @@ class ProductController extends Controller
         $product->imageProduct()->createMany($images);
 
 
-        return redirect()->route('admin.product.index')
+        return redirect()->route('admin.product.edit', $product->id)
             ->with('message', __('Product created successfully.'));
     }
     public function destroyImage(Request $request, $id)
