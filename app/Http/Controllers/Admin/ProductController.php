@@ -196,7 +196,7 @@ class ProductController extends Controller
         // }
 
         $images = [];
-
+// if(!empty())
         foreach ($request->file('image') as $img) {
             if ($img->isValid()) {
                 $imageName = uniqid() . '_' . $img->getClientOriginalName();
