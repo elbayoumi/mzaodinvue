@@ -61,6 +61,8 @@
                 </div>
             </div>
         </div>
+        <ModalImage v-if="modalOpen" :imageUrl="modalImageUrl" @close="modalOpen = false" />
+
     </LayoutAuthenticated>
 </template>
 
@@ -68,11 +70,13 @@
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue"
 import { Head, useForm } from "@inertiajs/vue3"
 import { ref } from 'vue'; // Import ref from vue
+import ModalImage from "@/Components/Admin/ModalImage.vue"
 
 export default {
     components: {
         LayoutAuthenticated,
         Head,
+        ModalImage,
     },
     props: {
         errors: Object,
@@ -112,7 +116,6 @@ export default {
         };
 
         const openImageModal = (index) => {
-            // افتح نافذة مودال لعرض الصورة بحجم أكبر أو إجراء أي عمليات أخرى
         };
 
         return { form, images, previewImages, submit, removeImage, openImageModal };
