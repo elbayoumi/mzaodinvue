@@ -205,7 +205,7 @@ class ProductController extends Controller
         foreach ($request->file('image') as $img) {
             if ($img->isValid()) {
                 $imageName = uniqid() . '_' . $img->getClientOriginalName();
-                $imagePath = $img->storeAs('images', $imageName, 'public');
+                $imagePath = $img->storeAs('productImages', $imageName, 'public');
 
                 $images[] = [
                     'img' => $imagePath,
@@ -239,16 +239,16 @@ class ProductController extends Controller
                 // Delete the ImageProduct record
                 $imageProduct->delete();
                 $images = ImageProduct::where('product_id', $imageProduct->product_id)
-                ->orderBy('rank') // Order by rank
-                ->get();
+                    ->orderBy('rank') // Order by rank
+                    ->get();
 
-            // Reorder images
-            $count = 1;
-            foreach ($images as $image) {
-                $image->rank = $count;
-                $image->save();
-                $count++;
-            }                // Redirect back with success message
+                // Reorder images
+                $count = 1;
+                foreach ($images as $image) {
+                    $image->rank = $count;
+                    $image->save();
+                    $count++;
+                }                // Redirect back with success message
                 return redirect()->route('admin.product.edit', $imageProduct->product_id)
                     ->with('message', __('Image Product deleted successfully'));
             } catch (\Exception $e) {
