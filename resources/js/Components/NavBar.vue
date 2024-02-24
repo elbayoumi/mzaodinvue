@@ -53,7 +53,9 @@ const menuOpenLg = () => {
 }
 
 const logout = () => {
+    if (confirm("Are you sure to logout?")) {
   router.post(route('logout'))
+    }
 }
 </script>
 
@@ -157,7 +159,7 @@ const logout = () => {
                 />
               </NavBarItem>
               <BaseDivider nav-bar />
-              <NavBarItem>
+              <NavBarItem @click="logout">
                 <NavBarItemLabel
                   :icon="mdiLogout"
                   label="Log Out"
