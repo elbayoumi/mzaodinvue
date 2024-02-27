@@ -171,7 +171,12 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index')
             ->with('message', __('Product Visible Change ' . $product->sku . ' successfully'));
     }
-    public function  upload(StoreMultiImage $request, $productId)
+    public function imageProductMultible(Request $request,$productId) {
+
+        return Inertia::render('Admin/Product/Fileupload',['productId'=>$productId]);
+
+    }
+    public function  uploadImageProductMultible(StoreMultiImage $request, $productId)
     {
         $product = Product::findOrFail($productId);
 
@@ -263,4 +268,5 @@ class ProductController extends Controller
         // Redirect back with error message if ImageProduct not found
         return redirect()->back()->withErrors(['error' => 'Image Product not found.']);
     }
+
 }
