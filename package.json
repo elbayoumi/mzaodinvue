@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "start":"npm run dev"
+        "start": "npm run dev"
     },
     "devDependencies": {
         "@mdi/js": "^7.0.96",
@@ -23,6 +23,7 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
-        "@inertiajs/vue3": "^1.0.0"
+        "@inertiajs/vue3": "^1.0.0",
+        "vuedraggable": "^2.24.3"
     }
 }

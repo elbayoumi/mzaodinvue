@@ -58,7 +58,7 @@ function convertToDate(dateString) {
 }
 const formDelete = useForm({})
 
-function destroyImage(id,rank) {
+function destroyImage(id, rank) {
     if (confirm(`Are you sure you want to delete image ${rank} ? `)) {
         formDelete.delete(route("admin.product.destroyImage", id))
     }
@@ -86,22 +86,27 @@ function destroyImage(id,rank) {
                         <BaseButton label="Image Upload" class="w-32 h-10 inline-block "
                             :route-name="route('admin.product.image', props.product.id)" :icon="mdiAppleKeyboardCaps" />
                         <BaseButton label="Image Edit" class="w-32 h-10 inline-block ml-4"
-                            :route-name="route('admin.product.image', props.product.id)" :icon="mdiCogTransferOutline" />
+                            :route-name="route('admin.product.editImageProductMultible', props.product.id)"
+                            :icon="mdiCogTransferOutline" />
                     </div>
 
 
 
                 </FormField>
                 <div class="grid grid-cols-3 gap-4 my-4">
-                    <div v-for="(image, index) in props.product.image_product" :key="image.id" class="max-w-full focus:ring focus:outline-none rounded">
+                    <div v-for="(image, index) in props.product.image_product" :key="image.id"
+                        class="max-w-full focus:ring focus:outline-none rounded">
                         <div class="relative">
-<span class="absolute inset-x-1/2 text-gray-800 font-semibold bg-white bg-opacity-75 px-4 text-center py-1 rounded">{{ image.rank }}</span>
+                            <span
+                                class="absolute inset-x-1/2 text-gray-800 font-semibold bg-white bg-opacity-75 px-4 text-center py-1 rounded">{{
+                                    image.rank }}</span>
                             <img class="image block w-full" :src="image.image_path" :alt="image.alt">
                             <div class="absolute top-2 right-2">
-                        <div @click="destroyImage(image.id,image.rank)" class="px-2 py-1 cursor-pointer bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 focus:outline-none">
-                          <i class="fas fa-trash"></i>
-                        </div>
-                      </div>
+                                <div @click="destroyImage(image.id, image.rank)"
+                                    class="px-2 py-1 cursor-pointer bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 focus:outline-none">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -227,6 +232,5 @@ function destroyImage(id,rank) {
                     </BaseButtons>
                 </template>
             </CardBox>
-        </SectionMain>
-    </LayoutAuthenticated>
-</template>
+    </SectionMain>
+</LayoutAuthenticated></template>
