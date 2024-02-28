@@ -176,11 +176,13 @@ class ProductController extends Controller
         return Inertia::render('Admin/Product/Fileupload',['productId'=>$productId]);
 
     }
-    public function editImageProductMultible(Request $request,$productId) {
-
-        return Inertia::render('Admin/Product/Fileupload',['productId'=>$productId]);
-
+    public function editImageProductMultible(Product $product) {
+        $product = $product->with('imageProduct')->first();
+        // dd($product->imageProduct[0]->image_path);
+        return Inertia::render('Admin/Product/editImageProductMultible', ['product' => $product]);
     }
+
+
     public function  uploadImageProductMultible(StoreMultiImage $request, $productId)
     {
         $product = Product::findOrFail($productId);
