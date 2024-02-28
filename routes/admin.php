@@ -47,6 +47,7 @@ Route::group([
     Route::post('change-image', 'UserController@changeImageStore')->name('account.image.store');
 
     Route::get('/imageProductMultible/{productId}', [ProductController::class,'imageProductMultible'])->name('product.image');
+    Route::get('/editImageProductMultible/{productId}', [ProductController::class,'editImageProductMultible'])->name('product.editImageProductMultible');
     Route::post('image/{productId}', [ProductController::class,'uploadImageProductMultible'])->name('image.store');
 
 });
