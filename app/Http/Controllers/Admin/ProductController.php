@@ -108,7 +108,7 @@ class ProductController extends Controller
 
         $product->imageProduct()->save($imageProduct);
 
-        return redirect()->route('admin.product.index')
+        return redirect()->route('admin.product.image',$product->id)
             ->with('message', __('Product created successfully.'));
     }
     /**
@@ -176,8 +176,9 @@ class ProductController extends Controller
         return Inertia::render('Admin/Product/Fileupload',['productId'=>$productId]);
 
     }
-    public function editImageProductMultible(Product $product) {
-        $product = $product->with('imageProduct')->first();
+    public function editImageProductMultible( $product) {
+        $product = Product::whereId($product)->with('imageProduct')->first();
+        // dd($product);
         // dd($product->imageProduct[0]->image_path);
         return Inertia::render('Admin/Product/EditImageProductMultible', ['product' => $product]);
     }
