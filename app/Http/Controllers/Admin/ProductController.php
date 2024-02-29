@@ -179,7 +179,7 @@ class ProductController extends Controller
     public function editImageProductMultible(Product $product) {
         $product = $product->with('imageProduct')->first();
         // dd($product->imageProduct[0]->image_path);
-        return Inertia::render('Admin/Product/editImageProductMultible', ['product' => $product]);
+        return Inertia::render('Admin/Product/EditImageProductMultible', ['product' => $product]);
     }
 
 
