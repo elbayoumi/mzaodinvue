@@ -186,7 +186,9 @@ function previewImage(event) {
                         focus:outline-none
                         focus:ring-1
                         focus:ring-blue-600
-                    " />
+                    "
+                    accept=".jpg, .jpeg, .png, .gif, .svg"
+                     />
                     <img v-if="imageUrl" :src="imageUrl" class="w-full mt-4 h-80" />
                     <div class="text-red-400 text-sm" v-if="form.errors.image">
                         {{ form.errors.image }}
