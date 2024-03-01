@@ -16,7 +16,7 @@
                   <div  v-for="(image, index) in product.image_product" :key="index" class="relative">
                     <img :src="image.image_path" class="w-full h-auto rounded-lg cursor-pointer" @click="openImageModal(index)" />
                     <div class="absolute top-2 right-2">
-                      <div @click="removeImage(index)" class="px-2 py-1 cursor-pointer bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 focus:outline-none">
+                      <div @click="removeImage(image.id,image.rank)" class="px-2 py-1 cursor-pointer bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 focus:outline-none">
                         <i class="fas fa-trash"></i>
                       </div>
                     </div>
@@ -36,7 +36,7 @@
 <script>
 import { ref } from 'vue'; // Import ref from Vue
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head,useForm } from "@inertiajs/vue3";
 import ModalImage from "@/Components/Admin/ModalImage.vue";
 
 export default {
@@ -54,10 +54,12 @@ export default {
   setup(props) {
     const modalOpen = ref(false);
     const modalImageUrl = ref("");
+    const formDelete = useForm({})
 
-    const removeImage = (index) => {
-      // Implement image removal logic here
-    };
+    const removeImage = (id, rank) => {
+        if (confirm(`Are you sure you want to delete image ${rank} ? `)) {
+        formDelete.delete(route("admin.product.destroyImage", id))
+    }    };
 // console.log(props.product.image_product[0].image_path)
     const openImageModal = (index) => {
       modalImageUrl.value = props.product.image_product[index].image_product;
