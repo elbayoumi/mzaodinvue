@@ -63,7 +63,7 @@ function destroyImage(id, rank) {
         formDelete.delete(route("admin.product.destroyImage", id))
     }
 }
-function removeAllImage  (id) {
+function removeAllImage(id) {
     if (confirm(`هل انت متأكد من حذف جميع الصور  ? `)) {
         if (confirm(`التأكييد الاخير للحذف  ? `)) {
 
@@ -87,15 +87,16 @@ function removeAllImage  (id) {
             <NotificationBar :key="Date.now()" v-if="$page.props.flash.message" color="success" :icon="mdiAlertBoxOutline">
                 {{ $page.props.flash.message }}
             </NotificationBar>
-            <CardBox dev >
+            <CardBox dev>
 
                 <FormField class="image-container">
                     <div class="flex">
 
-                            <button type="button" @click="removeAllImage(props.product.id)" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                                <i class="fas fa-trash"></i>
+                        <button type="button" @click="removeAllImage(props.product.id)"
+                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                            <i class="fas fa-trash"></i>
 
-                                حذف جميع الصور</button>
+                            حذف جميع الصور</button>
 
                     </div>
 
@@ -121,6 +122,6 @@ function removeAllImage  (id) {
                 </div>
 
             </CardBox>
-    </SectionMain>
-</LayoutAuthenticated>
+        </SectionMain>
+    </LayoutAuthenticated>
 </template>

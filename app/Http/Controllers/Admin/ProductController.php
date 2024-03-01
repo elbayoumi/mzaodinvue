@@ -333,6 +333,7 @@ class ProductController extends Controller
 
             if ($imageProducts->isNotEmpty()) {
                 foreach ($imageProducts as $imageProduct) {
+                    // dd(Storage::disk('public')->delete($imageProduct->img));
                     if (Storage::disk('public')->exists($imageProduct->img)) {
                         Storage::disk('public')->delete($imageProduct->img);
                     }
