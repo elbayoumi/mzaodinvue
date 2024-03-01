@@ -195,57 +195,95 @@ class ProductController extends Controller
     }
 
 
-    public function  uploadImageProductMultible(StoreMultiImage $request, $productId)
-    {
-        $product = Product::findOrFail($productId);
+    // public function  uploadImageProductMultible(StoreMultiImage $request, $productId)
+    // {
+    //     $product = Product::findOrFail($productId);
 
-        $image_path = '';
-        $count = ImageProduct::where('product_id', $productId)->count();
-        $count = $count < 1 ? 1 : $count;
-        // dd($count);
-        // foreach ($request->file('image') as $img) {
-        //     // Check if file is valid
-        //     if ($img->isValid()) {
-        //         // Generate a unique filename
-        //         $imageName = uniqid() . '_' . $img->getClientOriginalName();
-        //         // Store the image
-        //         $image_path = $img->storeAs('images', $imageName, 'public');
+    //     $image_path = '';
+    //     $count = ImageProduct::where('product_id', $productId)->count();
+    //     $count = $count < 1 ? 1 : $count;
+    //     // dd($count);
+    //     // foreach ($request->file('image') as $img) {
+    //     //     // Check if file is valid
+    //     //     if ($img->isValid()) {
+    //     //         // Generate a unique filename
+    //     //         $imageName = uniqid() . '_' . $img->getClientOriginalName();
+    //     //         // Store the image
+    //     //         $image_path = $img->storeAs('images', $imageName, 'public');
 
-        //         // Create ImageProduct instance
-        //         ImageProduct::create([
-        //             'product_id' => $productId,
-        //             'img' => $image_path,
-        //             'alt' => "dfgsdfds",
-        //             'rank' => $count, // Use $count as rank
-        //         ]);
+    //     //         // Create ImageProduct instance
+    //     //         ImageProduct::create([
+    //     //             'product_id' => $productId,
+    //     //             'img' => $image_path,
+    //     //             'alt' => "dfgsdfds",
+    //     //             'rank' => $count, // Use $count as rank
+    //     //         ]);
 
-        //         // Increment counter
-        //         $count++;
-        //     }
-        // }
+    //     //         // Increment counter
+    //     //         $count++;
+    //     //     }
+    //     // }
 
-        $images = [];
-        // if(!empty())
-        foreach ($request->file('image') as $img) {
-            if ($img->isValid()) {
-                $imageName = uniqid() . '_' . $img->getClientOriginalName();
-                $imagePath = $img->storeAs('productImages', $imageName, 'public');
+    //     $images = [];
+    //     // if(!empty())
+    //     foreach ($request->file('image') as $img) {
+    //         if ($img->isValid()) {
+    //             $imageName = uniqid() . '_' . $img->getClientOriginalName();
 
-                $images[] = [
-                    'img' => $imagePath,
-                    'alt' => "dfgsdfds",
-                    'rank' => $count,
-                ];
 
-                $count++;
-            }
+    //             $imagePath = $img->storeAs('productImages', $imageName, 'public');
+
+    //             $images[] = [
+    //                 'img' => $imagePath,
+    //                 'alt' => "dfgsdfds",
+    //                 'rank' => $count,
+    //             ];
+
+    //             $count++;
+    //         }
+    //     }
+    //     $product->imageProduct()->createMany($images);
+
+
+    //     return redirect()->route('admin.product.edit', $product->id)
+    //         ->with('message', __('Product created successfully.'));
+    // }
+    public function uploadImageProductMultible(StoreMultiImage $request, $productId)
+{
+    $product = Product::findOrFail($productId);
+
+    $images = [];
+    $count = ImageProduct::where('product_id', $productId)->count();
+    $count = $count < 1 ? 1 : $count;
+
+    foreach ($request->file('image') as $img) {
+        if ($img->isValid()) {
+            $imageName = uniqid() . '_' . $img->getClientOriginalName();
+            $imagePath = $img->storeAs('productImages', $imageName, 'public');
+
+            // تغيير حجم الصورة
+            $resized_image = Image::make($img)->resize(300, 200)->encode();
+
+            // حفظ الصورة المصغرة
+            $resized_image_path = 'productImages/resized_' . $imageName;
+            Storage::put($resized_image_path, $resized_image);
+
+            $images[] = [
+                'img' => $imagePath,
+                'alt' => "dfgsdfds",
+                'rank' => $count,
+            ];
+
+            $count++;
         }
-        $product->imageProduct()->createMany($images);
-
-
-        return redirect()->route('admin.product.edit', $product->id)
-            ->with('message', __('Product created successfully.'));
     }
+
+    // إنشاء السجلات في قاعدة البيانات
+    $product->imageProduct()->createMany($images);
+
+    return redirect()->route('admin.product.edit', $product->id)
+        ->with('message', __('Product created successfully.'));
+}
     public function destroyImage(Request $request, $id)
     {
         $imageProductQuery = ImageProduct::query();
@@ -287,5 +325,33 @@ class ProductController extends Controller
         // Redirect back with error message if ImageProduct not found
         return redirect()->back()->withErrors(['error' => 'Image Product not found.']);
     }
+    public function destroyAllImageForProduct(Request $request, $product_id)
+    {
+        try {
+            $imageProductQuery = ImageProduct::where('product_id', $product_id);
+            $imageProducts = $imageProductQuery->get();
 
+            if ($imageProducts->isNotEmpty()) {
+                foreach ($imageProducts as $imageProduct) {
+                    if (Storage::disk('public')->exists($imageProduct->img)) {
+                        Storage::disk('public')->delete($imageProduct->img);
+                    }
+                    // Delete the ImageProduct record
+                    $imageProduct->delete();
+                }
+                // Redirect back with success message
+                return redirect()->route('admin.product.edit', $product_id)
+                    ->with('message', __('Image Product deleted successfully'));
+            }
+
+            // Redirect back with error message if ImageProduct not found
+            return redirect()->back()->withErrors(['error' => 'Image Product not found.']);
+        } catch (\Exception $e) {
+            // Log the error
+            \Log::error('Error deleting image: ' . $e->getMessage());
+
+            // Redirect back with error message
+            return redirect()->back()->withErrors(['error' => 'Failed to delete image.']);
+        }
+    }
 }

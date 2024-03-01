@@ -27,6 +27,7 @@ Route::group([
     Route::put('product/visible/{id}',[ProductController::class,'visible'])->name('product.visible');
     Route::put('product/active/{id}',[ProductController::class,'active'])->name('product.active');
     Route::delete('destroyImage/{id}',[ProductController::class,'destroyImage'])->name('product.destroyImage');
+    Route::delete('destroyAllImageForProduct/{product_id}',[ProductController::class,'destroyAllImageForProduct'])->name('product.destroyAllImageForProduct');
 
     Route::resource('menu', 'MenuController')->except([
         'show',
