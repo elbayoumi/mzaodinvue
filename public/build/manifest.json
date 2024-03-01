@@ -829,9 +829,13 @@
     "file": "assets/Auctions.f6271649.css",
     "src": "resources/js/Pages/Web/Auctions.css"
   },
-  "resources/js/Pages/Home.css": {
+  "resources/js/Pages/Web/Home.css": {
     "file": "assets/Home.f6271649.css",
-    "src": "resources/js/Pages/Home.css"
+    "src": "resources/js/Pages/Web/Home.css"
+  },
+  "resources/js/Pages/Web/Soon.css": {
+    "file": "assets/Soon.f6271649.css",
+    "src": "resources/js/Pages/Web/Soon.css"
   },
   "resources/js/Pages/Welcome.css": {
     "file": "assets/Welcome.665689a9.css",
@@ -840,9 +844,5 @@
   "resources/js/app.css": {
     "file": "assets/app.72e2d35e.css",
     "src": "resources/js/app.css"
-  },
-  "resources/js/Pages/Web/Soon.css": {
-    "file": "assets/Soon.f6271649.css",
-    "src": "resources/js/Pages/Web/Soon.css"
   }
 }
