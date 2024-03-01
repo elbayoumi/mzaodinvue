@@ -16,6 +16,8 @@ use App\Models\{
     Product,
     Permission
 };
+use Intervention\Image\Facades\Image;
+
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
@@ -93,8 +95,17 @@ class ProductController extends Controller
         // dd($request->hasFile('image'));
         $image_path = '';
 
+        // if ($request->hasFile('image')) {
+        //     $image_path = $request->file('image')->store('image', 'public');
+        // }
         if ($request->hasFile('image')) {
-            $image_path = $request->file('image')->store('image', 'public');
+            $image = $request->file('image');
+            $image_path = $image->store('image', 'public');
+
+            $resized_image = Image::make(public_path('storage/' . $image_path))->resize(300, 200)->save();
+
+            $image_path = $resized_image->basePath();
+
         }
         $data = $request->validated();
         $data['user_id'] = Auth::id();
