@@ -534,12 +534,4 @@ footer section {
     }
 }
 </style>
-<script>
-export default {
-    methods: {
-        assetPath(asset, urlPath) {
-            return `${asset}/${urlPath}`;
-        }
-    }
-}
-</script>
+
