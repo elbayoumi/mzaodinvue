@@ -11,6 +11,10 @@ import WebSite from '@/Layouts/WebSite.vue'
 import Navbar from '@/Components/Landing/Navbar.vue';
 
 defineProps({
+    products: {
+        type: Object,
+        default: () => ({}),
+    },
     canLogin: {
         type: Boolean,
     },
@@ -32,10 +36,6 @@ defineProps({
     status: {
         type: String,
     },
-    canResetPassword: {
-        type: Boolean,
-    },
-
     canResetPassword: {
         type: Boolean,
     },
