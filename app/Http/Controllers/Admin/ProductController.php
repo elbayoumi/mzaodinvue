@@ -38,7 +38,7 @@ class ProductController extends Controller
      */
     public function index(Product $product)
     {
-        $products = (new Product)->newQuery();
+        $products = (new Product)->with('imageProduct')->newQuery();
 
         if (request()->has('search')) {
             $searchTerm = '%' . request()->input('search') . '%';

@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
     // dd('dddd');
-    $products = (new Product)->newQuery();
+    $products = (new Product)->with('imageProduct')->newQuery();
 
     if (request()->has('search')) {
         $searchTerm = '%' . request()->input('search') . '%';

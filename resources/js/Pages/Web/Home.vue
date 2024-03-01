@@ -10,7 +10,7 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 import WebSite from '@/Layouts/WebSite.vue'
 import Navbar from '@/Components/Landing/Navbar.vue';
 
-defineProps({
+const props = defineProps({
     products: {
         type: Object,
         default: () => ({}),
@@ -60,6 +60,8 @@ const submit = () => {
         $('#loginModal').modal('hide');
     }
 };
+console.log('daaaata',props.products.data[0]['image_product'])
+// product.image_product[0].image_path
 </script>
 
 <template>
@@ -115,106 +117,37 @@ const submit = () => {
 
 
             <div class="flex flex-wrap text-end">
-                <div class="w-full md:w-1/2 lg:w-1/3 p-4">
-                    <div class="bg-white relative rounded-md overflow-hidden shadow-md">
-                        <div class="card-img-info flex justify-end p-2 w-100">
-                            <div class="btn btn-dis"> <i class="fa-solid fa-eye"></i> عرض </div>
-                            <i class="fa-solid fa-star star"></i>
+  <div v-for="(product, index) in products.data" :key="index" class="w-full md:w-1/2 lg:w-1/3 p-4">
+    <div class="bg-white relative rounded-md overflow-hidden shadow-md">
+      <div class="card-img-info flex justify-end p-2 w-100">
+        <div class="btn btn-dis"> <i class="fa-solid fa-eye"></i> عرض </div>
+        <i class="fa-solid fa-star star"></i>
+      </div>
+      <img :src="product['image_product'][0]?.image_path" class="w-full h-48 object-cover" alt="Card Image">
+      <div class="rounded card-pop p-2">
+        <div> انتهى المزاد </div>
+      </div>
+      <div class="card-body p-4">
+        <div class="card-h mb-3 flex justify-center">
+          <h5 class="card-title text-success">{{ product.title }}</h5>
+        </div>
+        <div class="card-b mb-3 flex justify-end">
+          <input type="text" class="card-input rounded">
+          <p class="w-48">مبلغ ترسية المزاد</p>
+        </div>
+        <div class="card-b mb-3 flex justify-end">
+          <input type="text" class="card-input rounded">
+          <p class="w-48">المزاود</p>
+        </div>
+        <div class="card-h mb-3 flex justify-between">
+          <button class="btn card-btn-info">لوحة المزايدة</button>
+          <button class="btn card-btn-info">زاود</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-                            <!-- <i class="fa-solid fa-star"></i> -->
-                        </div>
-                        <img src="https://mzaodin.com/website/download.jpeg" class="w-full h-48 object-cover"
-                            alt="Card Image">
-                        <div class="rounded card-pop p-2">
-                            <div> انتهى المزاد </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="card-h mb-3 flex justify-center">
-                                <h5 class="card-title text-success">جوال ايفون 14 برو مكس</h5>
-                            </div>
-                            <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
-                                <p class="w-48">مبلغ ترسية المزاد</p>
-                            </div>
-                            <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
-                                <p class="w-48">المزاود</p>
-                            </div>
-                            <div class="card-h mb-3 flex justify-between">
-                                <button class="btn card-btn-info">لوحة المزايدة</button>
-                                <button class="btn card-btn-info">زاود</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2 lg:w-1/3 p-4">
-                    <div class="bg-white relative rounded-md overflow-hidden shadow-md">
-                        <div class="card-img-info flex justify-end p-2 w-100">
-                            <div class="btn btn-dis"> <i class="fa-solid fa-eye"></i> عرض </div>
-                            <i class="fa-solid fa-star star"></i>
-
-                            <!-- <i class="fa-solid fa-star"></i> -->
-                        </div>
-                        <img src="https://mzaodin.com/website/download.jpeg" class="w-full h-48 object-cover"
-                            alt="Card Image">
-                        <div class="rounded card-pop p-2">
-                            <div> انتهى المزاد </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="card-h mb-3 flex justify-center">
-                                <h5 class="card-title text-success">جوال ايفون 14 برو مكس</h5>
-                            </div>
-                            <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
-                                <p class="w-48">مبلغ ترسية المزاد</p>
-                            </div>
-                            <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
-                                <p class="w-48">المزاود</p>
-                            </div>
-                            <div class="card-h mb-3 flex justify-between">
-                                <button class="btn card-btn-info">لوحة المزايدة</button>
-                                <button class="btn card-btn-info">زاود</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2 lg:w-1/3 p-4">
-                    <div class="bg-white relative rounded-md overflow-hidden shadow-md">
-                        <div class="card-img-info flex justify-end p-2 w-100">
-                            <div class="btn btn-dis"> <i class="fa-solid fa-eye"></i> عرض </div>
-                            <i class="fa-solid fa-star star"></i>
-
-                            <!-- <i class="fa-solid fa-star"></i> -->
-                        </div>
-                        <img src="https://mzaodin.com/website/download.jpeg" class="w-full h-48 object-cover"
-                            alt="Card Image">
-                        <div class="rounded card-pop p-2">
-                            <div> انتهى المزاد </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="card-h mb-3 flex justify-center">
-                                <h5 class="card-title text-success">جوال ايفون 14 برو مكس</h5>
-                            </div>
-                            <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
-                                <p class="w-48">مبلغ ترسية المزاد</p>
-                            </div>
-                            <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
-                                <p class="w-48">المزاود</p>
-                            </div>
-                            <div class="card-h mb-3 flex justify-between">
-                                <button class="btn card-btn-info">لوحة المزايدة</button>
-                                <button class="btn card-btn-info">زاود</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Repeat similar structure for other columns -->
-
-            </div>
             <div class=" m-5 flex justify-end flex-col text-end">
 
                 <p class="text-3xl font-semibold  my-1">زاود : وكن الفائز</p>
