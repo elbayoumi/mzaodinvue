@@ -60,7 +60,7 @@ const submit = () => {
         $('#loginModal').modal('hide');
     }
 };
-console.log('daaaata',props.products.data[0]['image_product'])
+// console.log('daaaata',props.products.data[0]['image_product'])
 // product.image_product[0].image_path
 </script>
 

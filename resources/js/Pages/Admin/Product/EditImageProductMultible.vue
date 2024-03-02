@@ -81,7 +81,7 @@ function removeAllImage(id) {
         <Head title="Update product" />
         <SectionMain>
             <SectionTitleLineWithButton :icon="mdiAccountKey" title="Update product" main>
-                <BaseButton :route-name="route('admin.product.index')" :icon="mdiArrowLeftBoldOutline" label="Back"
+                <BaseButton :route-name="route('admin.product.edit',props.product.id)" :icon="mdiArrowLeftBoldOutline" label="Back"
                     color="white" rounded-full small />
             </SectionTitleLineWithButton>
             <NotificationBar :key="Date.now()" v-if="$page.props.flash.message" color="success" :icon="mdiAlertBoxOutline">
