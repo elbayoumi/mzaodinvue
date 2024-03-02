@@ -24,6 +24,8 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^1.0.0",
+        "swiper": "^11.0.7",
+        "vue-slick-carousel": "^1.0.5",
         "vue3-draggable": "^2.0.9"
     }
 }

@@ -44,7 +44,7 @@ class HomeController extends Controller
     }
 
     $products = $products->paginate(5)->onEachSide(2)->appends(request()->query());
-
+// dd($products);
     return Inertia::render('Web/Home', [
         'products' => $products,
         'filters' => request()->all('search'),

@@ -42,6 +42,8 @@ Route::get('/',function (){
      })->name('home.test');
 Route::get('/home',[HomeController::class, 'index'])->name('home');
 Route::get('/auctions',[HomeController::class, 'index'])->name('auctions');
-
+Route::get('/slider',function (){
+    return Inertia::render('Web/SwiperSlideTest');
+     })->name('SwiperSlideTest.slider');
 
 require __DIR__.'/auth.php';

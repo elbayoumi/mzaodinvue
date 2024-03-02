@@ -93,18 +93,30 @@ class ProductController extends Controller
     {
 
         // dd($request->hasFile('image'));
-        $image_path = '';
+        $imagePath = '';
 
         // if ($request->hasFile('image')) {
         //     $image_path = $request->file('image')->store('image', 'public');
         // }
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $image_path = $image->store('image', 'public');
+            // $image_path = $image->store('image', 'public');
 
-            $resized_image = Image::make(public_path('storage/' . $image_path))->resize(300, 200)->save();
+            // $resized_image = Image::make(public_path('storage/' . $image_path))->resize(300, 200)->save();
 
-            $image_path = $resized_image->basePath();
+            // $image_path = $resized_image->basePath();
+
+            ///
+
+            $imageName = uniqid() . '_' . $image->getClientOriginalName();
+            $imagePath = $image->storeAs('productImages', $imageName, 'public');
+
+            // تغيير حجم الصورة
+            $resized_image = Image::make($image)->resize(300, 200)->encode();
+
+            // حفظ الصورة المصغرة
+            $resized_image_path = 'productImages/resized_' . $imageName;
+            Storage::put($resized_image_path, $resized_image);
 
         }
         $data = $request->validated();
@@ -115,7 +127,7 @@ class ProductController extends Controller
         unset($data['alt']);
 
         $product = Product::create($data);
-        $imageProduct = ImageProduct::create(['img' => $image_path, "alt" => $request->alt]);
+        $imageProduct = ImageProduct::create(['img' => $imagePath, "alt" => $request->alt]);
 
         $product->imageProduct()->save($imageProduct);
 
