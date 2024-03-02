@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
     // dd('dddd');
-    $products = (new Product)->with('imageProduct')->newQuery();
+    $products = (new Product)->where('is_visible',true)->with('imageProduct')->newQuery();
 
     if (request()->has('search')) {
         $searchTerm = '%' . request()->input('search') . '%';
@@ -44,7 +44,7 @@ class HomeController extends Controller
     }
 
     $products = $products->paginate(5)->onEachSide(2)->appends(request()->query());
-// dd($products);
+// dd($products[2]->auction_status);
     return Inertia::render('Web/Home', [
         'products' => $products,
         'filters' => request()->all('search'),
