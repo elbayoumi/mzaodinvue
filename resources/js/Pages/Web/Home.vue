@@ -9,6 +9,7 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import WebSite from '@/Layouts/WebSite.vue'
 import Navbar from '@/Components/Landing/Navbar.vue';
+import Layout from "@/Layouts/Layout.vue"
 
 const props = defineProps({
     products: {
@@ -68,9 +69,9 @@ const submit = () => {
     <!-- <WebSite :canLogin="canLogin"> -->
 
     <Head title="Home" />
-
+<Layout>
     <div>
-        <Navbar :canLogin="canLogin" />
+        <!-- <Navbar :canLogin="canLogin" /> -->
 
 
         <div class="container mx-auto">
@@ -231,6 +232,8 @@ const submit = () => {
         <!-- Link Bootstrap JS and Popper.js -->
 
     </div>
+</Layout>
+
     <!-- </WebSite> -->
 </template>
 
