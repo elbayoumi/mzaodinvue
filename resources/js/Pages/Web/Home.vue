@@ -69,8 +69,7 @@ const submit = () => {
     <!-- <WebSite :canLogin="canLogin"> -->
 
     <Head title="Home" />
-<Layout>
-    <div>
+    <Layout>
         <!-- <Navbar :canLogin="canLogin" /> -->
 
 
@@ -166,7 +165,8 @@ const submit = () => {
                     </li>
                     <li class=" ">
                         <p>......................... 1</p>
-                        <Link v-if="canRegister" :href="route('register')" class="nav-link text-secondary"> التسجيل </Link>
+                        <Link v-if="canRegister" :href="route('register')" class="nav-link text-secondary"> التسجيل
+                        </Link>
                     </li>
 
                 </ul>
@@ -223,16 +223,10 @@ const submit = () => {
 
         </div>
 
-        <footer>
-            <section class="bg-footer-end text-center">
-                <p>جميع الحقوق محفوظة : بموجب براءة اختراع فكرية في الهيئة السعودية للملكية الفكرية رقم 103864100003
-                    بتاريخ 2023/11/17, ردمك 3-85-12-7963-971.</p>
-            </section>
-        </footer>
+
         <!-- Link Bootstrap JS and Popper.js -->
 
-    </div>
-</Layout>
+    </Layout>
 
     <!-- </WebSite> -->
 </template>
@@ -471,4 +465,3 @@ footer section {
     }
 }
 </style>
-

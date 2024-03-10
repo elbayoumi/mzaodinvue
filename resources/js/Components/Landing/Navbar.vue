@@ -109,6 +109,7 @@ defineProps({
                                 class="ml-2">المزادات</span>
                         </Link>
                     </li>
+                    
                     <li class="nav-item">
                         <Link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
                         :href="route('home')">
