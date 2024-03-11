@@ -119,7 +119,7 @@ defineProps({
                     </li>
                     <li class="nav-item">
                         <Link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
-                        :href="route('home')">
+                        :href="route('settings')">
                             <i class="fas fa-cog text-lg leading-lg main-text-color opacity-75" /><span
                                 class="ml-2">الاعدادت</span>
                         </Link>
