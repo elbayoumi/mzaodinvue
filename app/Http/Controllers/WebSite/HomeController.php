@@ -53,7 +53,45 @@ class HomeController extends Controller
     ]);
 
     }
+    public function settings(Request $request)
+    {
+    // dd('dddd');
+    $products = (new Product)->where('is_visible',true)->with('imageProduct')->newQuery();
 
+    if (request()->has('search')) {
+        $searchTerm = '%' . request()->input('search') . '%';
+
+        $products->where(function ($query) use ($searchTerm) {
+            $query->where('name_arabic', 'LIKE', $searchTerm)
+                ->orWhere('name_english', 'LIKE', $searchTerm)
+                ->orWhere('sku', 'LIKE', $searchTerm)
+                // Add more conditions for other columns as needed
+                ->orWhere('product_details', 'LIKE', $searchTerm);
+        });
+    }
+
+    if (request()->query('sort')) {
+        $attribute = request()->query('sort');
+        $sort_order = 'ASC';
+        if (strncmp($attribute, '-', 1) === 0) {
+            $sort_order = 'DESC';
+            $attribute = substr($attribute, 1);
+        }
+        $products->orderBy($attribute, $sort_order);
+    } else {
+        $products->latest();
+    }
+
+    $products = $products->paginate(5)->onEachSide(2)->appends(request()->query());
+// dd($products[2]->auction_status);
+    return Inertia::render('Web/Settings', [
+        'products' => $products,
+        'filters' => request()->all('search'),
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+
+    }
     /**
      * Show the form for creating a new resource.
      */

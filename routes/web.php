@@ -41,6 +41,7 @@ Route::get('/',function (){
     ]);
      })->name('home.test');
 Route::get('/home',[HomeController::class, 'index'])->name('home');
+Route::get('/settings',[HomeController::class, 'settings'])->name('settings');
 Route::get('/auctions',[HomeController::class, 'index'])->name('auctions');
 Route::get('/slider',function (){
     return Inertia::render('Web/SwiperSlideTest');
