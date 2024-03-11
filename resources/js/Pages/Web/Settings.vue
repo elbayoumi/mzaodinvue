@@ -79,7 +79,7 @@ const submit = () => {
 
                 <!-- Your content goes here -->
 
-                <main class="rounded  justify-end sm:flex-row p-5 items-center">
+                <!-- <main class="rounded  justify-end sm:flex-row p-5 items-center">
                     <p class="text-4xl font-bold text-end my-3">المزادات</p>
 
                     <ul class="list-none flex flex-nowrap justify-end">
@@ -96,27 +96,21 @@ const submit = () => {
                             <a class="main-text-color" href="#">الكل 14</a>
                         </li>
                     </ul>
-                </main>
+                </main> -->
 
 
             </div>
-            <div class=" my-3">
+            <!-- <div class=" my-3">
                 <div class="row flex justify-end p-3 sort-icons">
                     <i class="fa-solid fa-bars m-2"></i>
                     <i class="fa-solid fa-table-cells-large m-2"></i>
                     <i class="fa-solid fa-table-cells m-2"></i>
-                    <!-- <figure class="p-3">
-                    <img :src="assetPath(asset,"menu-burger.png")" class="sort-icon" alt="Card Image">
 
-                </figure>
-                <figure class="p-3">
-                    <img :src="assetPath(asset,"dots-menu-svgrepo-com.svg" class="sort-icon" alt="Card Image">
-                </figure> -->
                 </div>
-            </div>
+            </div> -->
 
 
-            <div class="flex flex-wrap text-end">
+            <!-- <div class="flex flex-wrap text-end">
                 <div v-for="(product, index) in products.data" :key="index" class="w-full md:w-1/2 lg:w-1/3 p-4">
                     <div class="bg-white relative rounded-md overflow-hidden shadow-md">
                         <div class="card-img-info flex justify-end p-2 w-100">
@@ -147,9 +141,9 @@ const submit = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class=" m-5 flex justify-end flex-col text-end">
+            <!-- <div class=" m-5 flex justify-end flex-col text-end">
 
                 <p class="text-3xl font-semibold  my-1">زاود : وكن الفائز</p>
                 <p class="text-xl font-semibold mb-4 text-right text-secondary ">خطوات المشاركة والفوز</p>
@@ -170,20 +164,6 @@ const submit = () => {
                     </li>
 
                 </ul>
-                <!-- <img :src="'https://mzaodin.com/website/log-removebg-preview.png'"
-                            class="w-100 d-inline-block m-0 p-0 logo" alt=""> -->
-                <!-- <ul class="list-unstyled flex flex-wrap justify-around w-100 py-5 ">
-                    <li class="text-center">
-                        <a class="nav-link text-secondary" href="#"> المزايدة والفوز </a>
-                    </li>
-                    <li class="">
-                        <a class="nav-link text-secondary" href="#"> الاشتراك </a>
-                    </li>
-                    <li class=" ">
-                        <Link v-if="canRegister" :href="route('register')" class="nav-link text-secondary"> التسجيل </Link>
-                    </li>
-
-                </ul> -->
                 <ul class="list-unstyled flex flex-wrap justify-around min-w-full my-5  py-5 ">
 
                     <li class="text-center">
@@ -214,7 +194,7 @@ const submit = () => {
                         <iconify-icon icon="pajamas:x"></iconify-icon>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- <figure>
             <img :src="assetPath(asset,"Screenshot from 2024-01-12 00-59-29.png")" class="card-img-top h-100 cover" alt="Card Image">
