@@ -76,7 +76,47 @@ const submit = () => {
         <div class="container mx-auto">
             <div class=" mt-5 main">
 
+                <div class="flex flex-wrap text-end">
+                    <div class="w-full  p-4">
+                        <div class="bg-white relative rounded-md overflow-hidden shadow-md">
+                            <div class="card-img-info flex justify-end p-2 w-100">
 
+
+                                <!-- <i class="fa-solid fa-star"></i> -->
+                            </div>
+                            <div>
+                                <figure>
+                                    <img src="http://127.0.0.1:8000/website/download.jpeg"
+                                        class="w-full h-48 object-cover" alt="Card Image">
+
+                                </figure>
+                            </div>
+
+                            <div class="card-body p-4">
+                                <div class="card-h mb-3 flex justify-center">
+                                    <h5 class="card-title text-success">جوال ايفون 14 برو مكس</h5>
+                                </div>
+                                <div class="card-b mb-3 flex justify-end">
+                                    <input type="text" class="card-input rounded">
+                                    <p class="w-48">مبلغ ترسية المزاد</p>
+                                </div>
+                                <div class="card-b mb-3 flex justify-end">
+                                    <input type="text" class="card-input rounded">
+                                    <p class="w-48">المزاود</p>
+                                </div>
+                                <div class="card-h mb-3 flex justify-between">
+                                    <button class="btn card-btn-info">لوحة المزايدة</button>
+                                    <button class="btn card-btn-info">زاود</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Repeat similar structure for other columns -->
+
+                </div>
 
             </div>
 
