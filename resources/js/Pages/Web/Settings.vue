@@ -82,12 +82,11 @@ const submit = () => {
                             <div class="card-img-info flex justify-end p-2 w-100">
 
 
-                                <!-- <i class="fa-solid fa-star"></i> -->
                             </div>
-                            <div>
+                            <div class="md:w-1/2 lg:w-1/3 m-auto rounded">
                                 <figure>
-                                    <img src="http://127.0.0.1:8000/website/download.jpeg"
-                                        class="w-full h-48 object-cover" alt="Card Image">
+                                    <img src="http://127.0.0.1:8000/website/download.jpeg" 
+                                        class="rounded-full w-full h-48 object-cover" alt="Card Image">
 
                                 </figure>
                             </div>
