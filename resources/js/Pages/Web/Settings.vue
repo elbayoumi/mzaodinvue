@@ -97,11 +97,11 @@ const submit = () => {
                                     <h5 class="card-title text-success">{{ user.name }}</h5>
                                 </div>
                                 <div class="card-b mb-3 flex justify-end">
-                                    <input type="text" class="card-input rounded">
+                                    <input type="text" class="  rounded" :value="user.name">
                                     <p class="w-48">الاسم</p>
                                 </div>
                                 <div class="card-b mb-3 flex justify-end">
-                                    <input type="text" class="card-input rounded">
+                                    <input type="text" class="rounded" :value="user.email">
                                     <p class="w-48">الايميل</p>
                                 </div>
                                 <div class="card-h mb-3 flex justify-between">
