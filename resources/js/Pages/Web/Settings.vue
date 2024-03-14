@@ -13,67 +13,13 @@ import Navbar from '@/Components/Landing/Navbar.vue';
 import Layout from "@/Layouts/Layout.vue"
 const user = computed(() => usePage().props.auth.user)
 console.log('mmmmm,',user)
-// const props = defineProps({
-//     products: {
-//         type: Object,
-//         default: () => ({}),
-//     },
-//     canLogin: {
-//         type: Boolean,
-//     },
-//     canRegister: {
-//         type: Boolean,
-//     },
-//     laravelVersion: {
-//         type: String,
-//         required: true,
-//     },
-//     asset: {
-//         type: String,
-//         required: true,
-//     },
-//     phpVersion: {
-//         type: String,
-//         required: true,
-//     },
-//     status: {
-//         type: String,
-//     },
-//     canResetPassword: {
-//         type: Boolean,
-//     },
 
-// });
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false,
-});
-
-const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-
-    });
-    const loginSuccessful = true;
-
-    if (loginSuccessful) {
-        // Close the modal using jQuery
-        $('#loginModal').modal('hide');
-    }
-};
-// console.log('daaaata',props.products.data[0]['image_product'])
-// product.image_product[0].image_path
 </script>
 
 <template>
-    <!-- <WebSite :canLogin="canLogin"> -->
 
     <Head title="Settings" />
     <Layout>
-        <!-- <Navbar :canLogin="canLogin" /> -->
-
 
         <div class="container mx-auto">
             <div class=" mt-5 main">
