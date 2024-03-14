@@ -98,15 +98,15 @@ const submit = () => {
                                 </div>
                                 <div class="card-b mb-3 flex justify-end">
                                     <input type="text" class="card-input rounded">
-                                    <p class="w-48">مبلغ ترسية المزاد</p>
+                                    <p class="w-48">الاسم</p>
                                 </div>
                                 <div class="card-b mb-3 flex justify-end">
                                     <input type="text" class="card-input rounded">
-                                    <p class="w-48">المزاود</p>
+                                    <p class="w-48">الايميل</p>
                                 </div>
                                 <div class="card-h mb-3 flex justify-between">
-                                    <button class="btn card-btn-info">لوحة المزايدة</button>
-                                    <button class="btn card-btn-info">زاود</button>
+                                    <!-- <button class="btn card-btn-info">لوحة المزايدة</button> -->
+                                    <button class="btn card-btn-info">تعديل</button>
                                 </div>
                             </div>
                         </div>
