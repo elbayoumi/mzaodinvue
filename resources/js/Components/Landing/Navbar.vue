@@ -35,8 +35,11 @@ defineProps({
     },
 
 });
+let showMenu = false
 
-
+function toggleNavbar() {
+    showMenu = !showMenu;
+}
 
 
 </script>
@@ -52,7 +55,8 @@ defineProps({
                     Dashboard</Link>
                     <template v-else>
 
-                        <Link class=" btn-main text-white font-bold py-3  px-4 rounded lg:block hidden h-100 text-center"
+                        <Link
+                            class=" btn-main text-white font-bold py-3  px-4 rounded lg:block hidden h-100 text-center"
                             :href="route('login')">
                         تسجيل الدخول
 
@@ -90,38 +94,43 @@ defineProps({
                     <li class="nav-item">
                         <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
                             href="#pablo">
-                            <i class="fas fa-users text-lg leading-lg main-text-color opacity-75" /><span class="ml-2">من
+                            <i class="fas fa-users text-lg leading-lg main-text-color opacity-75" /><span
+                                class="ml-2">من
                                 نحن</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <Link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75 "
-                        :href="route('home')" >
-                            <i class="fas fa-question-circle text-lg leading-lg main-text-color opacity-75" /><span
-                                class="ml-2">الاسئلة الشائعة</span>
+                        <Link
+                            class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75 "
+                            :href="route('home')">
+                        <i class="fas fa-question-circle text-lg leading-lg main-text-color opacity-75" /><span
+                            class="ml-2">الاسئلة
+                            الشائعة</span>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
-                            :href="route('auctions')"
-                            >
-                            <i class="fas fa-gavel text-lg leading-lg main-text-color opacity-75" /><span
-                                class="ml-2">المزادات</span>
+                        <Link
+                            class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
+                            :href="route('auctions')">
+                        <i class="fas fa-gavel text-lg leading-lg main-text-color opacity-75" /><span
+                            class="ml-2">المزادات</span>
                         </Link>
                     </li>
 
                     <li class="nav-item">
-                        <Link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
-                        :href="route('home')">
-                            <i class="fas fa-home text-lg leading-lg main-text-color opacity-75" /><span
-                                class="ml-2">الرئيسية</span>
+                        <Link
+                            class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
+                            :href="route('home')">
+                        <i class="fas fa-home text-lg leading-lg main-text-color opacity-75" /><span
+                            class="ml-2">الرئيسية</span>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
-                        :href="route('settings')">
-                            <i class="fas fa-cog text-lg leading-lg main-text-color opacity-75" /><span
-                                class="ml-2">الاعدادت</span>
+                        <Link v-if="$page.props.auth.user"
+                            class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug main-text-color hover:opacity-75"
+                            :href="route('settings')">
+                        <i class="fas fa-cog text-lg leading-lg main-text-color opacity-75" /><span
+                            class="ml-2">الاعدادت</span>
                         </Link>
                     </li>
                     <li v-if="canLogin" class="nav-item block my-5 lg:hidden">
@@ -143,21 +152,3 @@ defineProps({
         </div>
     </nav>
 </template>
-
-<script>
-export default {
-    name: "red-navbar",
-    data() {
-        return {
-            showMenu: false
-        }
-    },
-    methods: {
-        toggleNavbar: function () {
-            this.showMenu = !this.showMenu;
-        }
-    },
-
-}
-
-</script>
