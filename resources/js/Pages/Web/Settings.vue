@@ -11,37 +11,37 @@ import WebSite from '@/Layouts/WebSite.vue'
 import Navbar from '@/Components/Landing/Navbar.vue';
 import Layout from "@/Layouts/Layout.vue"
 
-const props = defineProps({
-    products: {
-        type: Object,
-        default: () => ({}),
-    },
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
-        type: Boolean,
-    },
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    asset: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
-    status: {
-        type: String,
-    },
-    canResetPassword: {
-        type: Boolean,
-    },
+// const props = defineProps({
+//     products: {
+//         type: Object,
+//         default: () => ({}),
+//     },
+//     canLogin: {
+//         type: Boolean,
+//     },
+//     canRegister: {
+//         type: Boolean,
+//     },
+//     laravelVersion: {
+//         type: String,
+//         required: true,
+//     },
+//     asset: {
+//         type: String,
+//         required: true,
+//     },
+//     phpVersion: {
+//         type: String,
+//         required: true,
+//     },
+//     status: {
+//         type: String,
+//     },
+//     canResetPassword: {
+//         type: Boolean,
+//     },
 
-});
+// });
 
 const form = useForm({
     email: '',
@@ -85,7 +85,7 @@ const submit = () => {
                             </div>
                             <div class="md:w-1/2 lg:w-1/3 m-auto rounded">
                                 <figure>
-                                    <img src="http://127.0.0.1:8000/website/download.jpeg" 
+                                    <img src="http://127.0.0.1:8000/website/download.jpeg"
                                         class="rounded-full w-full h-48 object-cover" alt="Card Image">
 
                                 </figure>
