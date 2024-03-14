@@ -87,7 +87,6 @@ const submit = () => {
                                 <figure>
                                     <img src="http://127.0.0.1:8000/website/download.jpeg"
                                         class="rounded-full w-full h-48 object-cover" alt="Card Image">
-
                                 </figure>
                             </div>
 
