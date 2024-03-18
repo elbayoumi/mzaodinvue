@@ -1,66 +1,70 @@
 <script setup>
-import { Head, Link, useForm } from "@inertiajs/vue3"
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import {
     mdiAccountKey,
     mdiArrowLeftBoldOutline,
     mdiAccessPointOff,
     mdiAccessPoint,
     mdiEyeOff,
-    mdiEyeSettings
-} from "@mdi/js"
-import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue"
-import SectionMain from "@/Components/SectionMain.vue"
-import SectionTitleLineWithButton from "@/Components/SectionTitleLineWithButton.vue"
-import CardBox from "@/Components/CardBox.vue"
-import BaseButton from "@/Components/BaseButton.vue"
+    mdiEyeSettings,
+} from "@mdi/js";
+import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue";
+import SectionMain from "@/Components/SectionMain.vue";
+import SectionTitleLineWithButton from "@/Components/SectionTitleLineWithButton.vue";
+import CardBox from "@/Components/CardBox.vue";
+import BaseButton from "@/Components/BaseButton.vue";
 
 const props = defineProps({
     product: {
         type: Object,
         default: () => ({}),
     },
-})
-const form = useForm({})
+});
+const form = useForm({});
 
 function destroy(id) {
     if (confirm("Are you sure you want to delete?")) {
-        form.delete(route("admin.permission.destroy", id))
+        form.delete(route("admin.permission.destroy", id));
     }
 }
 function visible(id) {
     if (confirm("Are you sure you want to change visible?")) {
-        form.put(route("admin.product.visible", id))
+        form.put(route("admin.product.visible", id));
     }
 }
 function active(id) {
     if (confirm("Are you sure you want to change active?")) {
-        form.put(route("admin.product.active", id))
+        form.put(route("admin.product.active", id));
     }
 }
 </script>
 
 <template>
     <LayoutAuthenticated>
-
         <Head title="View product" />
         <SectionMain>
-            <SectionTitleLineWithButton :icon="mdiAccountKey" title="View product" main>
-                <BaseButton :route-name="route('admin.product.index')" :icon="mdiArrowLeftBoldOutline" label="Back"
-                    color="white" rounded-full small />
+            <SectionTitleLineWithButton
+                :icon="mdiAccountKey"
+                title="View product"
+                main
+            >
+                <BaseButton
+                    :route-name="route('admin.product.index')"
+                    :icon="mdiArrowLeftBoldOutline"
+                    label="Back"
+                    color="white"
+                    rounded-full
+                    small
+                />
             </SectionTitleLineWithButton>
             <CardBox class="mb-6">
                 <table>
                     <tbody>
                         <tr>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 Name Arabic
                             </td>
 
@@ -68,14 +72,9 @@ function active(id) {
                                 {{ product.name_arabic }}
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 Name English
                             </td>
 
@@ -84,14 +83,9 @@ function active(id) {
                             </td>
 
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 Product Details
                             </td>
 
@@ -99,19 +93,13 @@ function active(id) {
                                 {{ product.product_details }}
                             </td>
                             <!-- // -->
-
                         </tr>
                         <tr>
                             <!-- // -->
 
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 sku
                             </td>
 
@@ -119,14 +107,9 @@ function active(id) {
                                 {{ product.sku }}
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 weight
                             </td>
 
@@ -134,14 +117,9 @@ function active(id) {
                                 {{ product.weight }}
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 estimated market price
                             </td>
 
@@ -149,19 +127,13 @@ function active(id) {
                                 {{ product.estimated_market_price }}
                             </td>
                             <!-- // -->
-
                         </tr>
                         <tr>
                             <!-- // -->
 
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 cost price
                             </td>
 
@@ -169,14 +141,9 @@ function active(id) {
                                 {{ product.cost_price }}
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 required bidders
                             </td>
 
@@ -184,14 +151,9 @@ function active(id) {
                                 {{ product.required_bidders }}
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 registration amount
                             </td>
 
@@ -199,19 +161,13 @@ function active(id) {
                                 {{ product.registration_amount }}
                             </td>
                             <!-- // -->
-
                         </tr>
                         <tr>
                             <!-- // -->
 
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 auction duration minutes
                             </td>
 
@@ -219,14 +175,9 @@ function active(id) {
                                 {{ product.auction_duration_minutes }}
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 opening bid amount
                             </td>
 
@@ -234,14 +185,9 @@ function active(id) {
                                 {{ product.opening_bid_amount }}
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 payment deadline minutes
                             </td>
 
@@ -249,73 +195,75 @@ function active(id) {
                                 {{ product.payment_deadline_minutes }}
                             </td>
                             <!-- // -->
-
                         </tr>
                         <tr>
                             <!-- // -->
 
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 is active
                             </td>
 
                             <td data-label="is active">
-                                <BaseButton v-if="!product.is_active" color="danger" :icon="mdiAccessPointOff" small
-                                    @click="active(product.id)" />
-                                <BaseButton v-if="product.is_active" color="success" :icon="mdiAccessPoint" small
-                                    @click="active(product.id)" />
+                                <BaseButton
+                                    v-if="!product.is_active"
+                                    color="danger"
+                                    :icon="mdiAccessPointOff"
+                                    small
+                                    @click="active(product.id)"
+                                />
+                                <BaseButton
+                                    v-if="product.is_active"
+                                    color="success"
+                                    :icon="mdiAccessPoint"
+                                    small
+                                    @click="active(product.id)"
+                                />
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 is visible
                             </td>
 
                             <td data-label="is visible">
-                                <BaseButton v-if="!product.is_visible" color="danger" :icon="mdiEyeOff" small
-                                    @click="visible(product.id)" />
-                                <BaseButton v-if="product.is_visible" color="success" :icon="mdiEyeSettings" small
-                                    @click="visible(product.id)" />
+                                <BaseButton
+                                    v-if="!product.is_visible"
+                                    color="danger"
+                                    :icon="mdiEyeOff"
+                                    small
+                                    @click="visible(product.id)"
+                                />
+                                <BaseButton
+                                    v-if="product.is_visible"
+                                    color="success"
+                                    :icon="mdiEyeSettings"
+                                    small
+                                    @click="visible(product.id)"
+                                />
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 Created
                             </td>
                             <td data-label="Created">
-                                {{ new Date(product.created_at).toLocaleString() }}
+                                {{
+                                    new Date(
+                                        product.created_at
+                                    ).toLocaleString()
+                                }}
                             </td>
                             <!-- // -->
-
                         </tr>
                         <tr>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 auction start
                             </td>
 
@@ -323,14 +271,9 @@ function active(id) {
                                 {{ product.auction_start }}
                             </td>
                             <!-- // -->
-                            <td class="
-                  p-4
-                  pl-8
-                  text-slate-500
-                  dark:text-slate-400
-                  hidden
-                  lg:block
-                ">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
                                 auction end
                             </td>
 
@@ -338,10 +281,7 @@ function active(id) {
                                 {{ product.auction_end }}
                             </td>
                         </tr>
-                        <tr>
-
-
-                        </tr>
+                        <tr></tr>
                     </tbody>
                 </table>
             </CardBox>
