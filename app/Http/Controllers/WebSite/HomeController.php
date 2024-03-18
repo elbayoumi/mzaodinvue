@@ -45,6 +45,7 @@ class HomeController extends Controller
 
     $products = $products->paginate(5)->onEachSide(2)->appends(request()->query());
 // dd($products[2]->auction_status);
+// return response()->json(['products' => $products]);
     return Inertia::render('Web/Home', [
         'products' => $products,
         'filters' => request()->all('search'),
