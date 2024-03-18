@@ -7,7 +7,6 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm ,usePage , router} from '@inertiajs/vue3';
 import { reactive, computed } from 'vue'
-
 import WebSite from '@/Layouts/WebSite.vue'
 import Navbar from '@/Components/Landing/Navbar.vue';
 import Layout from "@/Layouts/Layout.vue"

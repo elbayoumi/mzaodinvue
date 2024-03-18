@@ -63,14 +63,14 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="bg-white flex flex-col"
+    class="bg-transparent border-2  flex flex-col"
     @submit="submit"
     enctype="multipart/form-data"
 
   >
     <header
       v-if="title"
-      class="flex items-stretch border-b border-gray-100 dark:border-slate-800"
+      class="flex items-stretch border-b border-gray-100 dark:border-slate-800 "
     >
       <div
         class="flex items-center py-3 grow font-bold"

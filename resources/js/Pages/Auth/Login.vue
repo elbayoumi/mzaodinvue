@@ -43,17 +43,18 @@ const submit = () => {
 <template>
   <LayoutGuest>
     <Head title="Login" />
-
     <SectionFullScreen
       v-slot="{ cardClass }"
       bg="purplePink"
     >
+
       <CardBox
         :class="cardClass"
         form
         @submit.prevent="submit"
       >
         <FormValidationErrors />
+<div class="text-center  font-weight-bold">قم بتسجيل الدخول </div>
 
         <NotificationBarInCard 
           v-if="status"
@@ -76,7 +77,6 @@ const submit = () => {
             required
           />
         </FormField>
-
         <FormField
           label="Password"
           label-for="password"
@@ -117,8 +117,8 @@ const submit = () => {
               label="Remind"
             />
           </BaseButtons>
-          <Link
-            :href="route('register')"
+          <Link class="text-black "
+            :href="route('register') "
           >
             Register
           </Link>
