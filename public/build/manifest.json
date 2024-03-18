@@ -885,36 +885,36 @@
     "file": "assets/pagination.0f790e63.css",
     "src": "pagination.css"
   },
-  "resources/js/Pages/Home.css": {
-    "file": "assets/Home.f6271649.css",
-    "src": "resources/js/Pages/Home.css"
-  },
   "resources/js/Pages/Web/Auctions.css": {
     "file": "assets/Auctions.f6271649.css",
     "src": "resources/js/Pages/Web/Auctions.css"
-  },
-  "resources/js/Pages/Welcome.css": {
-    "file": "assets/Welcome.665689a9.css",
-    "src": "resources/js/Pages/Welcome.css"
-  },
-  "resources/js/Pages/Web/SwiperSlideTest.css": {
-    "file": "assets/SwiperSlideTest.d3b27418.css",
-    "src": "resources/js/Pages/Web/SwiperSlideTest.css"
-  },
-  "resources/js/Pages/Web/Home.css": {
-    "file": "assets/Home.4851a42a.css",
-    "src": "resources/js/Pages/Web/Home.css"
-  },
-  "resources/js/app.css": {
-    "file": "assets/app.85b2c712.css",
-    "src": "resources/js/app.css"
   },
   "Layout.css": {
     "file": "assets/Layout.f6271649.css",
     "src": "Layout.css"
   },
+  "resources/js/Pages/Home.css": {
+    "file": "assets/Home.f6271649.css",
+    "src": "resources/js/Pages/Home.css"
+  },
+  "resources/js/Pages/Web/Home.css": {
+    "file": "assets/Home.4851a42a.css",
+    "src": "resources/js/Pages/Web/Home.css"
+  },
   "resources/js/Pages/Web/Soon.css": {
     "file": "assets/Soon.f6271649.css",
     "src": "resources/js/Pages/Web/Soon.css"
+  },
+  "resources/js/Pages/Web/SwiperSlideTest.css": {
+    "file": "assets/SwiperSlideTest.d3b27418.css",
+    "src": "resources/js/Pages/Web/SwiperSlideTest.css"
+  },
+  "resources/js/Pages/Welcome.css": {
+    "file": "assets/Welcome.665689a9.css",
+    "src": "resources/js/Pages/Welcome.css"
+  },
+  "resources/js/app.css": {
+    "file": "assets/app.85b2c712.css",
+    "src": "resources/js/app.css"
   }
 }
