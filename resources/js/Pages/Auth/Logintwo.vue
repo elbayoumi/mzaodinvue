@@ -1,3 +1,40 @@
+<script setup>
+import { useForm, usePage, Head } from '@inertiajs/vue3'
+import { computed } from 'vue'
+import { mdiAccount, mdiEmail, mdiFormTextboxPassword } from '@mdi/js'
+import LayoutGuest from '@/Layouts/LayoutGuest.vue'
+import SectionFullScreen from '@/Components/SectionFullScreen.vue'
+import CardBox from '@/Components/CardBox.vue'
+import FormCheckRadioGroup from '@/Components/FormCheckRadioGroup.vue'
+import FormField from '@/Components/FormField.vue'
+import FormControl from '@/Components/FormControl.vue'
+import BaseDivider from '@/Components/BaseDivider.vue'
+import BaseButton from '@/Components/BaseButton.vue'
+import BaseButtons from '@/Components/BaseButtons.vue'
+import FormValidationErrors from '@/Components/FormValidationErrors.vue'
+
+const form = useForm({
+  name: '',
+  email: '',
+  password: '',
+  password_confirmation: '',
+  terms: [],
+})
+
+const hasTermsAndPrivacyPolicyFeature = computed(() => usePage().props.value?.jetstream?.hasTermsAndPrivacyPolicyFeature )
+
+const register = () => {
+  form
+    .transform(data => ({
+      ... data,
+      terms: form.terms && form.terms.length
+    }))
+    .post(route('register'), {
+      onFinish: () => form.reset('password', 'password_confirmation'),
+    })
+}
+</script>
+
 <template>
   <div class="flex min-h-screen items-center justify-center">
     <div class="relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none">
@@ -109,43 +146,12 @@
       <div class="w-full pt-5 px-4 mb-8 items-center">
         <div class="text-sm text-gray-700 py-1">
           Made with
-          <a class="text-gray-700 font-semibold" href="https://www.material-tailwind.com/docs/html/form?ref=tailwindcomponents" target="_blank">Material Tailwind</a>
+          <!-- <a class="text-gray-700 font-semibold" href="https://www.material-tailwind.com/docs/html/form?ref=tailwindcomponents" target="_blank">Material Tailwind</a>
           by
-          <a href="https://www.creative-tim.com?ref=tailwindcomponents" class="text-gray-700 font-semibold" target="_blank"> Creative Tim</a>.
+          <a href="https://www.creative-tim.com?ref=tailwindcomponents" class="text-gray-700 font-semibold" target="_blank"> Creative Tim</a>. -->
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      name: '',
-      email: '',
-      password: ''
-    };
-  },
-  computed: {
-    isValidForm() {
-      return this.name && this.email && this.password;
-    }
-  },
-  methods: {
-    register() {
-      
-      // this.$axios.post('/register', { name: this.name, email: this.email, password: this.password })
-      //   .then(response => {
-      //     console.log(response);
-      //   })
-      //   .catch(error => {
-      //     console.error(error);
-      //   });
-      alert('Registered successfully!');
-    }
-  }
-};
-</script>
-
 
