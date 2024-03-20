@@ -63,7 +63,7 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="bg-pink-400  border-2  flex flex-col"
+    class="bg-white  border-2  flex flex-col"
     @submit="submit"
     enctype="multipart/form-data"
 

@@ -62,7 +62,7 @@ function active(id) {
 <template>
     <LayoutAuthenticated>
 
-        <Head title="Product" />
+        <Head title="Product"  />
         <SectionMain>
             <SectionTitleLineWithButton :icon="mdiAccountKey" title="Product" main>
                 <BaseButton v-if="can.delete" :route-name="route('admin.product.create')" :icon="mdiPlus" label="Add"

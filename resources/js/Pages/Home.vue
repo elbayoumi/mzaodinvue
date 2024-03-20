@@ -1,14 +1,14 @@
 <script setup>
 // import { Head, Link } from '@inertiajs/vue3';
-import Checkbox from '@/Components/Checkbox.vue';
+import Checkbox from "@/Components/Checkbox.vue";
 // import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import WebSite from '@/Layouts/WebSite.vue'
-import Navbar from '@/Components/Landing/Navbar.vue';
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
+import { Head, Link, useForm } from "@inertiajs/vue3";
+import WebSite from "@/Layouts/WebSite.vue";
+import Navbar from "@/Components/Landing/Navbar.vue";
 
 defineProps({
     canLogin: {
@@ -39,25 +39,23 @@ defineProps({
     canResetPassword: {
         type: Boolean,
     },
-
 });
 
 const form = useForm({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     remember: false,
 });
 
 const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-
+    form.post(route("login"), {
+        onFinish: () => form.reset("password"),
     });
     const loginSuccessful = true;
 
     if (loginSuccessful) {
         // Close the modal using jQuery
-        $('#loginModal').modal('hide');
+        $("#loginModal").modal("hide");
     }
 };
 </script>
@@ -70,14 +68,11 @@ const submit = () => {
     <div>
         <Navbar :canLogin="canLogin" />
 
-
         <div class="container mx-auto">
-            <div class=" mt-5 main">
-
-
+            <div class="mt-5 main">
                 <!-- Your content goes here -->
 
-                <main class="rounded  justify-end sm:flex-row p-5 items-center">
+                <main class="rounded justify-end sm:flex-row p-5 items-center">
                     <p class="text-4xl font-bold text-end my-3">المزادات</p>
 
                     <ul class="list-none flex flex-nowrap justify-end">
@@ -95,10 +90,8 @@ const submit = () => {
                         </li>
                     </ul>
                 </main>
-
-
             </div>
-            <div class=" my-3">
+            <div class="my-3">
                 <div class="row flex justify-end p-3 sort-icons">
                     <i class="fa-solid fa-bars m-2"></i>
                     <i class="fa-solid fa-table-cells-large m-2"></i>
@@ -113,99 +106,131 @@ const submit = () => {
                 </div>
             </div>
 
-
             <div class="flex flex-wrap text-end">
                 <div class="w-full md:w-1/2 lg:w-1/3 p-4">
-                    <div class="bg-white relative rounded-md overflow-hidden shadow-md">
+                    <div
+                        class="bg-white relative rounded-md overflow-hidden shadow-md"
+                    >
                         <div class="card-img-info flex justify-end p-2 w-100">
-                            <div class="btn btn-dis"> <i class="fa-solid fa-eye"></i> عرض </div>
+                            <div class="btn btn-dis">
+                                <i class="fa-solid fa-eye"></i> عرض
+                            </div>
                             <i class="fa-solid fa-star star"></i>
 
                             <!-- <i class="fa-solid fa-star"></i> -->
                         </div>
-                        <img src="http://127.0.0.1:8000/website/download.jpeg" class="w-full h-48 object-cover"
-                            alt="Card Image">
+                        <img
+                            src="http://127.0.0.1:8000/website/download.jpeg"
+                            class="w-full h-48 object-cover"
+                            alt="Card Image"
+                        />
                         <div class="rounded card-pop p-2">
-                            <div> انتهى المزاد </div>
+                            <div>انتهى المزاد</div>
                         </div>
                         <div class="card-body p-4">
                             <div class="card-h mb-3 flex justify-center">
-                                <h5 class="card-title text-success">جوال ايفون 14 برو مكس</h5>
+                                <h5 class="card-title text-success">
+                                    جوال ايفون 14 برو مكس
+                                </h5>
                             </div>
                             <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
+                                <input type="text" class="card-input rounded" />
                                 <p class="w-48">مبلغ ترسية المزاد</p>
                             </div>
                             <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
+                                <input type="text" class="card-input rounded" />
                                 <p class="w-48">المزاود</p>
                             </div>
                             <div class="card-h mb-3 flex justify-between">
-                                <button class="btn card-btn-info">لوحة المزايدة</button>
+                                <button class="btn card-btn-info">
+                                    لوحة المزايدة
+                                </button>
                                 <button class="btn card-btn-info">زاود</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 lg:w-1/3 p-4">
-                    <div class="bg-white relative rounded-md overflow-hidden shadow-md">
+                    <div
+                        class="bg-white relative rounded-md overflow-hidden shadow-md"
+                    >
                         <div class="card-img-info flex justify-end p-2 w-100">
-                            <div class="btn btn-dis"> <i class="fa-solid fa-eye"></i> عرض </div>
+                            <div class="btn btn-dis">
+                                <i class="fa-solid fa-eye"></i> عرض
+                            </div>
                             <i class="fa-solid fa-star star"></i>
 
                             <!-- <i class="fa-solid fa-star"></i> -->
                         </div>
-                        <img src="http://127.0.0.1:8000/website/download.jpeg" class="w-full h-48 object-cover"
-                            alt="Card Image">
+                        <img
+                            src="http://127.0.0.1:8000/website/download.jpeg"
+                            class="w-full h-48 object-cover"
+                            alt="Card Image"
+                        />
                         <div class="rounded card-pop p-2">
-                            <div> انتهى المزاد </div>
+                            <div>انتهى المزاد</div>
                         </div>
                         <div class="card-body p-4">
                             <div class="card-h mb-3 flex justify-center">
-                                <h5 class="card-title text-success">جوال ايفون 14 برو مكس</h5>
+                                <h5 class="card-title text-success">
+                                    جوال ايفون 14 برو مكس
+                                </h5>
                             </div>
                             <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
+                                <input type="text" class="card-input rounded" />
                                 <p class="w-48">مبلغ ترسية المزاد</p>
                             </div>
                             <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
+                                <input type="text" class="card-input rounded" />
                                 <p class="w-48">المزاود</p>
                             </div>
                             <div class="card-h mb-3 flex justify-between">
-                                <button class="btn card-btn-info">لوحة المزايدة</button>
+                                <button class="btn card-btn-info">
+                                    لوحة المزايدة
+                                </button>
                                 <button class="btn card-btn-info">زاود</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 lg:w-1/3 p-4">
-                    <div class="bg-white relative rounded-md overflow-hidden shadow-md">
+                    <div
+                        class="bg-white relative rounded-md overflow-hidden shadow-md"
+                    >
                         <div class="card-img-info flex justify-end p-2 w-100">
-                            <div class="btn btn-dis"> <i class="fa-solid fa-eye"></i> عرض </div>
+                            <div class="btn btn-dis">
+                                <i class="fa-solid fa-eye"></i> عرض
+                            </div>
                             <i class="fa-solid fa-star star"></i>
 
                             <!-- <i class="fa-solid fa-star"></i> -->
                         </div>
-                        <img src="http://127.0.0.1:8000/website/download.jpeg" class="w-full h-48 object-cover"
-                            alt="Card Image">
+                        <img
+                            src="http://127.0.0.1:8000/website/download.jpeg"
+                            class="w-full h-48 object-cover"
+                            alt="Card Image"
+                        />
                         <div class="rounded card-pop p-2">
-                            <div> انتهى المزاد </div>
+                            <div>انتهى المزاد</div>
                         </div>
                         <div class="card-body p-4">
                             <div class="card-h mb-3 flex justify-center">
-                                <h5 class="card-title text-success">جوال ايفون 14 برو مكس</h5>
+                                <h5 class="card-title text-success">
+                                    جوال ايفون 14 برو مكس
+                                </h5>
                             </div>
                             <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
+                                <input type="text" class="card-input rounded" />
                                 <p class="w-48">مبلغ ترسية المزاد</p>
                             </div>
                             <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded">
+                                <input type="text" class="card-input rounded" />
                                 <p class="w-48">المزاود</p>
                             </div>
                             <div class="card-h mb-3 flex justify-between">
-                                <button class="btn card-btn-info">لوحة المزايدة</button>
+                                <button class="btn card-btn-info">
+                                    لوحة المزايدة
+                                </button>
                                 <button class="btn card-btn-info">زاود</button>
                             </div>
                         </div>
@@ -213,27 +238,38 @@ const submit = () => {
                 </div>
 
                 <!-- Repeat similar structure for other columns -->
-
             </div>
-            <div class=" m-5 flex justify-end flex-col text-end">
+            <div class="m-5 flex justify-end flex-col text-end">
+                <p class="text-3xl font-semibold my-1">زاود : وكن الفائز</p>
+                <p class="text-xl font-semibold mb-4 text-right text-secondary">
+                    خطوات المشاركة والفوز
+                </p>
 
-                <p class="text-3xl font-semibold  my-1">زاود : وكن الفائز</p>
-                <p class="text-xl font-semibold mb-4 text-right text-secondary ">خطوات المشاركة والفوز</p>
-
-                <ul class="list-unstyled flex flex-wrap justify-around w-100 py-5 text-center ">
+                <ul
+                    class="list-unstyled flex flex-wrap justify-around w-100 py-5 text-center"
+                >
                     <li class="">
                         <p>......................... 3</p>
-                        <a class="nav-link text-secondary" href="#"> المزايدة والفوز </a>
+                        <a class="nav-link text-secondary" href="#">
+                            المزايدة والفوز
+                        </a>
                     </li>
                     <li class="">
                         <p>......................... 2</p>
-                        <a class="nav-link text-secondary" href="#"> الاشتراك </a>
+                        <a class="nav-link text-secondary" href="#">
+                            الاشتراك
+                        </a>
                     </li>
                     <li class=" ">
                         <p>......................... 1</p>
-                        <Link v-if="canRegister" :href="route('register')" class="nav-link text-secondary"> التسجيل </Link>
+                        <Link
+                            v-if="canRegister"
+                            :href="route('register')"
+                            class="nav-link text-secondary"
+                        >
+                            التسجيل
+                        </Link>
                     </li>
-
                 </ul>
                 <!-- <img :src="'http://127.0.0.1:8000/website/log-removebg-preview.png'"
                             class="w-100 d-inline-block m-0 p-0 logo" alt=""> -->
@@ -249,32 +285,43 @@ const submit = () => {
                     </li>
 
                 </ul> -->
-                <ul class="list-unstyled flex flex-wrap justify-around min-w-full my-5  py-5 ">
-
+                <ul
+                    class="list-unstyled flex flex-wrap justify-around min-w-full my-5 py-5"
+                >
                     <li class="text-center">
                         <a class="nav-link text-secondary" href="#"> من نحن</a>
                     </li>
                     <li class="">
-                        <a class="nav-link text-secondary" href="#"> الروابط </a>
+                        <a class="nav-link text-secondary" href="#">
+                            الروابط
+                        </a>
                     </li>
                     <li class=" ">
-                        <a class="nav-link text-secondary" href="#"> التواصل </a>
+                        <a class="nav-link text-secondary" href="#">
+                            التواصل
+                        </a>
                     </li>
                     <li class="text-center">
-                        <img :src="'http://127.0.0.1:8000/website/log-removebg-preview.png'"
-                            class=" d-inline-block m-0 p-0 logo" alt="">
+                        <img
+                            :src="'http://127.0.0.1:8000/website/log-removebg-preview.png'"
+                            class="d-inline-block m-0 p-0 logo"
+                            alt=""
+                        />
                     </li>
                 </ul>
 
                 <div class="footer-icons flex justify-between">
-
                     <div class="payment">
-                        <iconify-icon icon="simple-icons:applepay"></iconify-icon>
+                        <iconify-icon
+                            icon="simple-icons:applepay"
+                        ></iconify-icon>
                         <iconify-icon icon="logos:visa"></iconify-icon>
                         <iconify-icon icon="logos:mastercard"></iconify-icon>
                     </div>
                     <div class="social">
-                        <iconify-icon icon="akar-icons:linkedin-fill"></iconify-icon>
+                        <iconify-icon
+                            icon="akar-icons:linkedin-fill"
+                        ></iconify-icon>
                         <iconify-icon icon="mdi:youtube"></iconify-icon>
                         <iconify-icon icon="pajamas:x"></iconify-icon>
                     </div>
@@ -285,24 +332,25 @@ const submit = () => {
             <img :src="assetPath(asset,"Screenshot from 2024-01-12 00-59-29.png")" class="card-img-top h-100 cover" alt="Card Image">
 
         </figure> -->
-
         </div>
 
         <footer>
             <section class="bg-footer-end text-center">
-                <p>جميع الحقوق محفوظة : بموجب براءة اختراع فكرية في الهيئة السعودية للملكية الفكرية رقم 103864100003
-                    بتاريخ 2023/11/17, ردمك 3-85-12-7963-971.</p>
+                <p>
+                    جميع الحقوق محفوظة : بموجب براءة اختراع فكرية في الهيئة
+                    السعودية للملكية الفكرية رقم 103864100003 بتاريخ 2023/11/17,
+                    ردمك 3-85-12-7963-971.
+                </p>
             </section>
         </footer>
         <!-- Link Bootstrap JS and Popper.js -->
-
     </div>
     <!-- </WebSite> -->
 </template>
 
 <style>
 * {
-    font-family: 'Cairo', sans-serif;
+    font-family: "Cairo", sans-serif;
 }
 
 .btn {
@@ -331,12 +379,9 @@ const submit = () => {
     background-color: #ba1971;
 }
 
-
-
 .cart {
     min-width: 2rem;
     max-width: 6rem;
-
 }
 
 .main-text-color {
@@ -362,15 +407,10 @@ nav {
 
 .main main {
     border: black 1px solid;
-
 }
 
-
-
-
-
 .card-title {
-    color: #6aaaa3 !important;
+    color: #2d8a7f !important;
     font-weight: bold;
 }
 
@@ -384,6 +424,7 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
+    z-index: 1000;
 }
 
 .star {
@@ -409,7 +450,7 @@ nav {
     box-sizing: border-box;
 }
 
-.sort-icons>* {
+.sort-icons > * {
     /* max-width: 2rem; */
     font-weight: bolder;
     font-size: 2rem;
@@ -420,8 +461,6 @@ nav {
     /* border-color: green; */
     /* opacity: 0.5; */
     /* filter: brightness(1) invert(5); */
-
-
 }
 
 .card-pop {
@@ -432,7 +471,7 @@ nav {
     /* Additional styling if needed */
     padding: 5px 30px;
     background-color: #d6d6d6;
-    opacity: .9;
+    opacity: 0.9;
 }
 
 .card-btn-info {
@@ -444,7 +483,7 @@ nav {
 }
 
 iconify-icon {
-    margin: .5rem;
+    margin: 0.5rem;
 }
 
 .bg-footer-end {
@@ -476,13 +515,10 @@ footer section {
     .main main ul li {
         margin: 10px;
     }
-
-
 }
 
 @media (max-width: 1280px) {
     .logo {
-
         margin: 0;
     }
 }
@@ -490,16 +526,12 @@ footer section {
 @media (max-width: 576px) {
     .card-pop {
         top: 30%;
-
     }
 
     .cart {
         min-width: 2rem;
         max-width: 3rem;
     }
-
-
-
 
     .main main ul {
         font-size: small;
@@ -539,7 +571,7 @@ export default {
     methods: {
         assetPath(asset, urlPath) {
             return `${asset}/${urlPath}`;
-        }
-    }
-}
+        },
+    },
+};
 </script>

@@ -14,12 +14,14 @@ import twodata from "../Web/fakers/cardTwo";
 import dataswiper from "../Web/fakers/dataswiper";
 // Import Swiper styles
 import "swiper/css";
-
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
 import WebSite from "@/Layouts/WebSite.vue";
 import Navbar from "@/Components/Landing/Navbar.vue";
 import Layout from "@/Layouts/Layout.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const props = defineProps({
     products: {
@@ -50,7 +52,17 @@ const props = defineProps({
     canResetPassword: {
         type: Boolean,
     },
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
+    setup() {
+        return {
+            modules: [Autoplay, Pagination, Navigation],
+        };
+    },
 });
+
 const activeTab = ref("tab1");
 
 const form = useForm({
@@ -62,6 +74,30 @@ const form = useForm({
 const submit = () => {
     form.post(route("login"), {
         onFinish: () => form.reset("password"),
+    });
+    const days = ref(0);
+    const hours = ref(0);
+    const minutes = ref(0);
+    const seconds = ref(0);
+    const updateTime = () => {
+        const now = new Date();
+        const futureDate = new Date("2024-03-21T00:00:00");
+
+        const difference = futureDate - now;
+
+        days.value = Math.floor(difference / (1000 * 60 * 60 * 24));
+        hours.value = Math.floor(
+            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        minutes.value = Math.floor(
+            (difference % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        seconds.value = Math.floor((difference % (1000 * 60)) / 1000);
+    };
+
+    onMounted(() => {
+        updateTime();
+        setInterval(updateTime, 1000);
     });
     const loginSuccessful = true;
 
@@ -89,15 +125,41 @@ console.log("as", props.products.data);
                 <main class="rounded justify-end sm:flex-row p-5 items-center">
                     <p class="text-4xl font-bold text-end my-3">المزادات</p>
 
-                    <ul class="list-none flex flex-nowrap justify-end">
+                    <ul
+                        class="list-none flex flex-nowrap justify-end text-pink-600"
+                    >
                         <li>
-                            <a class="main-text-color" href="#">منتهى +99 </a>
+                            <a
+                                @click="activeTab = 'tab3'"
+                                :class="{
+                                    'main-text-color': activeTab === 'tab3',
+                                    active: activeTab === 'tab3',
+                                }"
+                                href="#"
+                                >منتهى +99
+                            </a>
                         </li>
                         <li>
-                            <a class="main-text-color" href="#">قادم 10</a>
+                            <a
+                                @click="activeTab = 'tab1'"
+                                :class="{
+                                    'main-text-color': activeTab === 'tab1',
+                                    active: activeTab === 'tab1',
+                                }"
+                                href="#"
+                                >قادم 10</a
+                            >
                         </li>
                         <li>
-                            <a class="main-text-color" href="#">جاري 4</a>
+                            <a
+                                @click="activeTab = 'tab2'"
+                                :class="{
+                                    'main-text-color': activeTab === 'tab2',
+                                    active: activeTab === 'tab2',
+                                }"
+                                href="#"
+                                >جاري 4</a
+                            >
                         </li>
                         <li>
                             <a class="main-text-color" href="#">الكل 14</a>
@@ -107,14 +169,13 @@ console.log("as", props.products.data);
             </div>
             <div class="my-3">
                 <div class="row flex justify-end p-3 sort-icons">
-                    <i
-                        @click="activeTab = 'tab1'"
+                    <!-- <i
                         class="fa-solid fa-bars m-2 cursor-pointer"
                     ></i>
                     <i
-                        @click="activeTab = 'tab2'"
+                       
                         class="fa-solid fa-table-cells m-2 cursor-pointer"
-                    ></i>
+                    ></i> -->
                     <!-- <figure class="p-3">
                     <img :src="assetPath(asset,"menu-burger.png")" class="sort-icon" alt="Card Image">
 
@@ -133,17 +194,143 @@ console.log("as", props.products.data);
                     v-if="activeTab === 'tab1'"
                 >
                     <div
-                        class="bg-white relative rounded-md overflow-hidden shadow-md"
+                        class="bg-white relative rounded-md overflow-hidden shadow-md border-2 border-black"
                     >
                         <div class="card-img-info flex justify-end p-2 w-100">
-                            <div class="btn btn-dis">
-                                <i class="fa-solid fa-eye"></i> عرض
+                            <div class="btn card-btn-info rounded-md">
+                                <i class="fa-solid fa-eye"></i> التفاصيل
                             </div>
                             <i class="fa-solid fa-star star"></i>
                         </div>
                         <swiper
+                            :spaceBetween="30"
+                            :centeredSlides="true"
                             :autoplay="{
-                                delay: 2500,
+                                delay: 1000,
+                                disableOnInteraction: false,
+                            }"
+                            :pagination="{
+                                clickable: true,
+                            }"
+                            :navigation="true"
+                            :modules="modules"
+                            class="mySwiper"
+                        >
+                            <swiper-slide
+                                v-for="sw in dat['image_product']"
+                                :key="sw.id"
+                                ><img
+                                    :src="sw.image_path"
+                                    class="w-full h-48 object-cover"
+                                    :alt="sw.alt"
+                                />
+                            </swiper-slide>
+                        </swiper>
+
+                        <div class="card-body p-4">
+                            <div
+                                class="card-h mb-3 flex justify-center flex-col"
+                            >
+                                <h5
+                                    class="card-titl text-green-700 text-success font-semibold"
+                                >
+                                    جوال ايفون 14 برو ماكس
+                                </h5>
+                            </div>
+                            <div class="card-b mb-3 flex justify-end">
+                                <input type="text" class="card-input" />
+                                <p class="w-40 font-semibold">
+                                    السعر التقديرى للمنتج
+                                </p>
+                            </div>
+                            <div class="card-b mb-3 flex justify-end">
+                                <input type="text" class="card-input rounded" />
+                                <p class="w-40 font-semibold">مبلغ التسجيل</p>
+                            </div>
+                            <div class="card-b mb-3 flex justify-end">
+                                <input type="text" class="card-input rounded" />
+                                <p class="w-40 font-semibold">
+                                    الباقى من المشتركين للبدء
+                                </p>
+                            </div>
+                            <div class="card-b mb-3 flex justify-end">
+                                <input type="text" class="card-input" />
+                                <p class="w-40 font-semibold">
+                                    الحد الادنى للتزايد
+                                </p>
+                            </div>
+                            <div class="card-h mb-3 flex justify-between">
+                                <Link :href="route('Contrdashdone')">
+                                    <button class="btn card-btn-info">
+                                        التسجيل فى المزاد
+                                    </button>
+                                </Link>
+                            </div>
+                            <div
+                                class="flex justify-between flex-1 items-center"
+                            >
+                                <div class="flex flex-col text-[22px]">
+                                    <p class="text-center font-semibold mb-3">
+                                        شارك المنتج
+                                    </p>
+                                    <div class="flex gap-3 cursor-pointer">
+                                        <i
+                                            class="fa-brands fa-whatsapp"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-brands fa-twitter"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-solid fa-share-nodes"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-brands fa-facebook-f"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-brands fa-snapchat"
+                                            style="color: #63e6be"
+                                        ></i>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 ms-20 flex-wrap">
+                                    <button
+                                        class="bg-green-600 px-4 h-7 text-white rounded-md"
+                                    >
+                                        اضف تقيمك
+                                    </button>
+                                    <p class="text-[25px] text-gray-600">
+                                        التقييمات
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap text-end">
+                <div
+                    class="w-full md:w-1/2 lg:w-1/3 p-4"
+                    v-for="dat in props.products.data"
+                    :key="dat.id"
+                    v-if="activeTab === 'tab2'"
+                >
+                    <div
+                        class="bg-white relative rounded-md overflow-hidden shadow-md border-2 border-black"
+                    >
+                        <div class="card-img-info flex justify-end p-2 w-100">
+                            <div class="btn card-btn-info rounded-md">
+                                <i class="fa-solid fa-eye"></i> التفاصيل
+                            </div>
+                            <i class="fa-solid fa-star star"></i>
+                        </div>
+
+                        <swiper
+                            :autoplay="{
+                                delay: 1000,
                                 disableOnInteraction: false,
                             }"
                             :grabCursor="true"
@@ -172,117 +359,276 @@ console.log("as", props.products.data);
                             </swiper-slide>
                         </swiper>
 
-                        <div class="rounded card-pop p-2">
-                            <div>انتهى المزاد</div>
-                        </div>
                         <div class="card-body p-4">
-                            <div class="card-h mb-3 flex justify-center">
-                                <h5 class="card-title text-success">
+                            <div Class=" relative">
+                                <p
+                                    class="absolute-center z-20 bg-slate-50 text-center border-2 border-black py-2 px-4 w-52 rounded-lg"
+                                >
+                                    جارى يتنهى بعد
+                                </p>
+                                <div
+                                    class="flex justify-center gap-4 mt-[-80px] relative z-20"
+                                >
+                                    <sapn
+                                        class="bg-slate-50 text-center border-2 border-black font-semibold py-2 px-4 w-16 h-16 rounded-lg"
+                                        >01 <br />يوم</sapn
+                                    >
+                                    <sapn
+                                        class="bg-slate-50 text-center border-2 border-black font-semibold py-2 px-4 w-16 h-16 rounded-lg"
+                                        >07 <br />ساعة</sapn
+                                    >
+                                    <sapn
+                                        class="bg-slate-50 text-center border-2 border-black font-semibold py-2 px-4 w-16 h-16 rounded-lg"
+                                        >54 <br />دقيقة</sapn
+                                    >
+                                    <sapn
+                                        class="bg-slate-50 text-center border-2 border-black font-semibold py-2 px-4 w-16 h-16 rounded-lg"
+                                        >02 <br />ثانية</sapn
+                                    >
+                                </div>
+                            </div>
+                            <div
+                                class="card-h mb-3 mt-2 text-green-700 flex justify-center flex-col"
+                            >
+                                <h5 class="card-titl font-semibold">
                                     جوال ايفون 14 برو ماكس
                                 </h5>
                             </div>
                             <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded" />
-                                <p class="w-48">مبلغ تسوية المزاد</p>
+                                <input type="text" class="card-input" />
+                                <p class="w-32 font-semibold">
+                                    اعلى مبلغ مزايدة
+                                </p>
                             </div>
                             <div class="card-b mb-3 flex justify-end">
-                                <input type="text" class="card-input rounded" />
-                                <p class="w-48">المزاود</p>
+                                <input
+                                    type="text"
+                                    class="card-input rounded-lg"
+                                />
+                                <p class="w-32 font-semibold">المزاود</p>
                             </div>
-                            <div class="card-h mb-3 flex justify-between">
-                                <button class="btn card-btn-info">
-                                    لوحة المزايدة
-                                </button>
-                                <button class="btn card-btn-info">زاود</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col items-center flex-wrap">
-                <div
-                    class="w-full mb-4 flex justify-center"
-                    v-for="dat in twodata"
-                    :key="dat.id"
-                    v-if="activeTab === 'tab2'"
-                >
-                    <div style="width:100%"
-                        class=" bg-white relative rounded-md overflow-hidden shadow-md border-2 border-black md:w-fit p-2"
-                    >
-                        <div
-                            class="flex justify-between flex-wrap items-center p-2"
-                        >
-                            <div class="btn-detilas">
-                                <button
-                                    class="text-white bg-pink-600 rounded-md px-4 py-2"
-                                >
-                                    {{ dat.detilas }}
-                                </button>
-                            </div>
-                            <span class="text-green-700">{{ dat.phone }}</span>
-                            <div class="flex">
-                                <div
-                                    class="flex items-center btn btn-dis py-0 h-10 cursor-pointer"
-                                >
-                                    <i class="fa-solid fa-eye"></i>عرض
-                                </div>
-                                <div class="img-phone w-14 p-1 hidden sm:inline-block">
-                                    <img
-                                       style="width: 100%;"
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfwbxr_yufRwgzTWODR9-bOANUgXW14hae8TiNcRrpoQ&s"
-                                        alt=""
-                                    />
-                                </div>
-                                <i
-                                    class="fa-solid fa-star star hidden sm:inline-block"
-                                ></i>
-                            </div>
-                        </div>
-                        <div
-                            class="flex flex-col justify-center md:flex-row  items-center p-2 gap-7"
-                        >
-                            <div class="inputs flex justify-between gap-6">
-                                <div class="flex items-center gap-3">
-                                    <input
-                                        type="text"
-                                        class="px-2 w-full md:w-32 h-5 rounded-md"
-                                    />
-                                    <p class="text-black text-nowrap">
-                                        {{ dat.plus }}
-                                    </p>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <input
-                                        type="text"
-                                        class="px-2 w-full md:w-32 h-5 rounded-md"
-                                    />
-                                    <p class="text-black text-nowrap">
-                                        {{ dat.cost }}
-                                    </p>
-                                </div>
-                                <div
-                                    class="border-2 px-2 w-full md:w-36 py-2 border-black rounded-md"
-                                >
-                                    <p class="text-black text-center">
-                                        {{ dat.finsh }}
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- <div class="w-full md:w-32 h-24">
-                    <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9JqJi9owFQy_udNwQcHDxlFsYFy2TURyP3L-4NJarRg&s" alt="" />
-                </div> -->
-                        </div>
-                        <div class="btn-end flex justify-start p-2">
-                            <button
-                                class="text-white bg-pink-600 rounded-md ms-2 px-8 w-full md:w-48 py-1"
-                            >
-                                {{ dat.over }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+                            <div class="card-h mb-3 flex justify-between">
+                                <Link :href="route('Controlthree')">
+                                    <button
+                                        class="btn card-btn-info rounded-lg"
+                                    >
+                                        لوحة المزايدة
+                                    </button>
+                                </Link>
+                                <Link :href="route('Controtwo')">
+                                    <button
+                                        class="btn card-btn-info rounded-lg"
+                                    >
+                                        زواد
+                                    </button>
+                                </Link>
+                            </div>
+                            <div
+                                class="flex justify-between flex-1 items-center"
+                            >
+                                <div class="flex flex-col text-[22px]">
+                                    <p class="text-center font-semibold mb-3">
+                                        شارك المنتج
+                                    </p>
+                                    <div class="flex gap-3 cursor-pointer">
+                                        <i
+                                            class="fa-brands fa-whatsapp"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-brands fa-twitter"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-solid fa-share-nodes"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-brands fa-facebook-f"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-brands fa-snapchat"
+                                            style="color: #63e6be"
+                                        ></i>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 ms-20 flex-wrap">
+                                    <button
+                                        class="bg-green-600 px-4 h-7 text-white rounded-md"
+                                    >
+                                        اضف تقيمك
+                                    </button>
+                                    <p class="text-[25px] text-gray-600">
+                                        التقييمات
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap text-end">
+                <div
+                    class="w-full md:w-1/2 lg:w-1/3 p-4"
+                    v-for="dat in props.products.data"
+                    :key="dat.id"
+                    v-if="activeTab === 'tab3'"
+                >
+                    <div
+                        class="bg-white relative rounded-md overflow-hidden shadow-md border-2 border-black"
+                    >
+                        <div class="card-img-info flex justify-end p-2 w-100">
+                            <div class="btn card-btn-info rounded-md">
+                                <i class="fa-solid fa-eye"></i> التفاصيل
+                            </div>
+                            <i class="fa-solid fa-star star"></i>
+                        </div>
+
+                        <swiper
+                            :autoplay="{
+                                delay: 1000,
+                                disableOnInteraction: false,
+                            }"
+                            :grabCursor="true"
+                            :effect="'creative'"
+                            :creativeEffect="{
+                                prev: {
+                                    shadow: true,
+                                    translate: [0, 0, -400],
+                                },
+
+                                next: {
+                                    translate: ['100%', 0, 0],
+                                },
+                            }"
+                            :modules="modules"
+                            class="mySwiper"
+                        >
+                            <swiper-slide
+                                v-for="sw in dat['image_product']"
+                                :key="sw.id"
+                                ><img
+                                    :src="sw.image_path"
+                                    class="w-full h-48 object-cover"
+                                    :alt="sw.alt"
+                                />
+                            </swiper-slide>
+                        </swiper>
+
+                        <div class="card-body p-4">
+                            <div Class=" relative">
+                                <p
+                                    class="absolute-center text-[35px] z-20 bg-slate-50 text-center border-2 border-black py-1 px-4 w-60 rounded-lg"
+                                >
+                                    انتهى المزاد
+                                </p>
+                            </div>
+                            <div
+                                class="card-h mb-3 mt-2 text-green-700 flex justify-center flex-col"
+                            >
+                                <h5 class="card-titl font-semibold">
+                                    جوال ايفون 14 برو ماكس
+                                </h5>
+                            </div>
+                            <div class="card-b mb-3 flex justify-end">
+                                <input type="text" class="card-input" />
+                                <p class="w-32 font-semibold">
+                                    مبلغ ترسية المزاد
+                                </p>
+                            </div>
+                            <div class="card-b mb-3 flex justify-end">
+                                <input
+                                    type="text"
+                                    class="card-input rounded-lg"
+                                />
+                                <p class="w-32 font-semibold">المزاود</p>
+                            </div>
+
+                            <div class="card-h mb-3 flex justify-between">
+                                <Link :href="route('Controlthree')">
+                                    <button
+                                        class="btn card-btn-info rounded-lg"
+                                    >
+                                        لوحة المزايدة
+                                    </button>
+                                </Link>
+                            </div>
+                            <div
+                                class="flex justify-between flex-1 items-center"
+                            >
+                                <div class="flex flex-col text-[22px]">
+                                    <p class="text-center font-semibold mb-3">
+                                        شارك المنتج
+                                    </p>
+                                    <div class="flex gap-3 cursor-pointer">
+                                        <i
+                                            class="fa-brands fa-whatsapp"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-brands fa-twitter"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-solid fa-share-nodes"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-brands fa-facebook-f"
+                                            style="color: #63e6be"
+                                        ></i>
+                                        <i
+                                            class="fa-brands fa-snapchat"
+                                            style="color: #63e6be"
+                                        ></i>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 ms-20 flex-wrap">
+                                    <button
+                                        class="bg-green-600 px-4 h-7 text-white rounded-md"
+                                    >
+                                        اضف تقيمك
+                                    </button>
+                                    <p class="text-[25px] text-gray-600">
+                                        التقييمات
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //pageing// -->
+            <nav>
+                <ul class="flex justify-center mb-4">
+                    <li>
+                        <a
+                            class="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-pink-500 p-0 text-sm text-white shadow-md transition duration-150 ease-in-out"
+                            href="#"
+                        >
+                            1
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            class="mx-1 flex h-9 w-9 items-center justify-center rounded-full border border-blue-gray-100 bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
+                            href="#"
+                        >
+                            2
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            class="mx-1 flex h-9 w-9 items-center justify-center rounded-full border border-blue-gray-100 bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
+                            href="#"
+                        >
+                            3
+                        </a>
+                    </li>
+                </ul>
+            </nav>
             <div class="m-5 flex justify-end flex-col text-end">
                 <p class="text-3xl font-semibold my-1">زاود : وكن الفائز</p>
                 <p class="text-xl font-semibold mb-4 text-right text-secondary">
@@ -293,23 +639,47 @@ console.log("as", props.products.data);
                     class="list-unstyled flex flex-wrap justify-around w-100 py-5 text-center"
                 >
                     <li class="">
-                        <p>......................... 3</p>
-                        <a class="nav-link text-secondary" href="#">
+                        <div class="w-32">
+                            <img
+                                class="img-fluid"
+                                src="https://mzaodin.com/website/log-removebg-preview.png"
+                                alt=""
+                            />
+                        </div>
+                        <a
+                            class="nav-link text-secondary text-[25px] font-semibold"
+                            href="#"
+                        >
                             المزايدة والفوز
                         </a>
                     </li>
                     <li class="">
-                        <p>......................... 2</p>
-                        <a class="nav-link text-secondary" href="#">
+                        <div class="w-32">
+                            <img
+                                class="img-fluid"
+                                src="https://mzaodin.com/website/log-removebg-preview.png"
+                                alt=""
+                            />
+                        </div>
+                        <a
+                            class="nav-link text-secondary text-[25px] font-semibold"
+                            href="#"
+                        >
                             الاشتراك
                         </a>
                     </li>
                     <li class=" ">
-                        <p>......................... 1</p>
+                        <div class="w-32">
+                            <img
+                                class="img-fluid"
+                                src="https://mzaodin.com/website/log-removebg-preview.png"
+                                alt=""
+                            />
+                        </div>
                         <Link
                             v-if="canRegister"
                             :href="route('register')"
-                            class="nav-link text-secondary"
+                            class="nav-link text-secondary text-[25px] font-semibold"
                         >
                             التسجيل
                         </Link>
@@ -330,19 +700,83 @@ console.log("as", props.products.data);
 
                 </ul> -->
                 <ul
-                    class="list-unstyled flex flex-wrap justify-around min-w-full my-5 py-5"
+                    class="list-unstyled flex flex-wrap justify-between ms-3 min-w-full"
                 >
                     <li class="text-center">
-                        <a class="nav-link text-secondary" href="#"> من نحن</a>
+                        <a
+                            class="nav-link text-black text-[25px] font-semibold"
+                            href="#"
+                        >
+                            التواصل</a
+                        >
+                        <p class="text-[16px] text-pink-600 font-semibold">
+                            الرياض -المملكة العربية السعودية
+                        </p>
+                        <p class="text-[16px] text-pink-600 font-semibold">
+                            تواصل معنا
+                        </p>
+                        <sapn class="text-[13px] text-pink-600 font-semibold"
+                            >info@mazaodin.com</sapn
+                        >
                     </li>
                     <li class="">
-                        <a class="nav-link text-secondary" href="#">
+                        <a
+                            class="nav-link text-black text-[25px] font-semibold"
+                            href="#"
+                        >
                             الروابط
+                            <ul>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="text-[16px] text-pink-600 font-semibold"
+                                        >الشروط والاحكام</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="text-[16px] text-pink-600 font-semibold"
+                                        >سياسة الخصوصية</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="text-[16px] text-pink-600 font-semibold"
+                                        >سياسة الاسترجاع</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="text-[16px] text-pink-600 font-semibold"
+                                        >الاسئلة الشائعة</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="text-[16px] text-pink-600 font-semibold"
+                                        >التقييمات</a
+                                    >
+                                </li>
+                            </ul>
                         </a>
                     </li>
                     <li class=" ">
-                        <a class="nav-link text-secondary" href="#">
-                            التواصل
+                        <a
+                            class="nav-link text-black text-[25px] font-semibold"
+                            href="#"
+                        >
+                            من نحن
+                            <p class="text-[30px] text-pink-600 font-semibold">
+                                منصة سعودية للمزادات
+                            </p>
+                            <p class="text-[16px] text-pink-600 font-semibold">
+                                منصة تفاعلية رائدة فى تقديم المزادات الرقمية<br />
+                                للعديد من من الاصول والمتنجات
+                            </p>
                         </a>
                     </li>
                     <li class="text-center">
@@ -354,6 +788,32 @@ console.log("as", props.products.data);
                     </li>
                 </ul>
 
+                <div class="icons flex justify-between items-center flex-wrap">
+                    <div class="flex gap-3 text-[25px]">
+                        <i class="fa-brands fa-paypal"></i>
+                        <i class="fa-solid fa-money-check-dollar"></i>
+                        <i class="fa-brands fa-cc-amazon-pay"></i>
+                        <i
+                            class="fa-regular fa-credit-card"
+                            style="color: #74c0fc"
+                        ></i>
+                        <i class="fa-brands fa-alipay"></i>
+                    </div>
+                    <div class="flex gap-3 text-[25px]">
+                        <i class="fa-brands fa-x-twitter text-gray-500"></i>
+                        <i class="fa-brands fa-youtube text-gray-500"></i>
+                        <i class="fa-brands fa-linkedin-in text-gray-500"></i>
+                        <i
+                            class="fa-brands fa-square-snapchat"
+                            style="color: #ffd43b"
+                        ></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i
+                            class="fa-brands fa-facebook"
+                            style="color: #74c0fc"
+                        ></i>
+                    </div>
+                </div>
                 <div class="footer-icons flex justify-between">
                     <div class="payment">
                         <iconify-icon
@@ -392,5 +852,27 @@ console.log("as", props.products.data);
         flex-direction: column;
         gap: 10px;
     }
+    .icons {
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+.card-img-info {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    z-index: 1000;
+}
+.active {
+    border-bottom: 2px #c23381 solid;
+}
+.absolute-center {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 </style>

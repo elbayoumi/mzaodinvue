@@ -19,7 +19,7 @@ const layoutStore = useLayoutStore()
       <NavBar :class="{ 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }" />
       <AsideMenu />
       <slot />
-      <FooterBar />
+      <!-- <FooterBar /> -->
     </div>
   </div>
 
