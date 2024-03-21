@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <Head title="Dashboard" />
         <LayoutAuthenticated>
             <template #header>
@@ -9,65 +8,180 @@
                 </h2>
             </template>
 
-            <div class="py-12">
-                <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div class="p-6 bg-white border-b border-gray-200">
-                            <form @submit.prevent="submit">
-                                <div class="mb-6">
-                                    <label for="File" class="text-black">Images Upload</label>
-                                    <input required type="file" @change="previewImages" ref="photos" class="
-                        w-full
-                        px-4
-                        py-2
-                        mt-2
-                        border
-                        rounded-md
-                        focus:outline-none
-                        focus:ring-1
-                        focus:ring-blue-600
-                      " accept=".jpg, .jpeg, .png, .gif, .svg" multiple />
-                                </div>
-
-                                <div v-if="images.length === 0" class="mb-6 text-red-500">No images uploaded yet.</div>
-
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div v-for="(image, index) in images" :key="index" class="relative">
-                                        <img :src="image.url" class="w-full h-auto rounded-lg cursor-pointer"
-                                            @click="openImageModal(index)" />
-                                        <div class="absolute top-2 right-2">
-                                            <div @click="removeImage(index)"
-                                                class="px-2 py-1 cursor-pointer bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 focus:outline-none">
-                                                <i class="fas fa-trash"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div v-if="errors.image" class="mt-4 font-bold text-red-600">{{ errors.image }}</div>
-
-                                <div class="flex justify-center mt-6">
-                                    <button type="submit" class="
-                        px-6
-                        py-2
-                        text-white
-                        bg-gray-900
-                        rounded
-                        hover:bg-gray-800
-                        focus:outline-none
-                      ">
-                                        Save
-                                    </button>
-                                </div>
-                            </form>
+            <div class="py-52">
+                <div
+                    class="bg-white p-7 w-9/12 mx-auto h-auto border-2 border-gray-500 rounded-lg"
+                >
+                    <div
+                        ref="dnd"
+                        class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded"
+                        @drop.prevent="drop($event)"
+                        @dragover.prevent="
+                            $event.dataTransfer.dropEffect = 'move'
+                        "
+                    >
+                        <div
+                            class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer"
+                            @dragover="dragOverHandler"
+                            @dragleave="dragLeaveHandler"
+                        >
+                            <input
+                                accept="*"
+                                type="file"
+                                multiple
+                                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                                @change="addFiles($event)"
+                                title=""
+                            />
                         </div>
+
+                        <template v-if="files.length > 0">
+                            <div
+                                class="grid grid-cols-2 gap-4 mt-4 md:grid-cols-6"
+                            >
+                                <template
+                                    v-for="(file, index) in files"
+                                    :key="index"
+                                >
+                                    <div
+                                        class="relative flex flex-col items-center overflow-hidden text-center bg-gray-100 border rounded cursor-move select-none"
+                                        style="padding-top: 100%"
+                                        @dragstart="dragstart($event, index)"
+                                        @dragend="fileDragging = null"
+                                        :class="{
+                                            'border-blue-600':
+                                                fileDragging == index,
+                                        }"
+                                        draggable="true"
+                                        :data-index="index"
+                                    >
+                                        <button
+                                            class="absolute top-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none"
+                                            type="button"
+                                            @click="remove(index)"
+                                        >
+                                            <svg
+                                                class="w-4 h-4 text-red-400"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <template
+                                            v-if="file.type.includes('audio/')"
+                                        >
+                                            <svg
+                                                class="absolute w-12 h-12 text-gray-400 transform top-1/2 -translate-y-2/3"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+                                                />
+                                            </svg>
+                                        </template>
+                                        <template
+                                            v-else-if="
+                                                file.type.includes(
+                                                    'application/'
+                                                ) || file.type === ''
+                                            "
+                                        >
+                                            <svg
+                                                class="absolute w-12 h-12 text-gray-400 transform top-1/2 -translate-y-2/3"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                                />
+                                            </svg>
+                                        </template>
+                                        <template
+                                            v-else-if="
+                                                file.type.includes('image/')
+                                            "
+                                        >
+                                            <img
+                                                class="absolute inset-0 z-0 object-cover w-full h-full border-4 border-white preview"
+                                                :src="loadFile(file)"
+                                            />
+                                        </template>
+                                        <template
+                                            v-else-if="
+                                                file.type.includes('video/')
+                                            "
+                                        >
+                                            <video
+                                                class="absolute inset-0 object-cover w-full h-full border-4 border-white pointer-events-none preview"
+                                            >
+                                                <source
+                                                    :src="loadFile(file)"
+                                                    type="video/mp4"
+                                                />
+                                            </video>
+                                        </template>
+                                        <div
+                                            class="absolute bottom-0 left-0 right-0 flex flex-col p-2 text-xs bg-white bg-opacity-50"
+                                        >
+                                            <span
+                                                class="w-full font-bold text-gray-900 truncate"
+                                                >{{ file.name }}</span
+                                            >
+                                            <span
+                                                class="text-xs text-gray-900"
+                                                >{{
+                                                    humanFileSize(file.size)
+                                                }}</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="absolute inset-0 z-40 transition-colors duration-300"
+                                            @dragenter="dragenter($event)"
+                                            @dragleave="fileDropping = null"
+                                            :class="{
+                                                'bg-blue-200 bg-opacity-80':
+                                                    fileDropping == index &&
+                                                    fileDragging != index,
+                                            }"
+                                        ></div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="flex justify-center mt-24">
+                        <button
+                            type="submit"
+                            class="px-6 py-2 text-white bg-gray-900 rounded hover:bg-gray-800 focus:outline-none"
+                        >
+                            Save
+                        </button>
                     </div>
                 </div>
             </div>
         </LayoutAuthenticated>
 
         <!-- Image Modal Component -->
-        <ModalImage v-if="modalOpen.value" :imageUrl="modalImageUrl.value" @close="modalOpen.value = false" />
+        <ModalImage />
     </div>
 </template>
 
@@ -75,62 +189,70 @@
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import { ref } from "vue"; // Import ref from vue
-import ModalImage from "@/Components/Admin/ModalImage.vue";
 
 export default {
     components: {
         LayoutAuthenticated,
         Head,
-        ModalImage,
     },
-    props: {
-        errors: Object,
-        productId: {
-            type: String, // تحديد نوع الـ prop ليكون String
+    data() {
+        return {
+            files: [],
+            fileDragging: null,
+            fileDropping: null,
+        };
+    },
+    methods: {
+        humanFileSize(size) {
+            const i = Math.floor(Math.log(size) / Math.log(1024));
+            return (
+                (size / Math.pow(1024, i)).toFixed(2) * 1 +
+                " " +
+                ["B", "kB", "MB", "GB", "TB"][i]
+            );
         },
-    },
-
-    setup(props) {
-        const form = useForm({
-            image: [],
-        });
-        const images = ref([]);
-        const modalOpen = ref(false);
-        const modalImageUrl = ref("");
-        const previewImages = (e) => {
-            images.value = [];
-
-            Array.from(e.target.files).forEach((file) => {
-                images.value.push({ url: URL.createObjectURL(file) });
-                form.image.push(file);
-            });
-        };
-
-        const submit = () => {
-            const files = Array.from(images);
-
-            files.forEach((file) => {
-                form.image.push(file);
-            });
-
-            form.post(route("admin.image.store", props.productId));
-        };
-
-        const removeImage = (index) => {
-            images.value.splice(index, 1);
-            form.image.splice(index, 1);
-        };
-
-        const openImageModal = (index) => {
-            modalImageUrl.value = images.value[index].url;
-            modalOpen.value = true;
-            console.log(modalImageUrl.value);
-
-        };
-
-        return { form, images, modalImageUrl, modalOpen, previewImages, submit, removeImage, openImageModal };
+        remove(index) {
+            let files = [...this.files];
+            files.splice(index, 1);
+            this.files = this.createFileList(files);
+        },
+        drop(e) {
+            let removed, add;
+            let files = [...this.files];
+            removed = files.splice(this.fileDragging, 1);
+            files.splice(this.fileDropping, 0, ...removed);
+            this.files = this.createFileList(files);
+            this.fileDropping = null;
+            this.fileDragging = null;
+        },
+        dragenter(e) {
+            let targetElem = e.target.closest("[draggable]");
+            this.fileDropping = targetElem.getAttribute("data-index");
+        },
+        dragstart(e, index) {
+            this.fileDragging = e.target
+                .closest("[draggable]")
+                .getAttribute("data-index");
+            e.dataTransfer.effectAllowed = "move";
+        },
+        loadFile(file) {
+            const blobUrl = URL.createObjectURL(file);
+            return blobUrl;
+        },
+        addFiles(e) {
+            const files = this.createFileList(
+                [...this.files],
+                [...e.target.files]
+            );
+            this.files = files;
+        },
+        createFileList(existingFiles, newFiles = []) {
+            let fileList = existingFiles.slice();
+            for (let i = 0; i < newFiles.length; i++) {
+                fileList.push(newFiles[i]);
+            }
+            return fileList;
+        },
     },
 };
 </script>
-
-<style></style>
