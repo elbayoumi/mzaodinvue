@@ -34,26 +34,31 @@ use Inertia\Inertia;
 
 // Route::get('/',function (){
 // })->name('home');
-Route::get('/',function (){
+Route::get('/', function () {
     return Inertia::render('Web/Soon', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
-     })->name('home.test');
-Route::get('/home',[HomeController::class, 'index'])->name('home');
-Route::get('/settings',[HomeController::class, 'settings'])->name('settings');
-Route::get('/auctions',[HomeController::class, 'index'])->name('auctions');
-Route::get('/slider',function (){
+})->name('home.test');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
+Route::get('/auctions', [HomeController::class, 'index'])->name('auctions');
+Route::get('/slider', function () {
     return Inertia::render('Web/SwiperSlideTest');
-     })->name('SwiperSlideTest.slider');
-Route::get('/plus',function (){
-    return Inertia::render('Web/Contrdashd');
-     })->name('Contrdashdone');
-Route::get('/plusa',function (){
-    return Inertia::render('Web/Controtwo');
-     })->name('Controtwo');
-Route::get('/plusaa',function (){
-    return Inertia::render('Web/Controlthree');
-     })->name('Controlthree');
+})->name('SwiperSlideTest.slider');
+Route::group([
+    'prefix' => 'auction',
+], function () {
+    Route::get('/registration', function () {
+        return Inertia::render('Web/Contrdashd');
+    })->name('Contrdashdone');
+});
 
-require __DIR__.'/auth.php';
+Route::get('/plusa', function () {
+    return Inertia::render('Web/Controtwo');
+})->name('Controtwo');
+Route::get('/plusaa', function () {
+    return Inertia::render('Web/Controlthree');
+})->name('Controlthree');
+
+require __DIR__ . '/auth.php';
