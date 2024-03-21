@@ -409,7 +409,7 @@ console.log("as", props.products.data);
                             </div>
 
                             <div class="card-h mb-3 flex justify-between">
-                                <Link :href="route('Controlthree')">
+                                <Link :href="route('Controlthree',dat.id)">
                                     <button
                                         class="btn card-btn-info rounded-lg"
                                     >
@@ -547,7 +547,7 @@ console.log("as", props.products.data);
                             </div>
 
                             <div class="card-h mb-3 flex justify-between">
-                                <Link :href="route('Controlthree')">
+                                <Link :href="route('Controlthree',dat.id)">
                                     <button
                                         class="btn card-btn-info rounded-lg"
                                     >
