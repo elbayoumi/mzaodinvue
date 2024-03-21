@@ -50,10 +50,7 @@ Route::group([
 ], function () {
     Route::get('/registration/{auction_id}',[AuctionController::class, 'registration'])->name('Contrdashdone');
     Route::get('/bidding/{auction_id}',[AuctionController::class, 'bidding'])->name('Controtwo');
-    Route::get('/history', function () {
-        return Inertia::render('Web/Controlthree');
-    })->name('Controlthree');
-
+    Route::get('/history/{auction_id}',[AuctionController::class, 'history'])->name('Controlthree');
 });
 
 Route::get('/slider', function () {

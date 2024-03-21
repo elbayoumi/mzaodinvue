@@ -31,6 +31,11 @@ class AuctionController extends Controller
         return Inertia::render('Web/Controtwo');
 
     }
+    public function history(Request $request , $auction_id )
+    {
+        return Inertia::render('Web/Controlthree');
+
+    }
     public function create()
     {
         //
