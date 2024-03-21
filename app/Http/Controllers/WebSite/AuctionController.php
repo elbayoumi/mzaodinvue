@@ -21,9 +21,10 @@ class AuctionController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function registration()
+    {
+        
+    }
     public function create()
     {
         //
