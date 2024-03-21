@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WebSite\AuctionController;
 use App\Http\Controllers\WebSite\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -47,9 +48,7 @@ Route::get('/auctions', [HomeController::class, 'index'])->name('auctions');
 Route::group([
     'prefix' => 'auction',
 ], function () {
-    Route::get('/registration', function () {
-        return Inertia::render('Web/Contrdashd');
-    })->name('Contrdashdone');
+    Route::get('/registration/{auction_id}',[AuctionController::class, 'registration'])->name('Contrdashdone');
     Route::get('/bidding', function () {
         return Inertia::render('Web/Controtwo');
     })->name('Controtwo');

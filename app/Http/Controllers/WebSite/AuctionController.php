@@ -21,9 +21,10 @@ class AuctionController extends Controller
         ]);
     }
 
-    public function registration()
+    public function registration(Request $request , $auction_id )
     {
-        
+        return Inertia::render('Web/Contrdashd');
+
     }
     public function create()
     {
