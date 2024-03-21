@@ -26,6 +26,11 @@ class AuctionController extends Controller
         return Inertia::render('Web/Contrdashd');
 
     }
+    public function bidding(Request $request , $auction_id )
+    {
+        return Inertia::render('Web/Controtwo');
+
+    }
     public function create()
     {
         //

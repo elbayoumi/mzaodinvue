@@ -49,9 +49,7 @@ Route::group([
     'prefix' => 'auction',
 ], function () {
     Route::get('/registration/{auction_id}',[AuctionController::class, 'registration'])->name('Contrdashdone');
-    Route::get('/bidding', function () {
-        return Inertia::render('Web/Controtwo');
-    })->name('Controtwo');
+    Route::get('/bidding/{auction_id}',[AuctionController::class, 'bidding'])->name('Controtwo');
     Route::get('/history', function () {
         return Inertia::render('Web/Controlthree');
     })->name('Controlthree');

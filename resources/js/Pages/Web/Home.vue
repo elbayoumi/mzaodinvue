@@ -416,7 +416,7 @@ console.log("as", props.products.data);
                                         لوحة المزايدة
                                     </button>
                                 </Link>
-                                <Link :href="route('Controtwo')">
+                                <Link :href="route('Controtwo',dat.id)">
                                     <button
                                         class="btn card-btn-info rounded-lg"
                                     >
