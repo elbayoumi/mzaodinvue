@@ -22,6 +22,7 @@ import WebSite from "@/Layouts/WebSite.vue";
 import Navbar from "@/Components/Landing/Navbar.vue";
 import Layout from "@/Layouts/Layout.vue";
 import { ref, onMounted } from "vue";
+const modules = [Autoplay, Pagination, Navigation];
 
 const props = defineProps({
     products: {
