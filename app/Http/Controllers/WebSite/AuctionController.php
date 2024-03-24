@@ -21,9 +21,21 @@ class AuctionController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function registration(Request $request , $auction_id )
+    {
+        return Inertia::render('Web/Contrdashd');
+
+    }
+    public function bidding(Request $request , $auction_id )
+    {
+        return Inertia::render('Web/Controtwo');
+
+    }
+    public function history(Request $request , $auction_id )
+    {
+        return Inertia::render('Web/Controlthree');
+
+    }
     public function create()
     {
         //
