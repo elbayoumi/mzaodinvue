@@ -174,7 +174,7 @@ console.log("as", props.products.data);
                         class="fa-solid fa-bars m-2 cursor-pointer"
                     ></i>
                     <i
-                       
+
                         class="fa-solid fa-table-cells m-2 cursor-pointer"
                     ></i> -->
                     <!-- <figure class="p-3">
@@ -261,7 +261,7 @@ console.log("as", props.products.data);
                                 </p>
                             </div>
                             <div class="card-h mb-3 flex justify-between">
-                                <Link :href="route('Contrdashdone')">
+                                <Link :href="route('Contrdashdone',dat.id)">
                                     <button class="btn card-btn-info">
                                         التسجيل فى المزاد
                                     </button>

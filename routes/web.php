@@ -55,14 +55,5 @@ Route::get('/slider',function (){
         Route::get('/bidding/{auction_id}',[AuctionController::class, 'bidding'])->name('Controtwo');
         Route::get('/history/{auction_id}',[AuctionController::class, 'history'])->name('Controlthree');
     });
-Route::get('/plus',function (){
-    return Inertia::render('Web/Contrdashd');
-     })->name('Contrdashdone');
-Route::get('/plusa',function (){
-    return Inertia::render('Web/Controtwo');
-     })->name('Controtwo');
-Route::get('/plusaa',function (){
-    return Inertia::render('Web/Controlthree');
-     })->name('Controlthree');
 
 require __DIR__.'/auth.php';
