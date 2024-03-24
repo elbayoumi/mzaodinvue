@@ -52,7 +52,6 @@ Route::group([
     Route::get('/bidding/{auction_id}',[AuctionController::class, 'bidding'])->name('Controtwo');
     Route::get('/history/{auction_id}',[AuctionController::class, 'history'])->name('Controlthree');
 });
-
 Route::get('/slider', function () {
     return Inertia::render('Web/SwiperSlideTest');
      })->name('SwiperSlideTest.slider');
