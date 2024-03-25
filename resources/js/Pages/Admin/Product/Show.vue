@@ -13,6 +13,14 @@ import SectionMain from "@/Components/SectionMain.vue";
 import SectionTitleLineWithButton from "@/Components/SectionTitleLineWithButton.vue";
 import CardBox from "@/Components/CardBox.vue";
 import BaseButton from "@/Components/BaseButton.vue";
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
+;
+// Import Swiper styles
+import "swiper/css";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const props = defineProps({
     product: {
@@ -57,7 +65,18 @@ function active(id) {
                     small
                 />
             </SectionTitleLineWithButton>
+
             <CardBox class="mb-6">
+                <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
+                delay: 1000,
+                disableOnInteraction: false,
+            }" :pagination="{
+                clickable: true,
+            }" :navigation="true" :modules="modules" class="mySwiper">
+                    <swiper-slide v-for="sw in product['image_product']" :key="sw.id"><img :src="sw.image_path"
+                            class="w-full h-48 object-cover" :alt="sw.alt" />
+                    </swiper-slide>
+                </swiper>
                 <table>
                     <tbody>
                         <tr>

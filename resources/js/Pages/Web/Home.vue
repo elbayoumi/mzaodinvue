@@ -15,7 +15,6 @@ import dataswiper from "../Web/fakers/dataswiper";
 // Import Swiper styles
 import "swiper/css";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import WebSite from "@/Layouts/WebSite.vue";
