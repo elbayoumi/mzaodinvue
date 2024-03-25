@@ -780,13 +780,13 @@ console.log("as", props.products.data);
                             </p>
                         </a>
                     </li>
-                    <li class="text-center">
+                    <!-- <li class="text-center">
                         <img
                             :src="'https://mzaodin.com/website/log-removebg-preview.png'"
                             class="d-inline-block m-0 p-0 logo"
                             alt=""
                         />
-                    </li>
+                    </li> -->
                 </ul>
 
                 <div class="icons flex justify-between items-center flex-wrap">
