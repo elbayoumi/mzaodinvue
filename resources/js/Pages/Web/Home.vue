@@ -298,11 +298,11 @@ console.log("as", props.products.data);
                                     </div>
                                 </div>
                                 <div class="flex gap-3 ms-20 flex-wrap">
-                                    <button
+                                    <!-- <button
                                         class="bg-green-600 px-4 h-7 text-white rounded-md"
                                     >
                                         اضف تقيمك
-                                    </button>
+                                    </button> -->
                                     <p class="text-[25px] text-gray-600">
                                         التقييمات
                                     </p>
@@ -456,11 +456,11 @@ console.log("as", props.products.data);
                                     </div>
                                 </div>
                                 <div class="flex gap-3 ms-20 flex-wrap">
-                                    <button
+                                    <!-- <button
                                         class="bg-green-600 px-4 h-7 text-white rounded-md"
                                     >
                                         اضف تقيمك
-                                    </button>
+                                    </button> -->
                                     <p class="text-[25px] text-gray-600">
                                         التقييمات
                                     </p>
@@ -587,11 +587,11 @@ console.log("as", props.products.data);
                                     </div>
                                 </div>
                                 <div class="flex gap-3 ms-20 flex-wrap">
-                                    <button
+                                    <!-- <button
                                         class="bg-green-600 px-4 h-7 text-white rounded-md"
                                     >
                                         اضف تقيمك
-                                    </button>
+                                    </button> -->
                                     <p class="text-[25px] text-gray-600">
                                         التقييمات
                                     </p>
