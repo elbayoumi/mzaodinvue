@@ -170,6 +170,7 @@
                     </div>
                     <div class="flex justify-center mt-24">
                         <button
+                        @click="submit()"
                             type="submit"
                             class="px-6 py-2 text-white bg-gray-900 rounded hover:bg-gray-800 focus:outline-none"
                         >
@@ -194,14 +195,26 @@ export default {
     components: {
         LayoutAuthenticated,
         Head,
+        useForm,
+        ref
+    },
+    props: {
+        errors: Object,
+        productId: {
+            type: String, // تحديد نوع الـ prop ليكون String
+        },
     },
     data() {
         return {
             files: [],
             fileDragging: null,
             fileDropping: null,
+            form:useForm({
+            image: [],
+        })
         };
     },
+
     methods: {
         humanFileSize(size) {
             const i = Math.floor(Math.log(size) / Math.log(1024));
@@ -253,6 +266,15 @@ export default {
             }
             return fileList;
         },
+         submit ()  {
+            const new_files = Array.from(this.files);
+
+            new_files.forEach((file) => {
+                this.form.image.push(file);
+            });
+
+            this.form.post(route("admin.image.store", this.productId));
+        }
     },
 };
 </script>
