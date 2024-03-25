@@ -701,9 +701,9 @@ console.log("as", props.products.data);
 
                 </ul> -->
                 <ul
-                    class="list-unstyled flex flex-wrap justify-between ms-3 min-w-full"
+                    class="list-unstyled flex flex-wrap justify-between ms-3 min-w-full my-5"
                 >
-                    <li class="text-center">
+                    <li class="">
                         <a
                             class="nav-link text-black text-[25px] font-semibold"
                             href="#"
@@ -720,13 +720,13 @@ console.log("as", props.products.data);
                             >info@mazaodin.com</sapn
                         >
                     </li>
-                    <li class="">
+                    <li class="text-center">
                         <a
                             class="nav-link text-black text-[25px] font-semibold"
                             href="#"
                         >
                             الروابط
-                            <ul>
+                            <ul >
                                 <li>
                                     <a
                                         href="#"
